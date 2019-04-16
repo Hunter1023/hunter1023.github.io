@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Dev-C++</title>
+      <link href="/2019/04/16/Dev-C/"/>
+      <url>/2019/04/16/Dev-C/</url>
+      
+        <content type="html"><![CDATA[<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p>Dev-C++是一个SourceForge的项目，早已停止更新。</p><p>安装过程中的语言没有中文选项，选择English即可，按照默认选项安装。首次运行时，选择<strong>使用软件时的语言</strong>为简体中文即可，按照默认选项完成初运行配置。</p><hr><h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><ul><li>菜单栏 - 工具 - 编辑器选项 - 语法 - 预设 - Obsidian 黑曜石主题</li></ul><p><img src="https://i.loli.net/2019/04/16/5cb598b4cba28.png" alt="工具 - 编辑器选项"></p><p><img src="https://i.loli.net/2019/04/16/5cb599bfef712.png" alt="语法 - 预设 - Obsidian 黑曜石主题"></p><ul><li><p>菜单栏 - 工具 - 编辑器选项 - 基本</p><ul><li style="list-style: none"><input type="checkbox" checked> 显示编辑器提示</li><li style="list-style: none"><input type="checkbox" checked> 显示函数提示</li><li>高亮显示当前行 - 色彩 - Black</li></ul><p><img src="https://i.loli.net/2019/04/16/5cb59bb680afc.png" alt></p></li></ul><hr><h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2><p>菜单栏 - 工具 - 编辑器选项 - 显示 - 字体 - YaHei Consolas Hybrid</p><p>字体下载： <a href="https://pan.baidu.com/s/1kldCHl7A5SIZaCLJniLzwQ" target="_blank" rel="noopener"><a href="https://pan.baidu.com/s/1kldCHl7A5SIZaCLJniLzwQ" target="_blank" rel="noopener">Consolas和微软雅黑混合字体</a></a></p><hr><h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><table><thead><tr><th>功能</th><th>快捷键</th></tr></thead><tbody><tr><td>自动整理代码</td><td>Ctrl + Shift + A</td></tr><tr><td>代码补全</td><td>Ctrl + Space(<strong>和输入法切换快捷键冲突</strong>)</td></tr></tbody></table><p>自定义快捷键：工具 - 快捷键选项 - 菜单项的底部 - Show Code Completion(代码补全)，自定义即可。</p><hr><h2 id="支持C99标准"><a href="#支持C99标准" class="headerlink" title="支持C99标准"></a>支持C99标准</h2><p>工具 - 编译选项 - 编译时加入以下命令 - <code>-std=c99</code></p><p><img src="https://i.loli.net/2019/04/16/5cb59e4d63a98.png" alt></p><hr><p>参考：</p><ul><li><a href="https://ice1000.org/2016/10/28/DevCpp/" target="_blank" rel="noopener">如何正确使用 DEV C++</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 操作系统与软件 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Dev-C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>香港两日半 | 不妨长作岭南人</title>
       <link href="/2019/03/25/%E9%A6%99%E6%B8%AF%E6%B8%B8%E8%AE%B0/"/>
       <url>/2019/03/25/%E9%A6%99%E6%B8%AF%E6%B8%B8%E8%AE%B0/</url>
