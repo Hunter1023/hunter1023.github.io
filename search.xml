@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Cmder</title>
+      <link href="/2019/04/16/Cmder/"/>
+      <url>/2019/04/16/Cmder/</url>
+      
+        <content type="html"><![CDATA[<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>官网下载Cmder（压缩包，解压即用），有两种不同的版本可供选择：</p><ul><li>Mini</li><li>Full（附带msysgit工具）</li></ul><p>可根据设备是否已安装git自行选择</p><hr><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="添加系统环境变量"><a href="#添加系统环境变量" class="headerlink" title="添加系统环境变量"></a>添加系统环境变量</h3><p>我的电脑 - 右键属性 - 高级系统设置 - 环境变量 - 系统变量，在<code>Path</code>中添加Cmder路径</p><p><img src="https://i.loli.net/2019/04/16/5cb5a739330de.png" alt></p><hr><h3 id="添加Cmder到右键菜单"><a href="#添加Cmder到右键菜单" class="headerlink" title="添加Cmder到右键菜单"></a>添加Cmder到右键菜单</h3><ol><li><code>Win + R</code> - 输入<code>Cmder</code>，确认，打开Cmder</li><li>点击右下方的<code>Create new console</code></li><li>Startup command or {Task} name - {bash::bash}</li><li>Run as administrator</li><li>Start，即打开一个管理员权限的控制台 <img src="https://i.loli.net/2019/04/17/5cb6b470b7f0f.png" alt></li><li>输入 <code>Cmder.exe /REGISTER ALL</code>，回车。即可在每个文件夹中鼠标右键右键 - <code>Cmder here</code>，打开Cmder</li></ol><hr><h2 id="默认开启设置"><a href="#默认开启设置" class="headerlink" title="默认开启设置"></a>默认开启设置</h2><p>Cmder窗口右下角右键<code>Show system menu</code> - General - Choose your startup task or even a shell with arguments: - {bash::bash} - Save settings</p><p><img src="https://i.loli.net/2019/04/17/5cb6bbe028a30.png" alt></p><hr><h2 id="关闭Tab不提示"><a href="#关闭Tab不提示" class="headerlink" title="关闭Tab不提示"></a>关闭Tab不提示</h2><p>Cmder窗口右下角右键<code>Show system menu</code> - General - Confirm - Close confirmations下的复选框全不勾选 - Save settings</p><p><img src="https://i.loli.net/2019/04/17/5cb6bd25b23b6.png" alt></p><hr><p>参考：<a href="http://weikeqin.cn/2017/04/28/cmder-notes/" target="_blank" rel="noopener">Cmder 使用 笔记</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 操作系统与软件 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Cmder </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Dev-C++</title>
       <link href="/2019/04/16/Dev-C/"/>
       <url>/2019/04/16/Dev-C/</url>
