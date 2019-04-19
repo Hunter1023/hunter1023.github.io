@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="特叔服务">
 <meta property="og:description" content="变量名传统的C语言用法中，变量名使用小写字母，符号常量名使用大写字母 类型限定符类型限定符signed与unsigned可以用于限定char类型或任何整型。  signed如char类型 signed char，取值范围为-128~127 unsigned总是正值或0，例如char类型，unsigned char 取值范围为0~255  读入、输出数据 需要在开头写如下代码：#include &amp;l">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-18T08:59:13.547Z">
+<meta property="og:updated_time" content="2019-04-19T07:54:32.193Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言的基本概念">
 <meta name="twitter:description" content="变量名传统的C语言用法中，变量名使用小写字母，符号常量名使用大写字母 类型限定符类型限定符signed与unsigned可以用于限定char类型或任何整型。  signed如char类型 signed char，取值范围为-128~127 unsigned总是正值或0，例如char类型，unsigned char 取值范围为0~255  读入、输出数据 需要在开头写如下代码：#include &amp;l">
@@ -473,7 +473,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-18 16:59:13" itemprop="dateModified" datetime="2019-03-18T16:59:13+08:00">2019-03-18</time>
+                <time title="修改时间：2019-04-19 15:54:32" itemprop="dateModified" datetime="2019-04-19T15:54:32+08:00">2019-04-19</time>
               
             
           </span>
@@ -593,7 +593,7 @@
 <p><strong>C语言的编译器自上而下，按顺序分析代码</strong>。</p>
 <p><strong>函数的先后顺序</strong>很重要。</p>
 <hr>
-<p>C语言的函数可以将声明和定义分离，从而顺利通过编译,如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">void sum(int begin, int end); //声明，函数原型， 如果没有参数，括号内最好填写 void，更严谨</span><br><span class="line"></span><br><span class="line">int main() &#123; //main的参数部分也可以写 void</span><br><span class="line">	sum(1,10);</span><br><span class="line">	sum(20,30);</span><br><span class="line">	</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义</span><br><span class="line">void sum(int begin, int end) &#123;</span><br><span class="line">	int i = 0;</span><br><span class="line">	int sum = 0;</span><br><span class="line">	for (i = begin; i &lt;= end; i++) &#123;</span><br><span class="line">		sum += i;</span><br><span class="line">	&#125;</span><br><span class="line">	printf(&quot;%d到%d的和是%d\n&quot;, begin, end, sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>C语言的函数可以将声明和定义分离，从而顺利通过编译,如：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> begin, <span class="keyword">int</span> end)</span></span>; <span class="comment">//声明，函数原型， 如果没有参数，括号内最好填写 void，更严谨</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123; <span class="comment">//main的参数部分也可以写 void</span></span><br><span class="line">	sum(<span class="number">1</span>,<span class="number">10</span>);</span><br><span class="line">	sum(<span class="number">20</span>,<span class="number">30</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> begin, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = begin; i &lt;= end; i++) &#123;</span><br><span class="line">		sum += i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d到%d的和是%d\n"</span>, begin, end, sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><ul>
 <li><p>调用函数时，<strong>给的值可以与参数类型不完全匹配</strong>，编译器自行转换类型，（Java则对类型转换要求严格）。</p>
 </li>
@@ -607,7 +607,7 @@
 <li><p>如果内容省略，表示补0</p>
 </li>
 <li><p>也可以用定位（C99 ONLY）</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int a[10] = &#123;</span><br><span class="line">	[0] = 2, [2] = 3, 6,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>] = &#123;</span><br><span class="line">	[<span class="number">0</span>] = <span class="number">2</span>, [<span class="number">2</span>] = <span class="number">3</span>, <span class="number">6</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>用<code>[n]</code>在初始化数据中给出定位</li>
 <li>没有定位的数据接在前面的位置后面</li>
@@ -640,7 +640,7 @@
 </li>
 </ul>
 <h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><p>指针就是<strong>保存地址的变量</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int i;</span><br><span class="line">int *p = &amp;i;</span><br><span class="line"></span><br><span class="line">int *p,q; //*p 为指针，p为普通的int类型变量，代表地址</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;i;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *p,q; <span class="comment">//*p 为指针，p为普通的int类型变量，代表地址</span></span><br></pre></td></tr></table></figure>
 <h4 id="数组参数"><a href="#数组参数" class="headerlink" title="数组参数"></a>数组参数</h4><p>以下四种函数原型等价</p>
 <ul>
 <li><code>int sum(int *arr, int n);</code></li>
@@ -712,7 +712,7 @@
 <li>字符串以数组的形式存在，以数组或<strong>指针(主)的形式访问</strong></li>
 <li><code>string.h</code>里有很多处理字符串的函数</li>
 </ul>
-<h4 id="字符串变量"><a href="#字符串变量" class="headerlink" title="字符串变量"></a>字符串变量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">char *str = &quot;Hello&quot;;</span><br><span class="line">char word[] = &quot;Hello&quot;;</span><br><span class="line">char line[10] = &quot;Hello&quot;;</span><br></pre></td></tr></table></figure>
+<h4 id="字符串变量"><a href="#字符串变量" class="headerlink" title="字符串变量"></a>字符串变量</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *str = <span class="string">"Hello"</span>;</span><br><span class="line"><span class="keyword">char</span> word[] = <span class="string">"Hello"</span>;</span><br><span class="line"><span class="keyword">char</span> line[<span class="number">10</span>] = <span class="string">"Hello"</span>;</span><br></pre></td></tr></table></figure>
 <h4 id="字符串常量"><a href="#字符串常量" class="headerlink" title="字符串常量"></a>字符串常量</h4><p>例如：<code>Hello</code>，字符串会被编译器变成一个字符数组放在某处，这个数组的<strong>长度是5+1</strong>，结尾还有<strong>表示结束的0</strong></p>
 <p>例：<code>char* s = &quot;Hello, world!&quot;;</code></p>
 <ul>
@@ -737,7 +737,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="字符串的输入输出"><a href="#字符串的输入输出" class="headerlink" title="字符串的输入输出"></a>字符串的输入输出</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">char string[8];</span><br><span class="line">scanf(&quot;%s&quot;, string);</span><br><span class="line">printf(&quot;%s&quot;, string);</span><br></pre></td></tr></table></figure>
+<h4 id="字符串的输入输出"><a href="#字符串的输入输出" class="headerlink" title="字符串的输入输出"></a>字符串的输入输出</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> <span class="built_in">string</span>[<span class="number">8</span>];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>, <span class="built_in">string</span>);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%s"</span>, <span class="built_in">string</span>);</span><br></pre></td></tr></table></figure>
 <p>scanf读入一个单词（到空格、tab或回车为止）</p>
 <h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2><ul>
 <li><code>&amp;</code> 与</li>
@@ -768,11 +768,11 @@
 </ul>
 <h2 id="寄存器变量"><a href="#寄存器变量" class="headerlink" title="寄存器变量"></a>寄存器变量</h2><p><code>register</code>声明告诉编译器，它所声明的变量在程序中使用频率较高</p>
 <h2 id="结构（和java中的类-概念类似-只有变量没有函数）"><a href="#结构（和java中的类-概念类似-只有变量没有函数）" class="headerlink" title="结构（和java中的类 概念类似,只有变量没有函数）"></a>结构（和java中的类 概念类似,只有变量没有函数）</h2><p>关键字<code>struct</code>引入结构声明。关键字<code>struct</code>后面的名字是可选的，称为<strong>结构标记</strong>。</p>
-<p>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">struct point &#123;</span><br><span class="line">	int x;</span><br><span class="line">	int y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>例：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">point</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">	<span class="keyword">int</span> y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><code>struct point pt = {320, 200};</code>定义了一个struct point类型的变量pt</p>
 <hr>
 <h3 id="结构与函数"><a href="#结构与函数" class="headerlink" title="结构与函数"></a>结构与函数</h3><p>结构的合法操作只有几种：<strong>作为一个整体赋值和赋值（包括向函数传递参数以及从函数返回值）</strong>，通过<code>&amp;</code>运算符取地址，访问其成员。</p>
-<p>例：函数<code>makepoint</code>，带有两个整型参数，并返回一个point类型的结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct point makepoint(int x, int y) &#123;</span><br><span class="line">	struct point temp;</span><br><span class="line">	</span><br><span class="line">	temp.x = x;</span><br><span class="line">	temp.y = y;</span><br><span class="line">	return temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>例：函数<code>makepoint</code>，带有两个整型参数，并返回一个point类型的结构<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">struct point <span class="title">makepoint</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">point</span> <span class="title">temp</span>;</span></span><br><span class="line">	</span><br><span class="line">	temp.x = x;</span><br><span class="line">	temp.y = y;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>结构指针</strong>的使用频度非常高，为了使用方便，C语言提供了另一种简写方式。假设<code>p</code>是一个指向结构的指针，可以用<code>p-&gt;结构成员</code>的形式（等价于<code>(*p).结构成员</code>），引用相应的结构成员。</p>
 <p>C语言提供一个编译时的一元运算符sizeof，可以用来<strong>计算任一对象的长度</strong>。</p>
 <p><code>sizeof 对象</code>和<code>sizeof(类型名)</code>会返回一个整型值，等于指定对象或类型<strong>占用的存储空间字节数</strong>。</p>
@@ -793,7 +793,7 @@
 <li><p><code>strcpy</code> 复制<br><code>char* strcpy(char *restrict dst, const char *restrict src);</code> 把src的字符串复制给dst<br><strong><code>restrict</code>表明src和dst不重叠</strong>，返回dst</p>
 </li>
 </ul>
-<p>复制字符串的操作示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char *dst = (char*)malloc(strlen(src)+1);</span><br><span class="line">strcpy(dst,	src);</span><br></pre></td></tr></table></figure></p>
+<p>复制字符串的操作示例：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *dst = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="built_in">strlen</span>(src)+<span class="number">1</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(dst,	src);</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li><p>字符串中找字符<br><code>char* strchr(const char *s, int c);</code><br><code>char* strrchr(const char *s, int c);</code><br>返回NULL表示没有找到</p>
 </li>
@@ -812,7 +812,7 @@
 <li>comp:<br>比较两个数组元素的比较函数。比较函数的第一个参数值a与参数b,<strong>此函数需要自定义</strong><ul>
 <li>返回值 &gt; 0, a 将被排在b后面;</li>
 <li>返回值 &lt; 0, a 将被排在b前面;</li>
-<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int cmp(const void * a, const void * b) &#123;</span><br><span class="line">	//qsort的比较函数如果返回（第一个值大于第二个值时返回正数），则为递增 </span><br><span class="line">	return *(long int *)a - *(long int *)b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>示例：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> * a, <span class="keyword">const</span> <span class="keyword">void</span> * b)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//qsort的比较函数如果返回（第一个值大于第二个值时返回正数），则为递增 </span></span><br><span class="line">	<span class="keyword">return</span> *(<span class="keyword">long</span> <span class="keyword">int</span> *)a - *(<span class="keyword">long</span> <span class="keyword">int</span> *)b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
