@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="特叔服务">
 <meta property="og:description" content="变量名传统的C语言用法中，变量名使用小写字母，符号常量名使用大写字母 类型限定符类型限定符signed与unsigned可以用于限定char类型或任何整型。  signed如char类型 signed char，取值范围为-128~127 unsigned总是正值或0，例如char类型，unsigned char 取值范围为0~255   定义常量例： const int AMOUNT=100;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-28T07:23:48.228Z">
+<meta property="og:updated_time" content="2019-04-28T08:58:24.838Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言的基本概念">
 <meta name="twitter:description" content="变量名传统的C语言用法中，变量名使用小写字母，符号常量名使用大写字母 类型限定符类型限定符signed与unsigned可以用于限定char类型或任何整型。  signed如char类型 signed char，取值范围为-128~127 unsigned总是正值或0，例如char类型，unsigned char 取值范围为0~255   定义常量例： const int AMOUNT=100;">
@@ -473,7 +473,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-28 15:23:48" itemprop="dateModified" datetime="2019-04-28T15:23:48+08:00">2019-04-28</time>
+                <time title="修改时间：2019-04-28 16:58:24" itemprop="dateModified" datetime="2019-04-28T16:58:24+08:00">2019-04-28</time>
               
             
           </span>
@@ -562,6 +562,7 @@
 <li>需要在开头写如下代码：<code>#include &lt;stdbool.h&gt;</code></li>
 </ul>
 <p>布尔类型为<code>bool</code> (Java中为Boolean)</p>
+<hr>
 <h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>例：<code>int number[100];</code> (Java中为 int[] number = new int[100];)</p>
 <p>（C99开始，<strong>可以用变量定义数组大小</strong>）</p>
 <h3 id="二维数组的初始化"><a href="#二维数组的初始化" class="headerlink" title="二维数组的初始化"></a>二维数组的初始化</h3><ul>
@@ -647,11 +648,10 @@
 <p><strong>函数的先后顺序</strong>很重要。</p>
 <p>C语言的函数可以将声明和定义分离，从而顺利通过编译,如：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> begin, <span class="keyword">int</span> end)</span></span>; <span class="comment">//声明，函数原型， 如果没有参数，括号内最好填写 void，更严谨</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123; <span class="comment">//main的参数部分也可以写 void</span></span><br><span class="line">	sum(<span class="number">1</span>,<span class="number">10</span>);</span><br><span class="line">	sum(<span class="number">20</span>,<span class="number">30</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> begin, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = begin; i &lt;= end; i++) &#123;</span><br><span class="line">		sum += i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d到%d的和是%d\n"</span>, begin, end, sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><ul>
-<li><p>调用函数时，<strong>给的值可以与参数类型不完全匹配</strong>，编译器自行转换类型，（Java则对类型转换要求严格）。</p>
-</li>
-<li><p>C语言调用函数传参数时，是<strong>值传递</strong>。</p>
-</li>
+<li>调用函数时，<strong>给的值可以与参数类型不完全匹配</strong>，编译器自行转换类型，（Java则对类型转换要求严格）。</li>
+<li>C语言调用函数传参数时，是<strong>值传递</strong>。</li>
 </ul>
+<hr>
 <h2 id="指针与数组"><a href="#指针与数组" class="headerlink" title="指针与数组"></a>指针与数组</h2><ul>
 <li><p>一元运算符<code>&amp;</code><br>获取变量的地址，它的<strong>操作数必须是变量</strong>，没有其他的运算包括其中。<br><code>p = &amp;c;</code> 称p为“指向”c的指针。</p>
 </li>
@@ -660,7 +660,22 @@
 </ul>
 <h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><p>指针就是<strong>保存地址的变量</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;i;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *p,q; <span class="comment">//p为指针，值为所指向的地址；*p是int类型变量，为所指向地址上的值；</span></span><br></pre></td></tr></table></figure>
-<h4 id="数组参数"><a href="#数组参数" class="headerlink" title="数组参数"></a>数组参数</h4><p>以下四种函数原型等价</p>
+<h3 id="指针应用场景"><a href="#指针应用场景" class="headerlink" title="指针应用场景"></a>指针应用场景</h3><ol>
+<li><p>交换两个变量的值</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> *pa, <span class="keyword">int</span> *pb)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t = *pa;</span><br><span class="line">    *pa = *pb;</span><br><span class="line">    *pb = t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函数需要返回多个值，某些值就只能通过指针返回</p>
+</li>
+</ol>
+<h3 id="指针与const"><a href="#指针与const" class="headerlink" title="指针与const"></a>指针与const</h3><ol>
+<li><p>指针是const（<strong>*在const前</strong>）：表示一旦得到了某个变量的地址，不能再指向其他变量；<strong>不影响改变该地址上的值</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *<span class="keyword">const</span> q = &amp;i; <span class="comment">//q是const</span></span><br><span class="line">*q = <span class="number">26</span>; <span class="comment">//所指变量的值可以更改</span></span><br><span class="line">q++; <span class="comment">//ERROR!</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>所指的类型是const（<strong>*在const后</strong>）：表示不能通过指针去修改那个变量（<strong>不会使那个变量成为const</strong>）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p = &amp;i; <span class="comment">// int const *p 作用相同</span></span><br><span class="line">*p = <span class="number">26</span>; <span class="comment">//ERROR! (*p)是const</span></span><br><span class="line">i = <span class="number">26</span>; <span class="comment">//OK</span></span><br><span class="line">p = &amp;j; <span class="comment">//OK</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="数组参数"><a href="#数组参数" class="headerlink" title="数组参数"></a>数组参数</h3><p>以下四种函数原型等价</p>
 <ul>
 <li><code>int sum(int *arr, int n);</code></li>
 <li><code>int sum(int *, int);</code></li>
@@ -679,6 +694,7 @@
 <li><p>数组变量是const的指针，所以不能被赋值<br><code>int a[] &lt;==&gt; int *const a=...</code></p>
 </li>
 </ul>
+<hr>
 <h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>C语言的字符串以字符数组的形态存在</p>
 <ul>
 <li>不能用运算符对字符串做运算<ul>
@@ -743,14 +759,6 @@
 <li><code>otherprogram | program</code><br>将程序<code>otherprogram</code>的标准输出 通过管道，重定向到程序program的标准输入上。 </li>
 </ul>
 <hr>
-<h2 id="指针应用场景"><a href="#指针应用场景" class="headerlink" title="指针应用场景"></a>指针应用场景</h2><ol>
-<li><p>交换两个变量的值</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> *pa, <span class="keyword">int</span> *pb)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t = *pa;</span><br><span class="line">    *pa = *pb;</span><br><span class="line">    *pb = t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>函数需要返回多个值，某些值就只能通过指针返回</p>
-</li>
-</ol>
-<hr>
 <h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2><ul>
 <li><code>&amp;</code> 与</li>
 <li><code>|</code> 或</li>
@@ -758,12 +766,12 @@
 <li><code>~</code> 求反码</li>
 <li><code>&gt;&gt;</code> 右移（高位出现的空位，原来高位是什么，就用什么补该空位；<code>&gt;&gt;&gt;</code>无符号右移，<strong>高位的空位用0补</strong>）</li>
 </ul>
+<hr>
 <h2 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h2><ul>
-<li><p><code>#include &quot;xxx.h&quot;</code> 函数属于某个头文件</p>
-</li>
-<li><p><code>#include &lt;xxx.h&gt;</code> 引用头文件</p>
-</li>
+<li><code>#include &quot;xxx.h&quot;</code> 函数属于某个头文件</li>
+<li><code>#include &lt;xxx.h&gt;</code> 引用头文件</li>
 </ul>
+<hr>
 <h2 id="静态变量"><a href="#静态变量" class="headerlink" title="静态变量"></a>静态变量</h2><ul>
 <li><p>外部</p>
 <ul>
@@ -779,6 +787,7 @@
 </li>
 </ul>
 <h2 id="寄存器变量"><a href="#寄存器变量" class="headerlink" title="寄存器变量"></a>寄存器变量</h2><p><code>register</code>声明告诉编译器，它所声明的变量在程序中使用频率较高</p>
+<hr>
 <h2 id="结构（和java中的类-概念类似-只有变量没有函数）"><a href="#结构（和java中的类-概念类似-只有变量没有函数）" class="headerlink" title="结构（和java中的类 概念类似,只有变量没有函数）"></a>结构（和java中的类 概念类似,只有变量没有函数）</h2><p>关键字<code>struct</code>引入结构声明。关键字<code>struct</code>后面的名字是可选的，称为<strong>结构标记</strong>。</p>
 <p>例：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">point</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">	<span class="keyword">int</span> y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><code>struct point pt = {320, 200};</code>定义了一个struct point类型的变量pt</p>
@@ -789,14 +798,15 @@
 <p>C语言提供一个编译时的一元运算符sizeof，可以用来<strong>计算任一对象的长度</strong>。</p>
 <p><code>sizeof 对象</code>和<code>sizeof(类型名)</code>会返回一个整型值，等于指定对象或类型<strong>占用的存储空间字节数</strong>。</p>
 <h3 id="类型定义-typedef"><a href="#类型定义-typedef" class="headerlink" title="类型定义 (typedef)"></a>类型定义 (typedef)</h3><p><code>typedef</code>用来<strong>建立新的 数据类型名</strong>。<br>例如，声明<code>typedef int Length;</code><br>将Length定义为与int具有同等意义的名字，Length与类型int完全相同。</p>
-<h2 id="动态分配内存"><a href="#动态分配内存" class="headerlink" title="动态分配内存"></a>动态分配内存</h2><p><code>malloc</code>函数：在需要时，向操作系统申请存储空间，需要<code>#include &lt;stdlib.h&gt;</code>。</p>
+<h2 id="动态分配内存"><a href="#动态分配内存" class="headerlink" title="动态分配内存"></a>动态分配内存</h2><p>C99之前无法用变量作为数组定义的大小，当时如何解决该问题？</p>
+<p><code>malloc</code>函数：在需要时，向操作系统申请存储空间，需要<code>#include &lt;stdlib.h&gt;</code>。</p>
 <p><code>void* malloc(size_t size);</code></p>
 <ul>
 <li>向malloc申请的空间的大小以字节为单位</li>
-<li>返回的结果是<code>void*</code>，需要类型转换为需要的类型。例如<code>(int*)malloc(n*sizeof(int))</code></li>
+<li>返回的结果是<code>void*</code>，需要类型转换为需要的类型。例如<code>int *a = (int*)malloc(n*sizeof(int))</code></li>
 </ul>
 <p>因为程序中的某些地方可能不通过 malloc调用 申请空间，所以，<strong>malloc管理的空间不一定是连续的</strong>。</p>
-<h3 id="释放空间"><a href="#释放空间" class="headerlink" title="释放空间"></a>释放空间</h3><p><code>free();</code><br><strong>malloc得到的空间一定要有free的习惯</strong></p>
+<h3 id="释放空间"><a href="#释放空间" class="headerlink" title="释放空间"></a>释放空间</h3><p><code>free(a);</code><br><strong>malloc得到的空间一定要有free的习惯，只能free申请来的空间的首地址</strong></p>
 <hr>
 <h2 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h2><h3 id="gets"><a href="#gets" class="headerlink" title="gets()"></a><code>gets()</code></h3><p>gets()函数包含于stdio.h头文件，会一直读取用户输入，直至换行为止；而scanf一直读至空格键</p>
 <hr>
@@ -1104,7 +1114,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量名"><span class="nav-number">1.</span> <span class="nav-text">变量名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型限定符"><span class="nav-number">2.</span> <span class="nav-text">类型限定符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义常量"><span class="nav-number">3.</span> <span class="nav-text">定义常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义布尔类型"><span class="nav-number">4.</span> <span class="nav-text">定义布尔类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组"><span class="nav-number">5.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二维数组的初始化"><span class="nav-number">5.1.</span> <span class="nav-text">二维数组的初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组的大小"><span class="nav-number">5.1.1.</span> <span class="nav-text">数组的大小</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的赋值"><span class="nav-number">5.2.</span> <span class="nav-text">数组的赋值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符类型"><span class="nav-number">6.</span> <span class="nav-text">字符类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#逃逸字符"><span class="nav-number">6.1.</span> <span class="nav-text">逃逸字符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">7.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数传递"><span class="nav-number">7.1.</span> <span class="nav-text">参数传递</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针与数组"><span class="nav-number">8.</span> <span class="nav-text">指针与数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">8.1.</span> <span class="nav-text">指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组参数"><span class="nav-number">8.1.1.</span> <span class="nav-text">数组参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">9.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串变量"><span class="nav-number">9.0.1.</span> <span class="nav-text">字符串变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串常量"><span class="nav-number">9.0.2.</span> <span class="nav-text">字符串常量</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#读入、输出数据"><span class="nav-number">10.</span> <span class="nav-text">读入、输出数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#EOF（End-Of-File"><span class="nav-number">10.1.</span> <span class="nav-text">EOF（End Of File)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浮点数的输入输出"><span class="nav-number">10.2.</span> <span class="nav-text">浮点数的输入输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符的输入-输出"><span class="nav-number">10.3.</span> <span class="nav-text">字符的输入/输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串的输入输出"><span class="nav-number">10.4.</span> <span class="nav-text">字符串的输入输出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针应用场景"><span class="nav-number">11.</span> <span class="nav-text">指针应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#位运算符"><span class="nav-number">12.</span> <span class="nav-text">位运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#头文件"><span class="nav-number">13.</span> <span class="nav-text">头文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态变量"><span class="nav-number">14.</span> <span class="nav-text">静态变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寄存器变量"><span class="nav-number">15.</span> <span class="nav-text">寄存器变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构（和java中的类-概念类似-只有变量没有函数）"><span class="nav-number">16.</span> <span class="nav-text">结构（和java中的类 概念类似,只有变量没有函数）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构与函数"><span class="nav-number">16.1.</span> <span class="nav-text">结构与函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型定义-typedef"><span class="nav-number">16.2.</span> <span class="nav-text">类型定义 (typedef)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态分配内存"><span class="nav-number">17.</span> <span class="nav-text">动态分配内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#释放空间"><span class="nav-number">17.1.</span> <span class="nav-text">释放空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用函数"><span class="nav-number">18.</span> <span class="nav-text">常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gets"><span class="nav-number">18.1.</span> <span class="nav-text">gets()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串函数"><span class="nav-number">18.2.</span> <span class="nav-text">字符串函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准库函数-qsort排序"><span class="nav-number">18.3.</span> <span class="nav-text">标准库函数 qsort排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转换字符大小写"><span class="nav-number">18.4.</span> <span class="nav-text">转换字符大小写</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量名"><span class="nav-number">1.</span> <span class="nav-text">变量名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型限定符"><span class="nav-number">2.</span> <span class="nav-text">类型限定符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义常量"><span class="nav-number">3.</span> <span class="nav-text">定义常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义布尔类型"><span class="nav-number">4.</span> <span class="nav-text">定义布尔类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组"><span class="nav-number">5.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二维数组的初始化"><span class="nav-number">5.1.</span> <span class="nav-text">二维数组的初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组的大小"><span class="nav-number">5.1.1.</span> <span class="nav-text">数组的大小</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的赋值"><span class="nav-number">5.2.</span> <span class="nav-text">数组的赋值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符类型"><span class="nav-number">6.</span> <span class="nav-text">字符类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#逃逸字符"><span class="nav-number">6.1.</span> <span class="nav-text">逃逸字符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">7.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数传递"><span class="nav-number">7.1.</span> <span class="nav-text">参数传递</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针与数组"><span class="nav-number">8.</span> <span class="nav-text">指针与数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">8.1.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针应用场景"><span class="nav-number">8.2.</span> <span class="nav-text">指针应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针与const"><span class="nav-number">8.3.</span> <span class="nav-text">指针与const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组参数"><span class="nav-number">8.4.</span> <span class="nav-text">数组参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">9.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串变量"><span class="nav-number">9.0.1.</span> <span class="nav-text">字符串变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串常量"><span class="nav-number">9.0.2.</span> <span class="nav-text">字符串常量</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#读入、输出数据"><span class="nav-number">10.</span> <span class="nav-text">读入、输出数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#EOF（End-Of-File"><span class="nav-number">10.1.</span> <span class="nav-text">EOF（End Of File)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浮点数的输入输出"><span class="nav-number">10.2.</span> <span class="nav-text">浮点数的输入输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符的输入-输出"><span class="nav-number">10.3.</span> <span class="nav-text">字符的输入/输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串的输入输出"><span class="nav-number">10.4.</span> <span class="nav-text">字符串的输入输出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#位运算符"><span class="nav-number">11.</span> <span class="nav-text">位运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#头文件"><span class="nav-number">12.</span> <span class="nav-text">头文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态变量"><span class="nav-number">13.</span> <span class="nav-text">静态变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寄存器变量"><span class="nav-number">14.</span> <span class="nav-text">寄存器变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构（和java中的类-概念类似-只有变量没有函数）"><span class="nav-number">15.</span> <span class="nav-text">结构（和java中的类 概念类似,只有变量没有函数）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构与函数"><span class="nav-number">15.1.</span> <span class="nav-text">结构与函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型定义-typedef"><span class="nav-number">15.2.</span> <span class="nav-text">类型定义 (typedef)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态分配内存"><span class="nav-number">16.</span> <span class="nav-text">动态分配内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#释放空间"><span class="nav-number">16.1.</span> <span class="nav-text">释放空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用函数"><span class="nav-number">17.</span> <span class="nav-text">常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gets"><span class="nav-number">17.1.</span> <span class="nav-text">gets()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串函数"><span class="nav-number">17.2.</span> <span class="nav-text">字符串函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准库函数-qsort排序"><span class="nav-number">17.3.</span> <span class="nav-text">标准库函数 qsort排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转换字符大小写"><span class="nav-number">17.4.</span> <span class="nav-text">转换字符大小写</span></a></li></ol></li></div>
             
 
           </div>
