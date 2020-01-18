@@ -154,7 +154,7 @@
 <meta property="og:description" content="终端界面的说明示例：hunter@Hunter-PC:~$  最左侧的hunter是目前用户的账号 @之后的Hunter-PC是主机名 ~是目前所在目录；~为当前用户的home目录 $是提示字符；root的提示符为#，普通用户为$  登录后取得的程序被称为Shell(壳，因为该程序负责最外面跟使用者沟通，被戏称称为壳程序） 在Linux下平常最好使用一般账号来登录，需要动用到系统功能修订时，再使用">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/03/28/5c9c99ef62fbb.png">
-<meta property="og:updated_time" content="2019-03-28T09:55:31.384Z">
+<meta property="og:updated_time" content="2020-01-18T13:11:37.045Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu下的一些终端操作">
 <meta name="twitter:description" content="终端界面的说明示例：hunter@Hunter-PC:~$  最左侧的hunter是目前用户的账号 @之后的Hunter-PC是主机名 ~是目前所在目录；~为当前用户的home目录 $是提示字符；root的提示符为#，普通用户为$  登录后取得的程序被称为Shell(壳，因为该程序负责最外面跟使用者沟通，被戏称称为壳程序） 在Linux下平常最好使用一般账号来登录，需要动用到系统功能修订时，再使用">
@@ -475,7 +475,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-28 17:55:31" itemprop="dateModified" datetime="2019-03-28T17:55:31+08:00">2019-03-28</time>
+                <time title="修改时间：2020-01-18 21:11:37" itemprop="dateModified" datetime="2020-01-18T21:11:37+08:00">2020-01-18</time>
               
             
           </span>
@@ -568,10 +568,33 @@
 <li>指令太长的时候，可以使用<code>\</code>使指令连续到下一行。<code>\</code>后需要立刻接<br><strong>回车</strong>，才能跳脱！</li>
 </ul>
 <hr>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ctrl + Alt + T</td>
+<td>打开终端</td>
+</tr>
+<tr>
+<td>Shift + Ctrl + C/V</td>
+<td>复制/粘贴</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h2 id="操作命令"><a href="#操作命令" class="headerlink" title="操作命令"></a>操作命令</h2><p><strong>Linux命令中，参数一般是无序的，特殊情况除外</strong>。</p>
-<h3 id="安装-卸载软件"><a href="#安装-卸载软件" class="headerlink" title="安装/卸载软件"></a>安装/卸载软件</h3><p>在刚安装好Ubuntu时，应该先通过<code>sudo apt update</code>和<code>sudo apt upgrade</code>来更新系统文件。<br>然后：</p>
-<ul>
-<li><code>apt-get install build-essential</code>：获得各种开发工具（gcc…)</li>
+<h3 id="更新系统文件"><a href="#更新系统文件" class="headerlink" title="更新系统文件"></a>更新系统文件</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt upgrade</span><br></pre></td></tr></table></figure>
+<h3 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h3><p><code>sudo apt-get install xxx（程序名）</code></p>
+<h3 id="卸载软件"><a href="#卸载软件" class="headerlink" title="卸载软件"></a>卸载软件</h3><ul>
+<li><p><code>sudo apt-get remove -purge xxx(程序名)</code></p>
+</li>
+<li><p><code>sudo apt autoremove</code></p>
+</li>
 </ul>
 <h3 id="磁盘管理命令"><a href="#磁盘管理命令" class="headerlink" title="磁盘管理命令"></a>磁盘管理命令</h3><ul>
 <li><p>注销Linux：<code>exit</code>(Linux本身还在运行，只是退出了登录的操作)</p>
@@ -1003,7 +1026,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1117,7 +1140,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#终端界面的说明"><span class="nav-number">1.</span> <span class="nav-text">终端界面的说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作说明及技巧"><span class="nav-number">2.</span> <span class="nav-text">操作说明及技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作命令"><span class="nav-number">3.</span> <span class="nav-text">操作命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-卸载软件"><span class="nav-number">3.1.</span> <span class="nav-text">安装/卸载软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘管理命令"><span class="nav-number">3.2.</span> <span class="nav-text">磁盘管理命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件操作命令"><span class="nav-number">3.3.</span> <span class="nav-text">文件操作命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统命令"><span class="nav-number">3.4.</span> <span class="nav-text">系统命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权限命令"><span class="nav-number">3.5.</span> <span class="nav-text">权限命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几个重要的热键"><span class="nav-number">4.</span> <span class="nav-text">几个重要的热键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看帮助"><span class="nav-number">5.</span> <span class="nav-text">查看帮助</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指令名后加上-help"><span class="nav-number">5.1.</span> <span class="nav-text">指令名后加上--help</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#man-page"><span class="nav-number">5.2.</span> <span class="nav-text">man page</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#终端界面的说明"><span class="nav-number">1.</span> <span class="nav-text">终端界面的说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作说明及技巧"><span class="nav-number">2.</span> <span class="nav-text">操作说明及技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快捷键"><span class="nav-number">3.</span> <span class="nav-text">快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作命令"><span class="nav-number">4.</span> <span class="nav-text">操作命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#更新系统文件"><span class="nav-number">4.1.</span> <span class="nav-text">更新系统文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装软件"><span class="nav-number">4.2.</span> <span class="nav-text">安装软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载软件"><span class="nav-number">4.3.</span> <span class="nav-text">卸载软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘管理命令"><span class="nav-number">4.4.</span> <span class="nav-text">磁盘管理命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件操作命令"><span class="nav-number">4.5.</span> <span class="nav-text">文件操作命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统命令"><span class="nav-number">4.6.</span> <span class="nav-text">系统命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权限命令"><span class="nav-number">4.7.</span> <span class="nav-text">权限命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几个重要的热键"><span class="nav-number">5.</span> <span class="nav-text">几个重要的热键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看帮助"><span class="nav-number">6.</span> <span class="nav-text">查看帮助</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指令名后加上-help"><span class="nav-number">6.1.</span> <span class="nav-text">指令名后加上--help</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#man-page"><span class="nav-number">6.2.</span> <span class="nav-text">man page</span></a></li></ol></li></ol></div>
             
 
           </div>
