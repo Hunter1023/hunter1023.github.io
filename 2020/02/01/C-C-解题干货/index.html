@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="特叔服务">
 <meta property="og:description" content="数据类型选择 整型int取值范围：$-2^{31} \sim +(2^{31}-1)$，题目要求绝对值在$10^9$以内 或 32位整数，则用int型表示  长整型long long取值范围：$-2^{63} \sim +(2^{63}-1)$，题目要求绝对值在$10^{18}$以内 或 64位整数，则用long long型表示 注：如果 long long 型赋 $&amp;gt; 2^{31}-1$的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-02T12:04:14.761Z">
+<meta property="og:updated_time" content="2020-02-04T06:33:17.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C&#x2F;C++解题干货">
 <meta name="twitter:description" content="数据类型选择 整型int取值范围：$-2^{31} \sim +(2^{31}-1)$，题目要求绝对值在$10^9$以内 或 32位整数，则用int型表示  长整型long long取值范围：$-2^{63} \sim +(2^{63}-1)$，题目要求绝对值在$10^{18}$以内 或 64位整数，则用long long型表示 注：如果 long long 型赋 $&amp;gt; 2^{31}-1$的">
@@ -473,7 +473,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-02 20:04:14" itemprop="dateModified" datetime="2020-02-02T20:04:14+08:00">2020-02-02</time>
+                <time title="修改时间：2020-02-04 14:33:17" itemprop="dateModified" datetime="2020-02-04T14:33:17+08:00">2020-02-04</time>
               
             
           </span>
@@ -561,7 +561,7 @@
 </ul>
 </li>
 <li><p>强制类型转换</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">double</span> r = <span class="number">12.56</span>;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">3</span>, b = <span class="number">5</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, (<span class="keyword">int</span>)r); <span class="comment">//输出12</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.1f"</span>, (<span class="keyword">double</span>)a / (<span class="keyword">double</span>)b);<span class="comment">//输出0.6</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> r = <span class="number">12.56</span>;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">3</span>, b = <span class="number">5</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, (<span class="keyword">int</span>)r); <span class="comment">//输出12</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.1f"</span>, (<span class="keyword">double</span>)a / (<span class="keyword">double</span>)b);<span class="comment">//输出0.6</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <hr>
@@ -575,8 +575,8 @@
 </thead>
 <tbody>
 <tr>
-<td>#include \&lt;cstdio><br><strong>scanf函数<br>printf函数</strong></td>
-<td>#include \&lt;iostream> <br>using std::cin;<br>using std::cout;<br>cin<br>cout</td>
+<td>#include &lt;cstdio><br><strong>scanf函数<br>printf函数</strong></td>
+<td>#include &lt;iostream> <br>using std::cin;<br>using std::cout;<br>cin<br>cout</td>
 <td>cin 和 cout <strong>无需指定输入输出格式</strong>，<br>但<strong>消耗的时间</strong>比 scanf 和 printf <strong>多得多</strong>。<br>故<strong>推荐使用C语言的 scanf 和 printf</strong>，<br>只有在十分必要的时候使用 cin 和 cout</td>
 </tr>
 </tbody>

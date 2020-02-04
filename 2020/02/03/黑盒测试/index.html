@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="特叔服务">
 <meta property="og:description" content="对黑盒测试来说，所有输入数据都放在一个文件里。   单点测试PAT试题基本为单点测试（即一次运行一组数据，一组数据通过测试则获得这组数据的分值）。  多点测试多点测试要求程序一次运行所有数据，并要求输出结果都正确，只要存在错误，即不得分。大部分 在线判题系统(Online Judge)  都采用了多点测试。由于要求程序能运行所有数据，因此必须保证程序能反复执行代码的核心部分，这就要用到循环。 输">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-03T11:55:50.999Z">
+<meta property="og:updated_time" content="2020-02-03T12:04:48.249Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="黑盒测试">
 <meta name="twitter:description" content="对黑盒测试来说，所有输入数据都放在一个文件里。   单点测试PAT试题基本为单点测试（即一次运行一组数据，一组数据通过测试则获得这组数据的分值）。  多点测试多点测试要求程序一次运行所有数据，并要求输出结果都正确，只要存在错误，即不得分。大部分 在线判题系统(Online Judge)  都采用了多点测试。由于要求程序能运行所有数据，因此必须保证程序能反复执行代码的核心部分，这就要用到循环。 输">
@@ -456,7 +456,7 @@
                 
               
 
-              <time title="创建时间：2020-02-03 19:22:52 / 修改时间：19:55:50" itemprop="dateCreated datePublished" datetime="2020-02-03T19:22:52+08:00">2020-02-03</time>
+              <time title="创建时间：2020-02-03 19:22:52 / 修改时间：20:04:48" itemprop="dateCreated datePublished" datetime="2020-02-03T19:22:52+08:00">2020-02-03</time>
             
 
             
@@ -556,16 +556,19 @@
 <p><code>scanf</code> 若成功读入一个值，返回1；若成功读入2个值，返回2；若<strong>读入失败，返回 -1</strong>，C/C++中，<code>EOF</code>即为 -1。</p>
 <p>正常情况下，控制台中的输入不会失败，只有读取文件时<strong>到达文件末尾，导致无法读取时，才会产生读入失败</strong>。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//读取数字、字符、字符串</span></span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n) != EOF) &#123;</span><br><span class="line">    ···</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//读取字符串</span></span><br><span class="line"><span class="keyword">while</span> (gets(str) !- <span class="literal">NULL</span>) &#123;</span><br><span class="line">    ···</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
 <ol start="2">
-<li><strong><code>while··· break</code>型</strong></li>
+<li>while··· break`型**</li>
 </ol>
 <p>题目要求，<strong>当输入的数据满足某个条件时，停止输入</strong>。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;a, &amp;b) != EOF) &#123;</span><br><span class="line">    <span class="keyword">if</span> (a == <span class="number">0</span> &amp;&amp; b == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, a + b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//更简洁的写法</span></span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;a, &amp;b), a || b) &#123;<span class="comment">// scanf()恒不为0</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, a + b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
 <ol start="3">
-<li><code>while (T--)</code>型</li>
+<li>while (T–)`型</li>
 </ol>
 <p>题目给出测试数据的组数，然后才给出相应数量数组的输入数据。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> T;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line"><span class="keyword">while</span> (T--) &#123;</span><br><span class="line">    ···</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
 <h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><ol>
 <li><p>正常输出</p>
 </li>
@@ -575,6 +578,7 @@
 <p>一般在第三种输入类型<code>while (T--)</code>情况下出现，只需通过判断T是否为0选择是否输出额外的换行。</p>
 </li>
 </ol>
+<hr>
 <h3 id="重置变量"><a href="#重置变量" class="headerlink" title="重置变量"></a>重置变量</h3><p>在多点测试中，<strong>每一次循环都要重置变量和数组</strong>，否则在下一组数据来临时，变量和数组不是初始状态，将出错。<strong>重置数组一般使用<code>memset</code>函数或<code>fill</code>函数</strong>。</p>
 
       
