@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="特叔服务">
 <meta property="og:description" content="变量名传统的C语言用法中，变量名使用小写字母，符号常量名使用大写字母  类型限定符类型限定符signed与unsigned可以用于限定char类型或任何整型。  signed （默认）如char类型 signed char，取值范围为-128~127 unsigned （无符号类型）总是正值或0，例如char类型，unsigned char 取值范围为0~255   定义常量 方法一： const">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-01T16:18:53.172Z">
+<meta property="og:updated_time" content="2020-02-19T03:25:43.751Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言的基本概念">
 <meta name="twitter:description" content="变量名传统的C语言用法中，变量名使用小写字母，符号常量名使用大写字母  类型限定符类型限定符signed与unsigned可以用于限定char类型或任何整型。  signed （默认）如char类型 signed char，取值范围为-128~127 unsigned （无符号类型）总是正值或0，例如char类型，unsigned char 取值范围为0~255   定义常量 方法一： const">
@@ -473,7 +473,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-02 00:18:53" itemprop="dateModified" datetime="2020-02-02T00:18:53+08:00">2020-02-02</time>
+                <time title="修改时间：2020-02-19 11:25:43" itemprop="dateModified" datetime="2020-02-19T11:25:43+08:00">2020-02-19</time>
               
             
           </span>
@@ -848,7 +848,7 @@
 </ul>
 <hr>
 <h3 id="标准库函数-qsort排序"><a href="#标准库函数-qsort排序" class="headerlink" title="标准库函数 qsort排序"></a>标准库函数 qsort排序</h3><p>C语言有<code>qsort()</code>；C++有<code>sort()</code>；Java有<code>Arrays</code>类</p>
-<p><code>qsort()</code>声明在stdlib.h文件中。<br><code>void qsort(void *base,size_t nelem,size_t width,int (*Comp)(const void *,const void *));</code></p>
+<p><code>qsort()</code>声明在stdlib.h文件中。<br><code>void qsort(void *base,size_t nelem,size_t width,int (*cmp)(const void *,const void *));</code></p>
 <ul>
 <li><p>base:<br>要排序的数组</p>
 </li>
@@ -856,11 +856,11 @@
 </li>
 <li><p>size:<br>每个数组元素占用内存空间，可使用sizeof获得</p>
 </li>
-<li><p>comp:<br>比较两个数组元素的比较函数。比较函数的第一个参数值a与参数b,<strong>此函数需要自定义</strong></p>
+<li><p>cmp:<br>比较两个数组元素的比较函数，返回值是<strong>int类型</strong>。比较函数的第一个参数值a与参数b，<strong>此函数需要自定义</strong></p>
 <ul>
 <li>返回值 &gt; 0, a 将被排在b后面;</li>
 <li>返回值 &lt; 0, a 将被排在b前面;</li>
-<li>示例：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> * a, <span class="keyword">const</span> <span class="keyword">void</span> * b)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//qsort的比较函数如果返回（第一个值大于第二个值时返回正数），则为递增 </span></span><br><span class="line">	<span class="keyword">return</span> *(<span class="keyword">long</span> <span class="keyword">int</span> *)a - *(<span class="keyword">long</span> <span class="keyword">int</span> *)b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>示例：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *a, <span class="keyword">const</span> <span class="keyword">void</span> *b)</span> </span>&#123; <span class="comment">//升序</span></span><br><span class="line">	<span class="keyword">return</span> *(<span class="keyword">int</span> *)a - *(<span class="keyword">long</span> <span class="keyword">int</span> *)b; <span class="comment">//不能用'&gt;'、'&lt;'比较符(返回无负值)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
