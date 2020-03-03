@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="特叔服务">
 <meta property="og:description" content="根据《算法笔记》一书，对PAT甲级、乙级真题和codeup部分试题进行分类。 1. C/C++快速入门1.1 数组 codeup 杨辉三角   1.2 指针 codeup C语言10.16   1.3 结构体的使用 codeup C语言11.1 codeup C语言11.2 codeup C语言11.4   2. 入门模拟2.1 简单模拟不涉及算法，只是根据题目描述来编写代码，考察代码能力。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-01T07:47:34.792Z">
+<meta property="og:updated_time" content="2020-03-03T15:02:38.058Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法题目分类">
 <meta name="twitter:description" content="根据《算法笔记》一书，对PAT甲级、乙级真题和codeup部分试题进行分类。 1. C/C++快速入门1.1 数组 codeup 杨辉三角   1.2 指针 codeup C语言10.16   1.3 结构体的使用 codeup C语言11.1 codeup C语言11.2 codeup C语言11.4   2. 入门模拟2.1 简单模拟不涉及算法，只是根据题目描述来编写代码，考察代码能力。">
@@ -473,7 +473,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-01 15:47:34" itemprop="dateModified" datetime="2020-03-01T15:47:34+08:00">2020-03-01</time>
+                <time title="修改时间：2020-03-03 23:02:38" itemprop="dateModified" datetime="2020-03-03T23:02:38+08:00">2020-03-03</time>
               
             
           </span>
@@ -868,27 +868,27 @@
 <td><strong>（待优化）</strong><br>1. <strong>通话记录统一先排序</strong>后处理<br>2. <strong>连续的两个通话记录，判断是否为 同一用户 且 为先通话后挂断的状态</strong><br>3. <strong>通话时长的统计方法</strong><br>4. 单位美分cents 要转换为 美元$</td>
 </tr>
 <tr>
-<td><strong>1025</strong> <strong>PAT Ranking</strong></td>
-<td></td>
+<td><strong>A1025</strong> <strong>PAT Ranking</strong></td>
+<td>\</td>
 </tr>
 <tr>
-<td>A1028</td>
-<td></td>
+<td><strong>A1028</strong> <strong>List Sorting</strong></td>
+<td>\</td>
 </tr>
 <tr>
-<td>A1055</td>
-<td></td>
+<td><strong>A1055</strong> <strong>The World’s Richest</strong></td>
+<td><strong>超时问题。要求输出的人数$\leq$100，通过筛去每个年龄多余的人解决</strong></td>
 </tr>
 <tr>
-<td>A1075</td>
+<td><strong>A1075</strong> <strong>PAT Judge</strong></td>
+<td><strong>(待优化)</strong><br>1. <strong>不能编译</strong>的提交<strong>得分为0</strong><br>2. 没有提交过的答案需要输出为<code>-</code>，利用<code>&lt;cstring&gt;</code>中的<code>memset</code>函数，<strong>为 得分数组 赋值 -1，表示没有提交过答案</strong><br>3. <strong>没有任何一题通过编译 或 没有提交过答案的人</strong>不记录排名，<strong>设置 是否有通过编译的标识</strong>，进行筛选<br>4. 读取数据时，<strong>将用户数组下标看作id</strong>，便于统计<br>5. 排序<strong>以 是否有通过编译 为 第一排序条件</strong></td>
+</tr>
+<tr>
+<td>A1080</td>
 <td></td>
 </tr>
 <tr>
 <td>A1083</td>
-<td></td>
-</tr>
-<tr>
-<td>A1080</td>
 <td></td>
 </tr>
 <tr>
@@ -897,7 +897,137 @@
 </tbody>
 </table>
 <hr>
-<h3 id="3-2-散列"><a href="#3-2-散列" class="headerlink" title="3.2 散列"></a>3.2 散列</h3><h4 id="3-2-1-散列的定义与整数散列"><a href="#3-2-1-散列的定义与整数散列" class="headerlink" title="3.2.1 散列的定义与整数散列"></a>3.2.1 散列的定义与整数散列</h4><h4 id="3-2-2-字符串hash初步"><a href="#3-2-2-字符串hash初步" class="headerlink" title="3.2.2 字符串hash初步"></a>3.2.2 字符串hash初步</h4><hr>
+<h3 id="3-2-散列"><a href="#3-2-散列" class="headerlink" title="3.2 散列"></a>3.2 散列</h3><h4 id="3-2-1-散列-hash-的定义与整数散列"><a href="#3-2-1-散列-hash-的定义与整数散列" class="headerlink" title="3.2.1 散列(hash)的定义与整数散列"></a>3.2.1 散列(hash)的定义与整数散列</h4><blockquote>
+<p>例题:</p>
+<p>给出$N$个正整数，再给出$M$个正整数，问这$M$个数中的每个数分别是否在$N$个数中出现过，其中 $N, M \leq10^5$，且所有正整数均不超过$10^5$。例如 $N = 5，M = 3$， $N$个正整数为 ${8， 3， 7， 6， 2}$，欲查询的$M$个正整数为 ${7， 4， 2}$。</p>
+</blockquote>
+<p>对这个问题，最直观的思路是：对每个欲查询的正整数$x$，遍历所有$N$个数，看是否有一个数与$x$相等。这种做法的时间复杂度为$O(NM)$，显然不是好方法。可以采取<strong>用空间换时间</strong>的方式，用<strong>数组下标</strong>作为<strong>对应整数的标识</strong>，即设定一个<code>bool</code>型数组<code>hashTable[100001]</code>，其中<code>hashTable[x] == true</code>表示正整数$x$在$N$个整数中出现过。这样就可以在一开始读入$N$个正整数时进行预处理。于是，对$M$个欲查询的数，就能直接通过<code>hashTable</code>数组判断出每个数是否出现过，这种做法的时间复杂度为$O(N+M)$。<strong>直接把输入的数作为数组的下标</strong>来对这个数的性质进行统计的方法<strong>非常实用，务必掌握</strong>。</p>
+<p>但是这个方法有一个问题：如果<strong>输入的整数可能是$10^9$大小</strong>，甚至是<strong>字符串</strong>，就<strong>不能将其直接作为数组下标</strong>了。因此我们寻找一种做法，<strong>将元素通过一个函数转换为一个在能接受范围内的整数，使得该整数尽可能唯一地代表这个元素</strong>。这样的方法称为<strong>散列(hash)</strong>，用于转换的函数称为<strong>散列函数H</strong>，也就是说，如果元素在转换前为<code>key</code>，那么转换后就是一个整数<code>H(key)</code>。</p>
+<h5 id="散列函数"><a href="#散列函数" class="headerlink" title="散列函数"></a>散列函数</h5><p>对<code>key</code>是<strong>整数</strong>的情况来说，常用的<strong>散列函数</strong>有：</p>
+<ol>
+<li><p><strong>直接定址法</strong></p>
+<ul>
+<li><p>恒等变换，即 <code>H(key) = key</code></p>
+</li>
+<li><p>线性变换，即 <code>H(key) =  a * key + b</code></p>
+</li>
+</ul>
+</li>
+<li><p><strong>除留余数法</strong></p>
+<p>把<code>key</code><strong>除以一个数<code>mod</code>得到的余数</strong>作为 <code>hash</code>值 的方法，即 <code>H(key) = key % mod</code></p>
+<p>通过这个散列函数，可以把很大的数转换为不超过 mod 的整数，这样就可以将它作为可用的数组下标。显然，当<code>mod</code>是一个<strong>素数</strong>时，<code>H(key)</code><strong>能尽可能覆盖<code>[0,mod]</code>范围内的每一个数</strong>。</p>
+</li>
+<li><p>平方取中法(<strong>很少用</strong>)</p>
+<p>取<code>key</code>的<strong>平方的中间若干位</strong>作为hash值</p>
+</li>
+</ol>
+<hr>
+<h5 id="冲突"><a href="#冲突" class="headerlink" title="冲突"></a>冲突</h5><p>当两个不同的数<code>key1</code>和<code>key2</code>他们的hash值相同时，这样的情况称为<strong>冲突</strong>。<strong>解决冲突的常用方法：</strong></p>
+<ol>
+<li><p><strong>开放定址法(获取新的hash值)</strong></p>
+<ul>
+<li><p><strong>线性探查法 (Linear Probing)</strong></p>
+<p>当表中下标为<code>H(key)</code>的位置已经被其他元素占用，则<strong>检查下一个位置<code>H(key)+1</code></strong>，以此类推。<strong>如果检查过程中超过了表长<code>m</code>，那么就回到表的首位继续循环</strong>，直到找到一个可用的位置，或是所有位置都已经被使用。</p>
+<p><code>H = (H(key) + i) % m</code>；<strong>(i = 0, 1, 2, …, m-1)</strong></p>
+<p><strong>缺点</strong>：容易导致<strong>大量元素在相邻的散列地址上“聚集”(堆积)，大大降低查找效率</strong>。</p>
+</li>
+<li><p><strong>平方探查法 (Quadratic Probing)</strong></p>
+<p>当表中下标为<code>H(key)</code>的位置已经被其他元素占用，则按如下顺序检查表中位置</p>
+<p><code>H = (H(key) + i) % m</code>；i = $0, 1^2, -1^2, 2^2, -2^2, …, k^2, -k^2;(k \leq m/2)$</p>
+<p>可<strong>避免聚集</strong>问题。</p>
+<p>缺点：<strong>不能探测到散列表上所有单元</strong>(但至少能探测到一半单元)。</p>
+</li>
+<li><p><strong>再散列法(双散列法)</strong></p>
+<p><code>H = (H1(key) + i * H2(key)) % m</code>；<strong>i 是冲突次数</strong></p>
+</li>
+</ul>
+</li>
+<li><p><strong>链地址法 (拉链法)</strong></p>
+<p>不计算新的hash值，而是把 <strong>所有H(key)相同的key</strong>(称为<strong>同义词</strong>) <strong>存储在一个线性链表中</strong>，由散列地址唯一标识。</p>
+</li>
+</ol>
+<hr>
+<p>一般来说，可以使用<strong>标准库模板库中的<code>map</code></strong>来直接使用hash的功能（C++11以后可以用 <code>unordered_map</code>，<strong>速度更快</strong>），因此除非必须模拟这些方法或是对算法的效率要求比较高，一般不需要自己实现上面解决冲突的方法。</p>
+<hr>
+<h4 id="3-2-2-字符串hash初步"><a href="#3-2-2-字符串hash初步" class="headerlink" title="3.2.2 字符串hash初步"></a>3.2.2 字符串hash初步</h4><p>如果<strong><code>key</code>不是整数</strong>，应该如何设计散列函数？</p>
+<blockquote>
+<p>例题：</p>
+<p>如何将一个二维整点$P$的坐标映射为一个整数，使得整点$P$可以由该整数唯一标识？</p>
+</blockquote>
+<p>假设一个整点$P$的坐标是$(x,y)$，其中$0\leq x,y\leq Range$，那么可以令<code>hash</code>函数为<code>H(P) = x * Range + y</code>，这样对数据范围内的任意两个整点$P1$与$P2$，<code>H(P1)</code>都不会等于<code>H(P2)</code>，就可以用<code>H(P)</code>来唯一地标识该整点P，<strong>接着</strong>便可以<strong>通过整数hash的方法进一步映射到较小的范围</strong>。</p>
+<p>字符串hash是指<strong>将一个字符串S映射为一个整数</strong>，使得该整数可以尽可能唯一地代表字符串S。</p>
+<p>为了讨论问题方便，<strong>假设字符串均由大写字母A~Z构成</strong>，不妨把 A~Z 视为 0~25。接着按照<strong>26进制转换为10进制</strong>的思路，实现将字符串映射为整数的需求(转换成的整数最大为$26^{len}-1$，len为字符串长度)。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hashFunc</span><span class="params">(<span class="keyword">char</span> S[], <span class="keyword">int</span> len)</span> </span>&#123; <span class="comment">//将字符串S转换为整数</span></span><br><span class="line">    <span class="keyword">int</span> id = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">		id = id * <span class="number">26</span> + (S[i] - <span class="string">'A'</span>); <span class="comment">//将26进制转换为10进制</span></span><br><span class="line">    <span class="keyword">return</span> id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了避免转换成的整数过大，需要注意 字符串长度len 不能太长。如果字符串中<strong>还有小写字母，可以把 A~Z 作为 0~25，把 a~z 作为 26~51</strong>，这样就变成了<strong>52进制转换为10进制</strong>的问题。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hashFunc</span><span class="params">(<span class="keyword">char</span> S[], <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> id = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0l</span> i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">isupper</span>(S[i])) &#123;</span><br><span class="line">            id = id * <span class="number">52</span> + (S[i] - <span class="string">'A'</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">islower</span>(S[i])) &#123;</span><br><span class="line">            id = id * <span class="number">52</span> + (S[i] - <span class="string">'a'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果字符中还有数字，一般有两种处理方法：</p>
+<ol>
+<li><p>按照小写字母的处理方法，<strong>增大进制数至62</strong>。</p>
+</li>
+<li><p>如果保证在字符串的<strong>末尾是个确定的数字</strong>，就可以把前面英文字母的部分按上面的思路转换成整数，再<strong>将末尾的数字直接拼接上去</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hashFunc</span><span class="params">(<span class="keyword">char</span> S[], <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> id = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++)</span><br><span class="line">        id = id * <span class="number">26</span> + (S[i] - <span class="string">'A'</span>);</span><br><span class="line">   	id = id * <span class="number">10</span> + (S[len - <span class="number">1</span>] - <span class="string">'0'</span>);</span><br><span class="line">    <span class="keyword">return</span> id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>例题：</p>
+<p>给出N个字符串(由三位大写字母组成)，再给出M个查询字符串，问每个查询字符串在N个字符串中出现的次数。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hashFunc</span><span class="params">(<span class="keyword">char</span> S[], <span class="keyword">int</span> len)</span> </span>&#123; <span class="comment">//将字符串S转换为整数</span></span><br><span class="line">    <span class="keyword">int</span> id = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">		id = id * <span class="number">26</span> + (S[i] - <span class="string">'A'</span>); <span class="comment">//将26进制转换为10进制</span></span><br><span class="line">    <span class="keyword">return</span> id;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N, M;</span><br><span class="line">    <span class="keyword">int</span> hashTable[<span class="number">26</span> * <span class="number">26</span> * <span class="number">26</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; N &gt;&gt; M;</span><br><span class="line">    <span class="built_in">string</span> S[N];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; S[i];</span><br><span class="line">        <span class="keyword">int</span> id = hashFunc(S[i], <span class="number">3</span>);</span><br><span class="line">        hashTable[id]++; <span class="comment">//字符串出现的次数+1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">string</span> tmp;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; M; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; tmp;</span><br><span class="line">        <span class="keyword">int</span> id = hashFunc(tmp, <span class="number">3</span>);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; hashTable[id] &lt;&lt; <span class="built_in">endl</span>; <span class="comment">//输出字符串出现的次数</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="3-2-3-相关习题"><a href="#3-2-3-相关习题" class="headerlink" title="3.2.3 相关习题"></a>3.2.3 相关习题</h4><table>
+<thead>
+<tr>
+<th>题目</th>
+<th>解题关键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B1005</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>B1029</strong> <strong>旧键盘</strong><br><strong>A1084</strong> <strong>Broken Keyboard</strong></td>
+<td>待优化</td>
+</tr>
+<tr>
+<td><strong>B1033</strong> <strong>旧键盘打字</strong></td>
+<td><strong>不能用<code>scanf</code>或<code>cin</code>读取字符串</strong>，应采用<code>gets(str)</code>或<code>getline(cin, str)</code>，因为题目<strong>只保证第 2 行输入的文字串非空</strong></td>
+</tr>
+<tr>
+<td>B1038</td>
+<td></td>
+</tr>
+<tr>
+<td>B1039<br>A1092</td>
+<td></td>
+</tr>
+<tr>
+<td>B1042</td>
+<td></td>
+</tr>
+<tr>
+<td>B1043</td>
+<td></td>
+</tr>
+<tr>
+<td>B1047</td>
+<td></td>
+</tr>
+<tr>
+<td>A1041</td>
+<td></td>
+</tr>
+<tr>
+<td>A1050</td>
+<td></td>
+</tr>
+<tr>
+<td>A1048</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3 id="3-3-递归"><a href="#3-3-递归" class="headerlink" title="3.3 递归"></a>3.3 递归</h3><h4 id="3-3-1-分治"><a href="#3-3-1-分治" class="headerlink" title="3.3.1 分治"></a>3.3.1 分治</h4><h4 id="3-3-2-递归"><a href="#3-3-2-递归" class="headerlink" title="3.3.2 递归"></a>3.3.2 递归</h4><hr>
 <h3 id="3-4-贪心"><a href="#3-4-贪心" class="headerlink" title="3.4 贪心"></a>3.4 贪心</h3><h4 id="3-4-1-简单贪心"><a href="#3-4-1-简单贪心" class="headerlink" title="3.4.1 简单贪心"></a>3.4.1 简单贪心</h4><h4 id="3-4-2-区间贪心"><a href="#3-4-2-区间贪心" class="headerlink" title="3.4.2 区间贪心"></a>3.4.2 区间贪心</h4><hr>
 <h3 id="3-5-二分"><a href="#3-5-二分" class="headerlink" title="3.5 二分"></a>3.5 二分</h3><h4 id="3-5-1-二分查找"><a href="#3-5-1-二分查找" class="headerlink" title="3.5.1 二分查找"></a>3.5.1 二分查找</h4><h4 id="3-5-2-二分法拓展"><a href="#3-5-2-二分法拓展" class="headerlink" title="3.5.2 二分法拓展"></a>3.5.2 二分法拓展</h4><h4 id="3-5-3-快速幂"><a href="#3-5-3-快速幂" class="headerlink" title="3.5.3 快速幂"></a>3.5.3 快速幂</h4><hr>
@@ -1170,7 +1300,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-C-C-快速入门"><span class="nav-number">1.</span> <span class="nav-text">1. C/C++快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-数组"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-指针"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-结构体的使用"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 结构体的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-入门模拟"><span class="nav-number">2.</span> <span class="nav-text">2. 入门模拟</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-简单模拟"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 简单模拟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-查找元素"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 查找元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-图形输出"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 图形输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-日期处理"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 日期处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-进制转换"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 进制转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-字符串处理"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 字符串处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-算法初步"><span class="nav-number">3.</span> <span class="nav-text">3. 算法初步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-排序"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-简单选择排序（-O-n-2-）"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 简单选择排序（$O(n^2)$）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-直接插入排序（-O-n-2-）"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2 直接插入排序（$O(n^2)$）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-3-冒泡排序（-O-n-2-）"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.1.3 冒泡排序（$O(n^2)$）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-4-排序题与sort函数的应用"><span class="nav-number">3.1.4.</span> <span class="nav-text">3.1.4 排序题与sort函数的应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-散列"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 散列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-散列的定义与整数散列"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1 散列的定义与整数散列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-字符串hash初步"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.2 字符串hash初步</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-递归"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 递归</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-分治"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.3.1 分治</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-2-递归"><span class="nav-number">3.3.2.</span> <span class="nav-text">3.3.2 递归</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-贪心"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 贪心</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-1-简单贪心"><span class="nav-number">3.4.1.</span> <span class="nav-text">3.4.1 简单贪心</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-2-区间贪心"><span class="nav-number">3.4.2.</span> <span class="nav-text">3.4.2 区间贪心</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-二分"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 二分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-1-二分查找"><span class="nav-number">3.5.1.</span> <span class="nav-text">3.5.1 二分查找</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-2-二分法拓展"><span class="nav-number">3.5.2.</span> <span class="nav-text">3.5.2 二分法拓展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-3-快速幂"><span class="nav-number">3.5.3.</span> <span class="nav-text">3.5.3 快速幂</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-tow-pointers"><span class="nav-number">3.6.</span> <span class="nav-text">3.6 tow pointers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-6-1-什么是two-pointers"><span class="nav-number">3.6.1.</span> <span class="nav-text">3.6.1 什么是two pointers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-6-2-归并排序"><span class="nav-number">3.6.2.</span> <span class="nav-text">3.6.2 归并排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-6-3-快速排序"><span class="nav-number">3.6.3.</span> <span class="nav-text">3.6.3 快速排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-其他高效技巧与算法"><span class="nav-number">3.7.</span> <span class="nav-text">3.7 其他高效技巧与算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-7-1-打表"><span class="nav-number">3.7.1.</span> <span class="nav-text">3.7.1 打表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-7-2-活用递推"><span class="nav-number">3.7.2.</span> <span class="nav-text">3.7.2 活用递推</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-7-3-随机选择法"><span class="nav-number">3.7.3.</span> <span class="nav-text">3.7.3 随机选择法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-数学问题"><span class="nav-number">4.</span> <span class="nav-text">4.  数学问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-C-C-快速入门"><span class="nav-number">1.</span> <span class="nav-text">1. C/C++快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-数组"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-指针"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-结构体的使用"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 结构体的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-入门模拟"><span class="nav-number">2.</span> <span class="nav-text">2. 入门模拟</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-简单模拟"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 简单模拟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-查找元素"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 查找元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-图形输出"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 图形输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-日期处理"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 日期处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-进制转换"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 进制转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-字符串处理"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 字符串处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-算法初步"><span class="nav-number">3.</span> <span class="nav-text">3. 算法初步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-排序"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-简单选择排序（-O-n-2-）"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 简单选择排序（$O(n^2)$）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-直接插入排序（-O-n-2-）"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2 直接插入排序（$O(n^2)$）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-3-冒泡排序（-O-n-2-）"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.1.3 冒泡排序（$O(n^2)$）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-4-排序题与sort函数的应用"><span class="nav-number">3.1.4.</span> <span class="nav-text">3.1.4 排序题与sort函数的应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-散列"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 散列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-散列-hash-的定义与整数散列"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1 散列(hash)的定义与整数散列</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#散列函数"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">散列函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#冲突"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">冲突</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-字符串hash初步"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.2 字符串hash初步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-3-相关习题"><span class="nav-number">3.2.3.</span> <span class="nav-text">3.2.3 相关习题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-递归"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 递归</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-分治"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.3.1 分治</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-2-递归"><span class="nav-number">3.3.2.</span> <span class="nav-text">3.3.2 递归</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-贪心"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 贪心</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-1-简单贪心"><span class="nav-number">3.4.1.</span> <span class="nav-text">3.4.1 简单贪心</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-2-区间贪心"><span class="nav-number">3.4.2.</span> <span class="nav-text">3.4.2 区间贪心</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-二分"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 二分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-1-二分查找"><span class="nav-number">3.5.1.</span> <span class="nav-text">3.5.1 二分查找</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-2-二分法拓展"><span class="nav-number">3.5.2.</span> <span class="nav-text">3.5.2 二分法拓展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-3-快速幂"><span class="nav-number">3.5.3.</span> <span class="nav-text">3.5.3 快速幂</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-tow-pointers"><span class="nav-number">3.6.</span> <span class="nav-text">3.6 tow pointers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-6-1-什么是two-pointers"><span class="nav-number">3.6.1.</span> <span class="nav-text">3.6.1 什么是two pointers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-6-2-归并排序"><span class="nav-number">3.6.2.</span> <span class="nav-text">3.6.2 归并排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-6-3-快速排序"><span class="nav-number">3.6.3.</span> <span class="nav-text">3.6.3 快速排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-其他高效技巧与算法"><span class="nav-number">3.7.</span> <span class="nav-text">3.7 其他高效技巧与算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-7-1-打表"><span class="nav-number">3.7.1.</span> <span class="nav-text">3.7.1 打表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-7-2-活用递推"><span class="nav-number">3.7.2.</span> <span class="nav-text">3.7.2 活用递推</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-7-3-随机选择法"><span class="nav-number">3.7.3.</span> <span class="nav-text">3.7.3 随机选择法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-数学问题"><span class="nav-number">4.</span> <span class="nav-text">4.  数学问题</span></a></li></ol></div>
             
 
           </div>
