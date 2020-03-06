@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="特叔服务">
 <meta property="og:description" content="数据类型选择 整型int取值范围：$-2^{31} \sim +(2^{31}-1)$，题目要求绝对值在$10^9$以内 或 32位整数，则用int型表示  长整型long long取值范围：$-2^{63} \sim +(2^{63}-1)$，题目要求绝对值在$10^{18}$以内 或 64位整数，则用long long型表示 注：如果 long long 型赋 $&amp;gt; 2^{31}-1$的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-03T12:47:52.834Z">
+<meta property="og:updated_time" content="2020-03-05T08:35:07.937Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C&#x2F;C++解题干货">
 <meta name="twitter:description" content="数据类型选择 整型int取值范围：$-2^{31} \sim +(2^{31}-1)$，题目要求绝对值在$10^9$以内 或 32位整数，则用int型表示  长整型long long取值范围：$-2^{63} \sim +(2^{63}-1)$，题目要求绝对值在$10^{18}$以内 或 64位整数，则用long long型表示 注：如果 long long 型赋 $&amp;gt; 2^{31}-1$的">
@@ -473,7 +473,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-03 20:47:52" itemprop="dateModified" datetime="2020-03-03T20:47:52+08:00">2020-03-03</time>
+                <time title="修改时间：2020-03-05 16:35:07" itemprop="dateModified" datetime="2020-03-05T16:35:07+08:00">2020-03-05</time>
               
             
           </span>
@@ -635,14 +635,82 @@
 </li>
 </ol>
 <hr>
-<h2 id="cmath-头文件"><a href="#cmath-头文件" class="headerlink" title="cmath 头文件"></a>cmath 头文件</h2><ol>
+<h2 id="C-标准库头文件"><a href="#C-标准库头文件" class="headerlink" title="C++标准库头文件"></a>C++标准库头文件</h2><table>
+<thead>
+<tr>
+<th>C++标准库</th>
+<th>包含内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;iostream></td>
+<td>C++标准输入和输出函数 的函数原型</td>
+</tr>
+<tr>
+<td>&lt;cstdio></td>
+<td>C风格标准输入和输出函数 的函数原型</td>
+</tr>
+<tr>
+<td>&lt;iomanip></td>
+<td><strong>格式化数据流</strong>的流操纵符 的函数原型</td>
+</tr>
+<tr>
+<td>&lt;cmath></td>
+<td><strong>数学库</strong>函数 的函数原型</td>
+</tr>
+<tr>
+<td>&lt;ctime></td>
+<td>处理时间和日期的函数 的函数原型</td>
+</tr>
+<tr>
+<td>&lt;cstdlib></td>
+<td><strong>数与文本的转换、内存分配、随机数</strong>及其他各种<strong>工具函数</strong> 的函数原型</td>
+</tr>
+<tr>
+<td>&lt;random></td>
+<td>产生<strong>非确定性的随机数</strong> 的功能库</td>
+</tr>
+<tr>
+<td>&lt;cctype></td>
+<td><strong>测试 字符</strong>特定属性(如是否为数字、标点符号等)函数 的函数原型<br><strong>转换 大小写字母</strong>的函数 的函数原型</td>
+</tr>
+<tr>
+<td>&lt;iterator></td>
+<td><strong>访问 C++标准库容器中数据</strong> 的类</td>
+</tr>
+<tr>
+<td>&lt;algorithm></td>
+<td><strong>操作 C++标准库容器中数据</strong> 的函数</td>
+</tr>
+<tr>
+<td>&lt;string></td>
+<td>C++标准库的 <code>string</code>类 的定义</td>
+</tr>
+<tr>
+<td>&lt;cstring></td>
+<td>C风格<strong>字符串处理</strong>函数 的函数原型</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="lt-cmath"><a href="#lt-cmath" class="headerlink" title="&lt;cmath>"></a>&lt;cmath></h3><ol>
 <li><p><strong><code>double fabs(double x)</code></strong></p>
 <p><strong>取绝对值</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> db = <span class="number">-12.56</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.2f\n"</span>, <span class="built_in">fabs</span>(db)); <span class="comment">//输出 12.56</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong><code>double floor(double x)</code>和<code>ceil(double x)</code></strong></p>
 <p><strong>向下取整</strong>和<strong>向上取整</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> db1 = <span class="number">-5.2</span>, db2 = <span class="number">5.2</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.0f %.0f\n"</span>, <span class="built_in">floor</span>(db1), <span class="built_in">ceil</span>(db1)); <span class="comment">//输出 -6 -5</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.0f %.0f\n"</span>, <span class="built_in">floor</span>(db2), <span class="built_in">ceil</span>(db2)); <span class="comment">//输出 5 6</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>double round(double x)</code></strong><br><strong>针对小数点后一位四舍五入</strong></p>
+<p>另，<strong>不使用函数进行四舍五入的方法</strong>：</p>
+<p><code>num = num + 0.5</code> </p>
 </li>
 <li><p><strong><code>double pow(double r, double p)</code></strong></p>
 <p>求 r 的 p次方</p>
@@ -652,22 +720,45 @@
 <li>$2\times10^6$可写成<code>2e6</code></li>
 <li>$3\times10^{-6}$可写成<code>3e-6</code></li>
 </ul>
-<p>该表示方法可以用于赋值、判断等，<strong>无法直接输出</strong>。</p>
 </li>
 <li><p><strong><code>double sqrt(double x)</code></strong></p>
 <p>求 x 的算术平方根</p>
 </li>
-<li><p><strong><code>double log(double x)</code></strong>和<strong><code>double log10(double x)</code></strong>：求 x 以 $e$ 为底的对数 和 以10为底的对数</p>
+<li><p><strong><code>double log(double x)</code></strong>和<strong><code>double log10(double x)</code></strong></p>
+<p>求 x <strong>以 $e$ 为底</strong>的对数 和 <strong>以10为底</strong>的对数</p>
 <p>针对<strong>任意底数求对数的函数</strong>，必须用<strong>换底公式</strong>，即$\log_ab = \ln b/\ln a$</p>
 </li>
-<li><p><strong><code>double round(double x)</code></strong><br><strong>四舍五入</strong>，需要进行取整</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> db = round(<span class="number">3.4</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, (<span class="keyword">int</span>)db); <span class="comment">//输出3</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p><strong><code>double exp(double x)</code></strong></p>
+<p>指数函数$e^x$</p>
+</li>
+<li><p>三角函数</p>
+<p><strong>x为弧度</strong></p>
+<ul>
+<li><code>sin(double x)</code></li>
+<li><code>cos(double x)</code></li>
+<li><code>tan(double x)</code></li>
+</ul>
 </li>
 </ol>
-<p>   另，<strong>不使用函数进行四舍五入的方法</strong>：</p>
-<p>   <code>num = num + 0.5</code> </p>
 <hr>
-<h2 id="cctype-头文件"><a href="#cctype-头文件" class="headerlink" title="cctype 头文件"></a>cctype 头文件</h2><ol>
+<h3 id="lt-ctime"><a href="#lt-ctime" class="headerlink" title="&lt;ctime>"></a>&lt;ctime></h3><ol>
+<li><p><code>time_t time(time_t *seconds)</code></p>
+<p>返回<strong>自 格林尼治标准时间的1970年1月1日0时 起 到现在</strong>的<strong>秒数</strong>。如果<code>seconds</code>不为空，<strong>返回值也存储在<code>seconds</code>中</strong>。</p>
+</li>
+</ol>
+<hr>
+<h3 id="lt-cstdlib"><a href="#lt-cstdlib" class="headerlink" title="&lt;cstdlib>"></a>&lt;cstdlib></h3><ol>
+<li><p><code>int rand()</code></p>
+<p><code>rand</code>函数生成 [0, RAND_MAX] 之间的一个<strong>整数</strong></p>
+<p>直接由<code>rand</code>函数生成的数的范围<strong>常常不能满足具体需要</strong>，可以通过<strong>比例缩放(scaling)</strong>方法得到所需的随机数。例如<strong>模拟投掷六面骰子，结果可以用<code>rand() % 6 + 1</code>表示</strong>。其中数字6称为<strong>比例缩放因子</strong>。</p>
+</li>
+<li><p><code>void srand(unsigned int seed)</code></p>
+<p><code>rand</code>函数<strong>实际上生成的是 伪随机数</strong>。程序每次执行时产生的序列都是重复的，将其调整为每次执行时都产生不同的随机数序列的过程称为<strong>随机化</strong>，可以<strong>通过<code>srand</code>函数实现</strong>。<code>srand</code>函数接收一个<code>unsigned int</code>值，<strong>为</strong> <code>rand</code>函数使用的<strong>随机数发生器 “播种”</strong>，从而产生不同的随机数序列。为了<strong>在随机化时不用每次都输入“种子”</strong>，可以使用如下语句：</p>
+<p><code>srand(static_cast&lt;unsigned int&gt;(time(NULL) ) );</code></p>
+</li>
+</ol>
+<hr>
+<h3 id="lt-cctype"><a href="#lt-cctype" class="headerlink" title="&lt;cctype>"></a>&lt;cctype></h3><ol>
 <li><p><code>int isalnum(int c)</code></p>
 <p>字符是否为<strong>数字或字母</strong></p>
 </li>
@@ -690,6 +781,16 @@
 <li><p><code>int toupper(int c)</code></p>
 <p>把小写字母 <strong>转换为 大写字母</strong></p>
 <p><strong>不会改变非字母字符的值</strong></p>
+</li>
+</ol>
+<hr>
+<h3 id="lt-algorithm"><a href="#lt-algorithm" class="headerlink" title="&lt;algorithm>"></a>&lt;algorithm></h3><ol>
+<li><p>sort函数</p>
+<p>C语言的<code>qsort</code>函数的使用需要运用指针，且写法上没有C++的<code>sort</code>函数简洁。<code>sort</code>函数<strong>根据具体情形使用不同的排序方法</strong>，效率较高，在实现中<strong>规避了经典快速排序中可能出现的会导致实际复杂度退化到$O(n^2)$的极端情况</strong>。</p>
+<p>因此<strong>更推荐使用C++的<code>sort</code>函数</strong>进行代码编写。</p>
+<p><code>sort(首元素地址, 尾元素地址的下一个地址, 比较函数cmp(非必填))</code></p>
+<p>如果<strong>不写比较函数cmp</strong>，则<strong>默认升序</strong>排序。如果想要<strong>降序</strong>排序，需要编写比较函数cmp：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123; <span class="comment">//返回值为true时，a被排在b之前</span></span><br><span class="line">    <span class="keyword">return</span> a &gt; b; <span class="comment">//降序</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <hr>
@@ -780,7 +881,7 @@
 </li>
 </ul>
 <hr>
-<h3 id="cstring-头文件"><a href="#cstring-头文件" class="headerlink" title="cstring 头文件"></a>cstring 头文件</h3><ol>
+<h3 id="lt-cstring"><a href="#lt-cstring" class="headerlink" title="&lt;cstring>"></a>&lt;cstring></h3><ol>
 <li><p><code>strlen(str)</code></p>
 <p>得到字符数组中<strong>第一个<code>\0</code>前 的字符个数</strong></p>
 </li>
@@ -865,11 +966,6 @@
 <hr>
 <h2 id="结构体（struct）的使用"><a href="#结构体（struct）的使用" class="headerlink" title="结构体（struct）的使用"></a>结构体（struct）的使用</h2><h3 id="访问结构体内的元素"><a href="#访问结构体内的元素" class="headerlink" title="访问结构体内的元素"></a>访问结构体内的元素</h3><p>假设<code>p</code>是一个指向结构的指针，可以用<strong><code>p-&gt;结构成员</code>的形式（等价于<code>(*p).结构成员</code>）</strong>，引用相应的结构成员。</p>
 <hr>
-<h2 id="algorithm-头文件"><a href="#algorithm-头文件" class="headerlink" title="algorithm 头文件"></a>algorithm 头文件</h2><h3 id="sort函数"><a href="#sort函数" class="headerlink" title="sort函数"></a>sort函数</h3><p>C语言的<code>qsort</code>函数的使用需要运用指针，且写法上没有C++的<code>sort</code>函数简洁。<code>sort</code>函数<strong>根据具体情形使用不同的排序方法</strong>，效率较高，在实现中<strong>规避了经典快速排序中可能出现的会导致实际复杂度退化到$O(n^2)$的极端情况</strong>。</p>
-<p>因此<strong>更推荐使用C++的<code>sort</code>函数</strong>进行代码编写。</p>
-<p><code>sort(首元素地址, 尾元素地址的下一个地址, 比较函数cmp(非必填))</code></p>
-<p>如果<strong>不写比较函数cmp</strong>，则<strong>默认升序</strong>排序。如果想要<strong>降序</strong>排序，需要编写比较函数cmp：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123; <span class="comment">//返回值为true时，a被排在b之前</span></span><br><span class="line">    <span class="keyword">return</span> a &gt; b; <span class="comment">//降序</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1145,7 +1241,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型选择"><span class="nav-number">1.</span> <span class="nav-text">数据类型选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输入和输出格式"><span class="nav-number">2.1.</span> <span class="nav-text">输入和输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实用的输出格式"><span class="nav-number">2.2.</span> <span class="nav-text">实用的输出格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cmath-头文件"><span class="nav-number">3.</span> <span class="nav-text">cmath 头文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cctype-头文件"><span class="nav-number">4.</span> <span class="nav-text">cctype 头文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组"><span class="nav-number">5.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">6.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符数组"><span class="nav-number">6.1.</span> <span class="nav-text">字符数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-的标准库类-string"><span class="nav-number">6.2.</span> <span class="nav-text">C++ 的标准库类 string</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cstring-头文件"><span class="nav-number">6.3.</span> <span class="nav-text">cstring 头文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串与数字的相互转换"><span class="nav-number">6.4.</span> <span class="nav-text">字符串与数字的相互转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C语言"><span class="nav-number">6.4.1.</span> <span class="nav-text">C语言</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法一："><span class="nav-number">6.4.1.1.</span> <span class="nav-text">方法一：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法二：-sscanf-与-sprintf"><span class="nav-number">6.4.1.2.</span> <span class="nav-text">方法二： sscanf 与 sprintf</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-："><span class="nav-number">6.4.2.</span> <span class="nav-text">C++：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组作为函数参数"><span class="nav-number">7.</span> <span class="nav-text">数组作为函数参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针"><span class="nav-number">8.</span> <span class="nav-text">指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针变量作为函数参数"><span class="nav-number">8.1.</span> <span class="nav-text">指针变量作为函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用"><span class="nav-number">8.2.</span> <span class="nav-text">引用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#引用的含义"><span class="nav-number">8.2.1.</span> <span class="nav-text">引用的含义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指针的引用"><span class="nav-number">8.2.2.</span> <span class="nav-text">指针的引用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构体（struct）的使用"><span class="nav-number">9.</span> <span class="nav-text">结构体（struct）的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#访问结构体内的元素"><span class="nav-number">9.1.</span> <span class="nav-text">访问结构体内的元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#algorithm-头文件"><span class="nav-number">10.</span> <span class="nav-text">algorithm 头文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sort函数"><span class="nav-number">10.1.</span> <span class="nav-text">sort函数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型选择"><span class="nav-number">1.</span> <span class="nav-text">数据类型选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输入和输出格式"><span class="nav-number">2.1.</span> <span class="nav-text">输入和输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实用的输出格式"><span class="nav-number">2.2.</span> <span class="nav-text">实用的输出格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-标准库头文件"><span class="nav-number">3.</span> <span class="nav-text">C++标准库头文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-cmath"><span class="nav-number">3.1.</span> <span class="nav-text">&lt;cmath&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-ctime"><span class="nav-number">3.2.</span> <span class="nav-text">&lt;ctime&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-cstdlib"><span class="nav-number">3.3.</span> <span class="nav-text">&lt;cstdlib&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-cctype"><span class="nav-number">3.4.</span> <span class="nav-text">&lt;cctype&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-algorithm"><span class="nav-number">3.5.</span> <span class="nav-text">&lt;algorithm&gt;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组"><span class="nav-number">4.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">5.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符数组"><span class="nav-number">5.1.</span> <span class="nav-text">字符数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-的标准库类-string"><span class="nav-number">5.2.</span> <span class="nav-text">C++ 的标准库类 string</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-cstring"><span class="nav-number">5.3.</span> <span class="nav-text">&lt;cstring&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串与数字的相互转换"><span class="nav-number">5.4.</span> <span class="nav-text">字符串与数字的相互转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C语言"><span class="nav-number">5.4.1.</span> <span class="nav-text">C语言</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法一："><span class="nav-number">5.4.1.1.</span> <span class="nav-text">方法一：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法二：-sscanf-与-sprintf"><span class="nav-number">5.4.1.2.</span> <span class="nav-text">方法二： sscanf 与 sprintf</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-："><span class="nav-number">5.4.2.</span> <span class="nav-text">C++：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组作为函数参数"><span class="nav-number">6.</span> <span class="nav-text">数组作为函数参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针"><span class="nav-number">7.</span> <span class="nav-text">指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针变量作为函数参数"><span class="nav-number">7.1.</span> <span class="nav-text">指针变量作为函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用"><span class="nav-number">7.2.</span> <span class="nav-text">引用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#引用的含义"><span class="nav-number">7.2.1.</span> <span class="nav-text">引用的含义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指针的引用"><span class="nav-number">7.2.2.</span> <span class="nav-text">指针的引用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构体（struct）的使用"><span class="nav-number">8.</span> <span class="nav-text">结构体（struct）的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#访问结构体内的元素"><span class="nav-number">8.1.</span> <span class="nav-text">访问结构体内的元素</span></a></li></ol></li></ol></div>
             
 
           </div>
