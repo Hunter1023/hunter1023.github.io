@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="特叔服务">
 <meta property="og:description" content="数据类型选择 整型int取值范围：$-2^{31} \sim +(2^{31}-1)$，题目要求绝对值在$10^9$以内 或 32位整数，则用int型表示  长整型long long取值范围：$-2^{63} \sim +(2^{63}-1)$，题目要求绝对值在$10^{18}$以内 或 64位整数，则用long long型表示 注：如果 long long 型赋 $&amp;gt; 2^{31}-1$的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-09T11:13:28.002Z">
+<meta property="og:updated_time" content="2020-03-10T15:40:32.401Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C&#x2F;C++解题干货">
 <meta name="twitter:description" content="数据类型选择 整型int取值范围：$-2^{31} \sim +(2^{31}-1)$，题目要求绝对值在$10^9$以内 或 32位整数，则用int型表示  长整型long long取值范围：$-2^{63} \sim +(2^{63}-1)$，题目要求绝对值在$10^{18}$以内 或 64位整数，则用long long型表示 注：如果 long long 型赋 $&amp;gt; 2^{31}-1$的">
@@ -473,7 +473,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-09 19:13:28" itemprop="dateModified" datetime="2020-03-09T19:13:28+08:00">2020-03-09</time>
+                <time title="修改时间：2020-03-10 23:40:32" itemprop="dateModified" datetime="2020-03-10T23:40:32+08:00">2020-03-10</time>
               
             
           </span>
@@ -780,7 +780,7 @@
 <h3 id="lt-algorithm"><a href="#lt-algorithm" class="headerlink" title="&lt;algorithm>"></a>&lt;algorithm></h3><ol>
 <li><p><code>max(x, y)</code>和<code>min(x, y)</code></p>
 </li>
-<li><p><code>abs(x)</code>：<code>x</code>必须是<strong>整数</strong>，因此更推荐使用<code>&lt;cmath\&gt;</code>下的<code>fabs(x)</code></p>
+<li><p><code>abs(x)</code>：<code>x</code>必须是<strong>整数</strong>，因此更推荐使用<code>&lt;cmath&gt;</code>下的<code>fabs(x)</code></p>
 </li>
 <li><p><code>swap(x, y)</code></p>
 </li>
@@ -806,10 +806,15 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123; <span class="comment">//返回值为true时，a被排在b之前</span></span><br><span class="line">    <span class="keyword">return</span> a &gt; b; <span class="comment">//降序</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在STL标准容器中，<strong>只有<code>vector</code>、<code>string</code>、<code>deque</code>可以使用<code>sort</code>，因为像<code>set</code>、<code>map</code>这种容器是用红黑树实现的，元素本身有序，故不允许使用<code>sort</code>排序</strong>。</p>
 </li>
-<li><p><code>lower_bound()</code>和<code>upper_bound()</code></p>
+<li><p><code>lower_bound</code>和<code>upper_bound</code></p>
 <p><code>lower_bound(first, last, val)</code>用来寻找在数组或容器中的[first, last)范围内<strong>第一个值$\geq$<code>val</code>的元素的位置</strong>。</p>
 <p><code>upper_bound(first, last, val)</code>用来寻找在数组或容器中的[first, last)范围内<strong>第一个值&gt;<code>val</code>的元素的位置</strong>。</p>
 <p><strong>如果是数组，则返回该位置的指针；如果是容器，则返回该位置的迭代器。如果没有找到相应元素，则返回可以插入该元素的位置的指针或迭代器</strong>。</p>
+</li>
+<li><p><code>max_element</code>和<code>min_element</code></p>
+<p><code>max_element(first, last)</code>用来寻找在数组或容器中的[first, last)范围内<strong>最大元素的位置</strong>。</p>
+<p><code>min_element(first, last, val)</code>用来寻找在数组或容器中的[first, last)范围内<strong>最小元素的位置</strong>。</p>
+<p><strong>如果是数组，则返回该位置的指针；如果是容器，则返回该位置的迭代器</strong>。</p>
 </li>
 </ol>
 <hr>
