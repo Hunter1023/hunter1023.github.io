@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="特叔服务">
 <meta property="og:description" content="数据类型选择 整型int取值范围：$-2^{31} \sim +(2^{31}-1)$，题目要求绝对值在$10^9$以内 或 32位整数，则用int型表示  长整型long long取值范围：$-2^{63} \sim +(2^{63}-1)$，题目要求绝对值在$10^{18}$以内 或 64位整数，则用long long型表示 注：如果 long long 型赋 $&amp;gt; 2^{31}-1$的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-13T13:16:27.748Z">
+<meta property="og:updated_time" content="2020-03-15T14:50:14.706Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C&#x2F;C++解题干货">
 <meta name="twitter:description" content="数据类型选择 整型int取值范围：$-2^{31} \sim +(2^{31}-1)$，题目要求绝对值在$10^9$以内 或 32位整数，则用int型表示  长整型long long取值范围：$-2^{63} \sim +(2^{63}-1)$，题目要求绝对值在$10^{18}$以内 或 64位整数，则用long long型表示 注：如果 long long 型赋 $&amp;gt; 2^{31}-1$的">
@@ -473,7 +473,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-13 21:16:27" itemprop="dateModified" datetime="2020-03-13T21:16:27+08:00">2020-03-13</time>
+                <time title="修改时间：2020-03-15 22:50:14" itemprop="dateModified" datetime="2020-03-15T22:50:14+08:00">2020-03-15</time>
               
             
           </span>
@@ -878,7 +878,7 @@
 </li>
 <li><p><code>end()</code>：取 set 的 <strong>尾后(尾元素地址的下一个)地址</strong>（美国人思维比较习惯<strong>左闭右开</strong>）</p>
 </li>
-<li><p><code>size</code>：获取 set 中的<strong>元素个数</strong></p>
+<li><p><code>size()</code>：获取 set 中的<strong>元素个数</strong></p>
 </li>
 <li><p><code>clear()</code>：<strong>清空</strong> set 中所有元素</p>
 </li>
@@ -898,7 +898,7 @@
 </li>
 </ul>
 </li>
-<li><p>删除 [firstIt, lastIt) 内所有元素：<code>erase(first, last)</code></p>
+<li><p>删除 [firstIt, lastIt) 内所有元素：<code>erase(firstIt, lastIt)</code></p>
 </li>
 </ul>
 </li>
@@ -906,7 +906,7 @@
 </li>
 <li><p><code>set</code>容器内元素的访问</p>
 <p><code>set</code><strong>只能通过 迭代器iterator 访问</strong>，因为<strong>只有<code>vector</code>和<code>string</code>中，才允许使用<code>vi.begin() + 1</code>这种 迭代器加上整数 的写法</strong>，因此只能按如下方式枚举：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">	st.insert(<span class="number">3</span>);</span><br><span class="line">    st.insert(<span class="number">5</span>);</span><br><span class="line">    st.insert(<span class="number">2</span>);</span><br><span class="line">    st.insert(<span class="number">3</span>);</span><br><span class="line">    <span class="comment">//set 的迭代器不支持 it &lt; vi.end() 写法</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator it = st.begin(); it != st.end(); it++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *it;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">	st.insert(<span class="number">3</span>);</span><br><span class="line">    st.insert(<span class="number">5</span>);</span><br><span class="line">    st.insert(<span class="number">2</span>);</span><br><span class="line">    st.insert(<span class="number">3</span>);</span><br><span class="line">    <span class="comment">//set 的迭代器不支持 it &lt; vi.end() 写法</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator it = st.begin(); it != st.end(); it++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; *it;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出为：<code>2 3 5</code>，可以发现，<code>set</code>内的元素自动<strong>递增</strong>排序，且自动去除了重复元素。</p>
 </li>
 <li><p>延伸</p>
@@ -950,7 +950,7 @@
 <li><p>在 pos 位置插入字符串：<code>insert(int pos, string str)</code>，<strong>原来位置的字符串顺延</strong>。</p>
 </li>
 <li><p>在 迭代器it 位置插入字符串：</p>
-<p><code>insert(it, it2, it3)</code>，<code>it2</code>和<code>it3</code>为<strong>待插字符串的首尾迭代器</strong>，用来表示串 [it2, it3) 将被插在 it 位置上</p>
+<p><code>insert(it, firstIt, lastIt)</code>，<code>firstIt</code>和<code>lastIt</code>为<strong>待插字符串的首尾迭代器</strong>，用来表示串 [firstIt, lastIt) 将被插在 it 位置上</p>
 </li>
 </ul>
 </li>
