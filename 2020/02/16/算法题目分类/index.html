@@ -154,7 +154,7 @@
 <meta property="og:description" content="根据《算法笔记》一书，对PAT甲级、乙级真题和codeup部分试题进行分类。 1. C/C++快速入门1.1 数组 codeup 杨辉三角   1.2 指针 codeup C语言10.16   1.3 结构体的使用 codeup C语言11.1 codeup C语言11.2 codeup C语言11.4   2. 入门模拟2.1 简单模拟不涉及算法，只是根据题目描述来编写代码，考察代码能力。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2020/03/07/KlvHnuEwTJkcVsP.png">
-<meta property="og:updated_time" content="2020-03-15T17:28:18.682Z">
+<meta property="og:updated_time" content="2020-03-18T15:02:35.464Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法题目分类">
 <meta name="twitter:description" content="根据《算法笔记》一书，对PAT甲级、乙级真题和codeup部分试题进行分类。 1. C/C++快速入门1.1 数组 codeup 杨辉三角   1.2 指针 codeup C语言10.16   1.3 结构体的使用 codeup C语言11.1 codeup C语言11.2 codeup C语言11.4   2. 入门模拟2.1 简单模拟不涉及算法，只是根据题目描述来编写代码，考察代码能力。">
@@ -475,7 +475,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-16 01:28:18" itemprop="dateModified" datetime="2020-03-16T01:28:18+08:00">2020-03-16</time>
+                <time title="修改时间：2020-03-18 23:02:35" itemprop="dateModified" datetime="2020-03-18T23:02:35+08:00">2020-03-18</time>
               
             
           </span>
@@ -1521,6 +1521,7 @@
 </tr>
 <tr>
 <td><strong>A1102</strong> <strong>Invert a Binary Tree</strong></td>
+<td>1. 题目给的是<strong>结点编号</strong>的关系，故<strong>采用静态链表</strong>存储二叉树<br>2. 反转二叉树即<strong>每个结点的左右子树对换</strong>，选择<strong>后序</strong>遍历</td>
 </tr>
 </tbody>
 </table>
@@ -1534,20 +1535,20 @@
 </thead>
 <tbody>
 <tr>
-<td>A1004</td>
-<td></td>
+<td><strong>A1004</strong> <strong>Counting Leaves</strong></td>
+<td>1. 利用数组<strong>存储每层的叶结点个数</strong><br>2. 根据<strong>出队结点的层数，获取最大层数</strong>，遍历输出每层叶结点个数<br></td>
 </tr>
 <tr>
-<td>A1053</td>
-<td></td>
+<td><strong>A1053</strong> <strong>Path of Equal Weight</strong></td>
+<td>1. 输出的路径序列要求降序，因此<strong>在读入结点时</strong>就将孩子节点<strong>按权重降序</strong>排序，这样，之后遍历时得到的路径即为降序<br><br>2. 利用<code>vector</code>的<code>begin</code>和<code>end</code>函数获得<code>vector</code>的<strong>首元素地址</strong>和<strong>尾后地址</strong>，用于<code>sort</code>函数排序<br>3. 利用<code>vector</code>存储路径，在<strong>递归子结点之前</strong>，用<code>push_back</code>函数<strong>将子结点加入路径</strong>，递归<strong>回溯后</strong>，用<code>pop_back</code><strong>将先前加入的子结点移出路径</strong></td>
 </tr>
 <tr>
-<td>A1079</td>
-<td></td>
+<td><strong>A1079</strong> <strong>Total Sales of Supply Chain</strong></td>
+<td>1. <strong>静态写法</strong>表示树，即用数组下标指代结点<br>2. 结点的结构体中设有<strong>货物量</strong>变量，用来<strong>判断是否为零售商</strong>（本题采用了BFS；也可DFS）</td>
 </tr>
 <tr>
-<td>A1090</td>
-<td></td>
+<td><strong>A1090</strong> <strong>Highest Price in Supply Chain</strong></td>
+<td>由于<strong>不涉及结点的数据域</strong>，可以直接<strong>用<code>vector&lt;int&gt; child[maxn]</code>存放树</strong></td>
 </tr>
 <tr>
 <td>A1094</td>
@@ -1568,15 +1569,16 @@
 </thead>
 <tbody>
 <tr>
-<td>A1043</td>
-<td></td>
+<td><strong>A1043</strong> <strong>Is It a Binary Search Tree</strong></td>
+<td>1. <strong>静态写法</strong>(<strong>变长数组</strong>)表示二叉树<br>2. 根据BST左子树所有结点的数据域 &lt; 根结点的数据域，右子树所有结点的数据域 <strong>≥</strong> 根结点的数据域(<strong>由输入样例得出大小关系</strong>，镜像则相反)，<strong>获取左右子树的边界，判断是否符合先序序列，若符合</strong>，则按照<strong>左右根的顺序递归，将符合的根结点存入<code>vector</code>(获取后序序列)</strong><br>3. <strong>若vecotr中元素数量 = 输入序列的元素数量(能顺利转换为BST的后序序列)，说明输入序列为先序序列</strong></td>
 </tr>
 <tr>
-<td>A1064</td>
-<td></td>
+<td><strong>A1064</strong> <strong>Complete Binary Search Tree</strong></td>
+<td>1. 输入的元素<strong>升序排序</strong>，即为二叉树的<strong>中序遍历序列</strong>。<br>2. <strong>静态写法</strong>(<strong>变长数组</strong>)按照<strong>层序存储</strong>完全二叉排序树<br>3. 对二叉树进行<strong>中序遍历</strong>，依次<strong>填入中序遍历序列的元素</strong>即可得到层序存储的二叉树。注意：中序遍历时，二叉树数组<strong>根结点的下标</strong>：<br>        <strong>若设为1</strong>，则左右孩子结点下标为<code>root * 2</code>和<code>root * 2 + 2</code>；<br>        <strong>若设为0</strong>，则左右孩子结点下标为<code>root * 2 + 1</code>和<code>root * 2 + 2</code><br>4. <strong>顺序输出</strong>二叉树数组元素即为<strong>层序遍历</strong>序列</td>
 </tr>
 <tr>
-<td>A1099</td>
+<td><strong>A1099</strong> <strong>Build A Binary Search Tree</strong></td>
+<td><strong>静态写法</strong>表示树，解题方法和 A1064 基本一致</td>
 </tr>
 </tbody>
 </table>
@@ -1590,7 +1592,8 @@
 </thead>
 <tbody>
 <tr>
-<td>A1066</td>
+<td><strong>A1066</strong> <strong>Root of AVL Tree</strong></td>
+<td>即写出<strong>平衡二叉树的代码模板</strong><br>1. <strong>新建结点的初始高度为1</strong><br>2. 获取树高时，注意<strong>递归到空结点</strong>时，<strong>返回0</strong><br>3. 插入结点，递归过程中从<strong>系统栈出栈后</strong>：<br>        1) 平衡因子为2时，<strong>树型可能为LR型或LL型</strong>，LR型需要先对当前结点的<strong>左子树</strong>进行<strong>右旋</strong>；之后，LR型和LL型<strong>都需要对当前结点进行右旋</strong><br>        2) 平衡因子为-2时，<strong>树型可能为RL型或RR型</strong>，RL型需要先对当前结点的<strong>右子树</strong>进行<strong>左旋</strong>；之后，RL型和RR型<strong>都需要对当前结点进行左旋</strong><br>4. 左旋和右旋过程中要<strong>及时更新树高</strong></td>
 </tr>
 </tbody>
 </table>
