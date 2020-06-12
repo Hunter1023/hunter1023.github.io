@@ -154,7 +154,7 @@
 <meta property="og:description" content="根据《算法笔记》一书，对PAT甲级、乙级真题和codeup部分试题进行分类。 1. C/C++快速入门1.1 数组 codeup 杨辉三角   1.2 指针 codeup C语言10.16   1.3 结构体的使用 codeup C语言11.1 codeup C语言11.2 codeup C语言11.4   2. 入门模拟2.1 简单模拟不涉及算法，只是根据题目描述来编写代码，考察代码能力。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2020/03/07/KlvHnuEwTJkcVsP.png">
-<meta property="og:updated_time" content="2020-03-18T15:02:35.464Z">
+<meta property="og:updated_time" content="2020-05-12T03:04:45.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法题目分类">
 <meta name="twitter:description" content="根据《算法笔记》一书，对PAT甲级、乙级真题和codeup部分试题进行分类。 1. C/C++快速入门1.1 数组 codeup 杨辉三角   1.2 指针 codeup C语言10.16   1.3 结构体的使用 codeup C语言11.1 codeup C语言11.2 codeup C语言11.4   2. 入门模拟2.1 简单模拟不涉及算法，只是根据题目描述来编写代码，考察代码能力。">
@@ -475,7 +475,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-18 23:02:35" itemprop="dateModified" datetime="2020-03-18T23:02:35+08:00">2020-03-18</time>
+                <time title="修改时间：2020-05-12 11:04:45" itemprop="dateModified" datetime="2020-05-12T11:04:45+08:00">2020-05-12</time>
               
             
           </span>
@@ -1574,7 +1574,7 @@
 </tr>
 <tr>
 <td><strong>A1064</strong> <strong>Complete Binary Search Tree</strong></td>
-<td>1. 输入的元素<strong>升序排序</strong>，即为二叉树的<strong>中序遍历序列</strong>。<br>2. <strong>静态写法</strong>(<strong>变长数组</strong>)按照<strong>层序存储</strong>完全二叉排序树<br>3. 对二叉树进行<strong>中序遍历</strong>，依次<strong>填入中序遍历序列的元素</strong>即可得到层序存储的二叉树。注意：中序遍历时，二叉树数组<strong>根结点的下标</strong>：<br>        <strong>若设为1</strong>，则左右孩子结点下标为<code>root * 2</code>和<code>root * 2 + 2</code>；<br>        <strong>若设为0</strong>，则左右孩子结点下标为<code>root * 2 + 1</code>和<code>root * 2 + 2</code><br>4. <strong>顺序输出</strong>二叉树数组元素即为<strong>层序遍历</strong>序列</td>
+<td>1. 输入的元素<strong>升序排序</strong>，即为二叉树的<strong>中序遍历序列</strong>。<br>2. <strong>静态写法</strong>(<strong>变长数组</strong>)按照<strong>层序存储</strong>完全二叉排序树<br>3. 对二叉树进行<strong>中序遍历</strong>，依次<strong>填入中序遍历序列的元素</strong>即可得到层序存储的二叉树。注意：中序遍历时，二叉树数组<strong>根结点的下标</strong>：<br>        <strong>若设为1</strong>，则左右孩子结点下标为<code>root * 2</code>和<code>root * 2 + 1</code>；<br>        <strong>若设为0</strong>，则左右孩子结点下标为<code>root * 2 + 1</code>和<code>root * 2 + 2</code><br>4. <strong>顺序输出</strong>二叉树数组元素即为<strong>层序遍历</strong>序列</td>
 </tr>
 <tr>
 <td><strong>A1099</strong> <strong>Build A Binary Search Tree</strong></td>
@@ -1607,7 +1607,8 @@
 </thead>
 <tbody>
 <tr>
-<td>A1107</td>
+<td><strong>A1107</strong> <strong>Social Clusters</strong></td>
+<td>1. <strong>根据共同(包括潜在的→有共同爱好的人另外的爱好)爱好</strong>来确定潜在<strong>朋友的集合</strong>，利用<code>hobby[1001]</code><strong>记录 任意一个 拥有对应爱好的结点</strong>，<strong>便于合并操作</strong><br>2. 遍历各用户，<strong>根据根结点统计各集合的人数</strong><br>3. 将集合<strong>按包含人数降序</strong>排序，再<strong>遍历</strong>即可<strong>筛选统计出集合个数</strong><br>4. 路径压缩<strong>可选</strong></td>
 </tr>
 </tbody>
 </table>
@@ -1621,7 +1622,8 @@
 </thead>
 <tbody>
 <tr>
-<td>A1098</td>
+<td><strong>A1098</strong> <strong>Insertion or Heap Sort</strong></td>
+<td>1. 用于<strong>表示树的数组</strong>，注意下标<strong>从 0或1 开始，孩子结点表示的区别</strong><br>2. 插入排序：<strong>未排序部分和初始序列一定相同</strong><br>3. 堆排序：<strong>后面的元素有序，前面无规律</strong><br>4. <strong>插入排序 更容易判断，将其作为判断排序类型的切入点</strong><br>4. <strong>插入排序</strong>的<strong>实际操作可由排序函数<code>sort</code></strong>实现<br><br>5. 要用堆排序得到<strong>递增序列</strong>，则需要建立<strong>大根堆</strong><br>6. 堆排序<strong>从后往前</strong>找到<strong>第一个 $&lt;$ 堆顶</strong>的元素，与堆顶元素交换，再<strong>对整个堆向下调整</strong></td>
 </tr>
 </tbody>
 </table>
@@ -1636,19 +1638,20 @@
 </thead>
 <tbody>
 <tr>
-<td>A1013</td>
-<td></td>
+<td><strong>A1013</strong> <strong>Battle Over Cities</strong></td>
+<td>1. 问题等价于求 一个无向图<strong>去掉一个结点后，连通分量的数量</strong>，这种问题一般有两种方法：<strong>图的遍历</strong>和<strong>并查集</strong><br>2. <strong><code>cin</code>会超时，需要改为<code>scanf</code></strong>，邻接矩阵和邻接表都可存储图<br>3. <strong>每次输入被占领的城市之前，要重置城市的访问状态为未访问</strong><br>4. 将<strong>失去的城市标记为已访问</strong>，即可<strong>达到失去的效果(没有公路可以到达)</strong></td>
 </tr>
 <tr>
 <td>A1021</td>
 <td></td>
 </tr>
 <tr>
-<td>A1034</td>
-<td></td>
+<td><strong>A1034</strong> <strong>Head of a Gang</strong></td>
+<td>1. 相同人员之间可能<strong>多次通话</strong><br>2. <code>map&lt;type1, type2&gt;</code><strong>自动按<code>type1</code>从小到大输出</strong>，使用<code>map&lt;string, int&gt;</code>建立头目姓名与成员数量的关系，便于输出结果<br>3. 图中可能<strong>有环</strong>，为了<strong>边权不被漏加</strong>，需要<strong>先累加边权再递归</strong>；同时<strong>为了防止边权被重复计算</strong>，累加后<strong>删除这条边，以免走回头路、重复计算边权</strong></td>
 </tr>
 <tr>
-<td>A1076</td>
+<td><strong>A1076</strong> <strong>Forwards on Weibo</strong></td>
+<td>1. 转发是<strong>粉丝转发博主</strong>的信息，因此要<strong>根据用户的关注情况</strong>建立<strong>从博主到粉丝(即反向)</strong>的<strong>有向图</strong><br>2. <strong>DFS</strong>记录访问过的结点数量<strong>比较麻烦</strong>，BFS比较方便<br>3. 可能形成环 ，必须控制<strong>每个用户只能转发一次</strong>(<strong>遍历时只能访问一次</strong>)</td>
 </tr>
 </tbody>
 </table>
@@ -1662,7 +1665,7 @@
 </thead>
 <tbody>
 <tr>
-<td>A1003</td>
+<td><strong>A1003</strong> <strong>Emergency</strong></td>
 <td></td>
 </tr>
 <tr>
@@ -1670,7 +1673,7 @@
 <td></td>
 </tr>
 <tr>
-<td>A1030</td>
+<td><strong>A1030</strong> <strong>Travel Plan</strong></td>
 <td></td>
 </tr>
 <tr>
@@ -1754,6 +1757,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2020/06/01/Excel技巧/" rel="prev" title="Excel技巧">
+                Excel技巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -1829,7 +1836,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1862,7 +1869,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1915,7 +1924,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">18</span>
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
