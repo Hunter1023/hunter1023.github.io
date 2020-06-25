@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="特叔服务">
 <meta property="og:description" content="第1章 了解SQL 数据库软件应称为DBMS（数据库管理系统）。  数据库是通过DBMS创建和操纵的容器。  在很大程度上说，数据库究竟是文件还是别的什么东西并不重要，因为你并不直接访问数据库；你使用的是DBMS，它替你访问数据库。  模式（schema）： 关于数据库和表的布局及特性的信息。  有时，模式用作数据库的同义词。遗憾的是，模式的含义通常在上下文中并不是很清晰。  主键（primary">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-17T14:18:02.574Z">
+<meta property="og:updated_time" content="2020-06-21T12:37:40.247Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL必知必会">
 <meta name="twitter:description" content="第1章 了解SQL 数据库软件应称为DBMS（数据库管理系统）。  数据库是通过DBMS创建和操纵的容器。  在很大程度上说，数据库究竟是文件还是别的什么东西并不重要，因为你并不直接访问数据库；你使用的是DBMS，它替你访问数据库。  模式（schema）： 关于数据库和表的布局及特性的信息。  有时，模式用作数据库的同义词。遗憾的是，模式的含义通常在上下文中并不是很清晰。  主键（primary">
@@ -473,7 +473,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-06-17 22:18:02" itemprop="dateModified" datetime="2020-06-17T22:18:02+08:00">2020-06-17</time>
+                <time title="修改时间：2020-06-21 20:37:40" itemprop="dateModified" datetime="2020-06-21T20:37:40+08:00">2020-06-21</time>
               
             
           </span>
@@ -1131,6 +1131,10 @@
 <tr>
 <td><code>DATEDIFF(d1, d2)</code></td>
 <td>计算日期d1-&gt;d2之间<strong>相隔的天数</strong></td>
+</tr>
+<tr>
+<td><code>TIMESTAMPDIFF(interval, datetime_expr1, datetime_expr2)</code></td>
+<td>比较两个日期的时间差。<br>interval 确定时间差的<strong>单位</strong>：SECOND、MINUTE、HOUR、DAY、MONTH、YEAR<br>差值为 后一个时间参数 - 前一个时间参数</td>
 </tr>
 <tr>
 <td><code>DATE_ADD(d, INTERVAL expr type)</code></td>

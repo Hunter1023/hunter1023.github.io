@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="特叔服务">
 <meta property="og:description" content="准备数据建表语句12345678910111213141516171819202122CREATE TABLE students(sno VARCHAR(3) NOT NULL, sname VARCHAR(4) NOT NULL,ssex VARCHAR(2) NOT NULL, sbirthday DATETIME,class VARCHAR(5));CREATE TABLE courses(">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-17T14:31:38.119Z">
+<meta property="og:updated_time" content="2020-06-21T16:15:01.720Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="经典SQL练习题">
 <meta name="twitter:description" content="准备数据建表语句12345678910111213141516171819202122CREATE TABLE students(sno VARCHAR(3) NOT NULL, sname VARCHAR(4) NOT NULL,ssex VARCHAR(2) NOT NULL, sbirthday DATETIME,class VARCHAR(5));CREATE TABLE courses(">
@@ -456,12 +456,24 @@
                 
               
 
-              <time title="创建时间：2020-06-17 14:25:35 / 修改时间：22:31:38" itemprop="dateCreated datePublished" datetime="2020-06-17T14:25:35+08:00">2020-06-17</time>
+              <time title="创建时间：2020-06-17 14:25:35" itemprop="dateCreated datePublished" datetime="2020-06-17T14:25:35+08:00">2020-06-17</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-06-22 00:15:01" itemprop="dateModified" datetime="2020-06-22T00:15:01+08:00">2020-06-22</time>
               
             
           </span>
@@ -616,61 +628,139 @@
 <p>解答：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sno, cno, <span class="keyword">rank</span></span><br><span class="line"><span class="keyword">FROM</span> scores <span class="keyword">INNER</span> <span class="keyword">JOIN</span> grade</span><br><span class="line"><span class="keyword">ON</span> scores.degree <span class="keyword">BETWEEN</span> grade.low <span class="keyword">AND</span> grade.upp</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> sno;</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>★★★查询<strong>选修“3-105”课程</strong>的<strong>成绩高于“109”号同学成绩</strong>的所有同学的记录。</p>
+<p>解答：</p>
+<ul>
+<li><strong>自联结</strong></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sname, s1.degree</span><br><span class="line"><span class="keyword">FROM</span> scores <span class="keyword">AS</span> s1</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> scores <span class="keyword">AS</span> s2 <span class="keyword">ON</span> s1.cno = s2.cno <span class="keyword">AND</span>  s1.degree &gt; s2.degree</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> students <span class="keyword">AS</span> st <span class="keyword">ON</span> s1.sno = st.sno</span><br><span class="line"><span class="keyword">WHERE</span> s1.cno = <span class="string">'3-105'</span> <span class="keyword">AND</span> s2.sno = <span class="string">'109'</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> s1.degree;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>★★★查询scores中<strong>选学一门以上课程</strong>的同学中分数为<strong>非最高分成绩</strong>的记录。</p>
+<p>解答：</p>
+<ul>
+<li>条件：<ol>
+<li>选学一门以上课程</li>
+<li>列出这些同学的所有非最高分成绩</li>
 </ol>
-<ol start="19">
-<li><p>查询选修“3-105”课程的成绩高于“109”号同学成绩的所有同学的记录。</p>
 </li>
-<li><p>查询score中选学一门以上课程的同学中分数为非最高分成绩的记录。</p>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> scores.sno, cno, degree, max_degree</span><br><span class="line"><span class="keyword">FROM</span> scores <span class="keyword">INNER</span> <span class="keyword">JOIN</span> </span><br><span class="line">			(<span class="keyword">SELECT</span> sno, <span class="keyword">MAX</span>(degree) <span class="keyword">AS</span> max_degree </span><br><span class="line">             <span class="keyword">FROM</span> scores </span><br><span class="line">             <span class="keyword">GROUP</span> <span class="keyword">BY</span> sno </span><br><span class="line">             <span class="keyword">HAVING</span> <span class="keyword">COUNT</span>(*) &gt; <span class="number">1</span>) <span class="keyword">AS</span> <span class="keyword">max</span> </span><br><span class="line"><span class="keyword">ON</span> scores.sno = max.sno <span class="keyword">AND</span> degree &lt; max_degree</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> sno;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询成绩高于学号为“109”、课程号为“3-105”的成绩的所有记录。</p>
+</ol>
+<ol start="21">
+<li><p>查询成绩高于<strong>学号为“109”、课程号为“3-105”的成绩</strong>的所有记录。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> st.sname, s1.cno, s1.degree</span><br><span class="line"><span class="keyword">FROM</span> scores <span class="keyword">AS</span> s1 <span class="keyword">INNER</span> <span class="keyword">JOIN</span> scores <span class="keyword">AS</span> s2</span><br><span class="line"><span class="keyword">ON</span> s1.cno = s2.cno <span class="keyword">AND</span> s1.degree &gt; s2.degree</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> students <span class="keyword">AS</span> st</span><br><span class="line"><span class="keyword">ON</span> s1.sno = st.sno</span><br><span class="line"><span class="keyword">WHERE</span> s1.cno = <span class="string">'3-105'</span> <span class="keyword">AND</span> s2.sno = <span class="string">'109'</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> s1.degree;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询和学号为108的同学同年出生的所有学生的Sno、Sname和Sbirthday列。</p>
+<li><p>★★★查询和学号为108的同学<strong>同年出生</strong>的所有学生的sno、sname和sbirthday列。</p>
+<p>解答：函数<code>YEAR(d)</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> s1.sno, s1.sname, s1.sbirthday</span><br><span class="line"><span class="keyword">FROM</span> students <span class="keyword">AS</span> s1 <span class="keyword">INNER</span> <span class="keyword">JOIN</span> students <span class="keyword">AS</span> s2</span><br><span class="line"><span class="keyword">ON</span> <span class="keyword">YEAR</span>(s1.sbirthday) = <span class="keyword">YEAR</span>(s2.sbirthday)</span><br><span class="line"><span class="keyword">WHERE</span> s2.sno = <span class="string">'108'</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> sbirthday;</span><br></pre></td></tr></table></figure>
 </li>
+</ol>
+<ol start="23">
 <li><p>查询“张旭“教师任课的学生成绩。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sno, degree</span><br><span class="line"><span class="keyword">FROM</span> scores <span class="keyword">INNER</span> <span class="keyword">JOIN</span> courses</span><br><span class="line"><span class="keyword">ON</span> scores.cno = courses.cno</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> teachers</span><br><span class="line"><span class="keyword">ON</span> courses.tno = teachers.tno</span><br><span class="line"><span class="keyword">WHERE</span> teachers.tname = <span class="string">'张旭'</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> degree;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询选修某课程的同学人数多于5人的教师姓名。</p>
+<li><p>查询选修某课程的同学人数<strong>多于5人</strong>的<strong>教师姓名</strong>。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> tname</span><br><span class="line"><span class="keyword">FROM</span> scores <span class="keyword">AS</span> s <span class="keyword">INNER</span> <span class="keyword">JOIN</span> courses <span class="keyword">AS</span> c</span><br><span class="line"><span class="keyword">ON</span> s.cno = c.cno</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> teachers <span class="keyword">AS</span> t</span><br><span class="line"><span class="keyword">ON</span> t.tno = c.tno</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> c.cno</span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">COUNT</span>(c.cno) &gt; <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询95033班和95031班全体学生的记录。</p>
+<li><p>查询95033班和95031班<strong>全体学生的记录</strong>。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> students</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">class</span> <span class="keyword">IN</span> (<span class="string">'95033'</span>, <span class="string">'95031'</span>)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">class</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询存在有85分以上成绩的课程Cno.</p>
+<li><p>查询<strong>有85分以上成绩</strong>的课程cno。</p>
+<p>解答：<strong>DISTINCT</strong>关键字</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> c.cno</span><br><span class="line"><span class="keyword">FROM</span> scores</span><br><span class="line"><span class="keyword">WHERE</span> degree &gt; <span class="number">85</span>;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查询出“计算机系“教师所教课程的成绩表。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> t.tname, s.cno, cname, sno, degree</span><br><span class="line"><span class="keyword">FROM</span> scores <span class="keyword">AS</span> s <span class="keyword">INNER</span> <span class="keyword">JOIN</span> courses <span class="keyword">AS</span> c</span><br><span class="line"><span class="keyword">ON</span> s.cno = c.cno</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> teachers <span class="keyword">AS</span> t</span><br><span class="line"><span class="keyword">ON</span> t.tno = c.tno</span><br><span class="line"><span class="keyword">WHERE</span> t.depart = <span class="string">'计算机系'</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> t.tname, cname, degree <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询“计算机系”与“电子工程系“不同职称的教师的Tname和Prof。</p>
+<li><p>查询“计算机系”中与“电子工程系“的教师<strong>不同职称</strong>教师的tname和prof。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> tname, prof</span><br><span class="line"><span class="keyword">FROM</span> teachers</span><br><span class="line"><span class="keyword">WHERE</span> depart = <span class="string">'计算机系'</span> <span class="keyword">AND</span> prof <span class="keyword">NOT</span> <span class="keyword">IN</span> </span><br><span class="line">								(<span class="keyword">SELECT</span> prof</span><br><span class="line">                                <span class="keyword">FROM</span> teachers</span><br><span class="line">                                <span class="keyword">WHERE</span> depart = <span class="string">'电子工程系'</span>);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询选修编号为“3-105“课程且成绩至少高于选修编号为“3-245”的同学的Cno、Sno和Degree,并按Degree从高到低次序排序。</p>
+<li><p>查询选修编号为“3-105”课程且成绩至少<strong>高于任意</strong>选修编号为“3-245”的同学的成绩的cno、sno和degree。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cno, sno, degree</span><br><span class="line"><span class="keyword">FROM</span> scores</span><br><span class="line"><span class="keyword">WHERE</span> cno = <span class="string">'3-105'</span> <span class="keyword">AND</span> degree &gt; (<span class="keyword">SELECT</span> <span class="keyword">MIN</span>(degree)</span><br><span class="line">    							<span class="keyword">FROM</span> scores</span><br><span class="line">    							<span class="keyword">WHERE</span> cno = <span class="string">'3-245'</span>)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> degree <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询选修编号为“3-105”且成绩高于选修编号为“3-245”课程的同学的Cno、Sno和Degree.</p>
+<li><p>查询选修编号为”3-105“且成绩<strong>高于所有</strong>选修编号为”3-245“课程的同学的cno、sno和degree。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cno, sno, degree</span><br><span class="line"><span class="keyword">FROM</span> scores</span><br><span class="line"><span class="keyword">WHERE</span> cno = <span class="string">'3-105'</span> <span class="keyword">AND</span> degree &gt; (<span class="keyword">SELECT</span> <span class="keyword">MAX</span>(degree)</span><br><span class="line">    							<span class="keyword">FROM</span> scores</span><br><span class="line">    							<span class="keyword">WHERE</span> cno = <span class="string">'3-245'</span>)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> degree <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询所有教师和同学的name、sex和birthday.</p>
+<li><p>查询<strong>所有教师和同学</strong>的name、sex和birthday。</p>
+<p>解答：<strong>组合查询UNION</strong></p>
+<ul>
+<li>UNION中<strong>每个查询必须包含相同的列、表达式或聚集函数</strong>（不过各个列<strong>不需要以相同的次序列出</strong>）。</li>
+<li>列数据类型必须<strong>兼容</strong>。类型不必完全相同，但必须是DBMS可以隐含地转换的类型(如<strong>不同的数值类型</strong>或<strong>不同的日期类型</strong>)。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> tname <span class="keyword">AS</span> <span class="keyword">name</span>, tsex <span class="keyword">AS</span> sex, tbirthday <span class="keyword">AS</span> birthday</span><br><span class="line"><span class="keyword">FROM</span> teachers</span><br><span class="line"><span class="keyword">UNION</span> </span><br><span class="line"><span class="keyword">SELECT</span> sname <span class="keyword">AS</span> <span class="keyword">name</span>, ssex <span class="keyword">AS</span> sex, sbirthday <span class="keyword">AS</span> birthday</span><br><span class="line"><span class="keyword">FROM</span> students</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> birthday;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询所有“女”教师和“女”同学的name、sex和birthday.</p>
+<li><p>查询所有“女”教师和“女”同学的name、sex和birthday。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> tname <span class="keyword">AS</span> <span class="keyword">name</span>, tsex <span class="keyword">AS</span> sex, tbirthday <span class="keyword">AS</span> birthday</span><br><span class="line"><span class="keyword">FROM</span> teachers <span class="keyword">AS</span> t</span><br><span class="line"><span class="keyword">WHERE</span> t.tsex = <span class="string">'女'</span></span><br><span class="line"><span class="keyword">UNION</span> </span><br><span class="line"><span class="keyword">SELECT</span> sname <span class="keyword">AS</span> <span class="keyword">name</span>, ssex <span class="keyword">AS</span> sex, sbirthday <span class="keyword">AS</span> birthday</span><br><span class="line"><span class="keyword">FROM</span> students <span class="keyword">AS</span> s</span><br><span class="line"><span class="keyword">WHERE</span> s.ssex = <span class="string">'女'</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> birthday;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询成绩比该课程平均成绩低的同学的成绩表。</p>
+<li><p>★★★查询成绩<strong>比该课程平均成绩低</strong>的同学的成绩表。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> s1.*, avg_degree</span><br><span class="line"><span class="keyword">FROM</span> scores <span class="keyword">AS</span> s1 <span class="keyword">INNER</span> <span class="keyword">JOIN</span> (</span><br><span class="line">	<span class="keyword">SELECT</span> cno, <span class="keyword">AVG</span>(degree) <span class="keyword">AS</span> avg_degree</span><br><span class="line">	<span class="keyword">FROM</span> scores</span><br><span class="line">	<span class="keyword">GROUP</span> <span class="keyword">BY</span> cno) <span class="keyword">AS</span> s2</span><br><span class="line"><span class="keyword">ON</span> s1.cno = s2.cno <span class="keyword">AND</span> s1.degree &lt; s2.avg_degree;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询所有任课教师的Tname和Depart.</p>
+<li><p>查询所有<strong>任课教师</strong>的tname和depart。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> tname, depart</span><br><span class="line"><span class="keyword">FROM</span> courses <span class="keyword">AS</span> c <span class="keyword">INNER</span> <span class="keyword">JOIN</span> teachers <span class="keyword">AS</span> t</span><br><span class="line"><span class="keyword">ON</span> c.tno = t.tno</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> tname;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> tname, depart</span><br><span class="line"><span class="keyword">FROM</span> teachers</span><br><span class="line"><span class="keyword">WHERE</span> tno <span class="keyword">IN</span>(</span><br><span class="line">	<span class="keyword">SELECT</span> tno</span><br><span class="line">	<span class="keyword">FROM</span> courses)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> tname;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询所有未讲课的教师的Tname和Depart. </p>
+<li><p>★查询所有<strong>未讲课</strong>的教师的Tname和Depart。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> tname, depart</span><br><span class="line"><span class="keyword">FROM</span> teachers</span><br><span class="line"><span class="keyword">WHERE</span> tno <span class="keyword">NOT</span> <span class="keyword">IN</span>(</span><br><span class="line">	<span class="keyword">SELECT</span> tno</span><br><span class="line">	<span class="keyword">FROM</span> courses)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> tname;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询至少有2名男生的班号。</p>
+<li><p>★★查询<strong>至少有2名</strong>男生的班号。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">class</span></span><br><span class="line"><span class="keyword">FROM</span> students</span><br><span class="line"><span class="keyword">WHERE</span> ssex = <span class="string">'男'</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">class</span></span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">COUNT</span>(*) &gt;= <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询Student表中不姓“王”的同学记录。</p>
+<li><p>★查询students表中<strong>不姓“王”</strong>的同学记录。</p>
+<p>解答：</p>
+<ul>
+<li>LIKE操作符</li>
+<li>通配符%</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> students</span><br><span class="line"><span class="keyword">WHERE</span> sname <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">'王%'</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询Student表中每个学生的姓名和年龄。</p>
+<li><p>★★查询students表中每个学生的姓名和<strong>年龄</strong>。</p>
+<p>解答：</p>
+<ul>
+<li>当前<strong>日期</strong>函数CURDATE()</li>
+<li>当前<strong>日期和时间</strong>函数NOW()</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sname, <span class="keyword">TIMESTAMPDIFF</span>(<span class="keyword">YEAR</span>, sbirthday, <span class="keyword">CURDATE</span>()) <span class="keyword">AS</span> age</span><br><span class="line"><span class="keyword">FROM</span> students;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询Student表中最大和最小的Sbirthday日期值。</p>
+<li><p>★★查询students表中<strong>最大</strong>和<strong>最小</strong>的sbirthday<strong>日期</strong>值。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">DATE</span>(<span class="keyword">MAX</span>(Sbirthday)) <span class="keyword">AS</span> max_birthday, <span class="built_in">DATE</span>(<span class="keyword">MIN</span>(Sbirthday)) <span class="keyword">AS</span> min_birthday,</span><br><span class="line"><span class="keyword">FROM</span> Students;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>以班号和年龄从大到小的顺序查询Student表中的全部记录。</p>
+<li><p>以<strong>班号</strong>和<strong>年龄</strong>从大到小的顺序查询students表中的全部记录。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> students</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">class</span> <span class="keyword">DESC</span>, <span class="keyword">TIMESTAMPDIFF</span>(<span class="keyword">YEAR</span>, sbirthday, <span class="keyword">CURDATE</span>()) <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询“男”教师及其所上的课程。</p>
+<li><p>查询“男”教师及其<strong>所上的课程</strong>。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> tname, cname</span><br><span class="line"><span class="keyword">FROM</span> teachers <span class="keyword">AS</span> t <span class="keyword">INNER</span> <span class="keyword">JOIN</span> courses <span class="keyword">AS</span> c</span><br><span class="line"><span class="keyword">ON</span> t.tno = c.tno</span><br><span class="line"><span class="keyword">WHERE</span> tsex=<span class="string">'男'</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> tname;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询最高分同学的Sno、Cno和Degree列。</p>
+<li><p>★查询<strong>最高分</strong>同学的sno、cno和degree列。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sno, cno, degree</span><br><span class="line"><span class="keyword">FROM</span> scores</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> cno</span><br><span class="line"><span class="keyword">HAVING</span> degree=<span class="keyword">MAX</span>(degree);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询和“李军”同性别的所有同学的Sname.</p>
+<li><p>查询和“李军”<strong>同性别</strong>的所有同学的sname。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法一 子查询</span></span><br><span class="line"><span class="keyword">SELECT</span> sname</span><br><span class="line"><span class="keyword">FROM</span> students</span><br><span class="line"><span class="keyword">WHERE</span> ssex = (</span><br><span class="line">			<span class="keyword">SELECT</span> ssex</span><br><span class="line">			<span class="keyword">FROM</span> students</span><br><span class="line">			<span class="keyword">WHERE</span> sname = <span class="string">'李军'</span>);</span><br><span class="line">			</span><br><span class="line"><span class="comment"># 方法二 联结表</span></span><br><span class="line"><span class="keyword">SELECT</span> s1.Sname</span><br><span class="line"><span class="keyword">FROM</span> students <span class="keyword">AS</span> s1 <span class="keyword">INNER</span> <span class="keyword">JOIN</span> students <span class="keyword">AS</span> s2</span><br><span class="line"><span class="keyword">ON</span> s1.ssex=s2.ssex</span><br><span class="line"><span class="keyword">WHERE</span> s2.sname = <span class="string">'李军'</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询和“李军”同性别并同班的同学Sname.</p>
+<li><p>★★查询和“李军”<strong>同性别</strong>并<strong>同班</strong>的同学sname。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sname</span><br><span class="line"><span class="keyword">FROM</span> students <span class="keyword">AS</span> s1 <span class="keyword">INNER</span> <span class="keyword">JOIN</span> students <span class="keyword">AS</span> s2</span><br><span class="line"><span class="keyword">ON</span> s1.ssex = s2.ssex <span class="keyword">AND</span> s1.class = s2.class</span><br><span class="line"><span class="keyword">WHERE</span> s2.sname = <span class="string">'李军'</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查询所有选修“计算机导论”课程的“男”同学的成绩表</p>
+<li><p>查询所有<strong>选修“计算机导论”课程</strong>的<strong>“男”</strong>同学的成绩表。</p>
+<p>解答：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sname, degree</span><br><span class="line"><span class="keyword">FROM</span> scores <span class="keyword">AS</span> s1 <span class="keyword">INNER</span> <span class="keyword">JOIN</span> courses <span class="keyword">AS</span> c</span><br><span class="line"><span class="keyword">ON</span> s1.cno = c.cno</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> students <span class="keyword">AS</span> s2</span><br><span class="line"><span class="keyword">ON</span> s1.sno = s2.sno</span><br><span class="line"><span class="keyword">WHERE</span> c.cname = <span class="string">'计算机导论'</span> <span class="keyword">AND</span> s2.ssex = <span class="string">'男'</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> degree <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 
