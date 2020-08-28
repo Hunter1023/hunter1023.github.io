@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="特叔服务">
 <meta property="og:description" content="练习一准备数据建表语句12345678910111213141516171819202122CREATE TABLE students(sno VARCHAR(3) NOT NULL, sname VARCHAR(4) NOT NULL,ssex VARCHAR(2) NOT NULL, sbirthday DATETIME,class VARCHAR(5));CREATE TABLE cours">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T15:21:30.143Z">
+<meta property="og:updated_time" content="2020-08-27T10:48:01.558Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL练习题">
 <meta name="twitter:description" content="练习一准备数据建表语句12345678910111213141516171819202122CREATE TABLE students(sno VARCHAR(3) NOT NULL, sname VARCHAR(4) NOT NULL,ssex VARCHAR(2) NOT NULL, sbirthday DATETIME,class VARCHAR(5));CREATE TABLE cours">
@@ -473,7 +473,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-08-09 23:21:30" itemprop="dateModified" datetime="2020-08-09T23:21:30+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-27 18:48:01" itemprop="dateModified" datetime="2020-08-27T18:48:01+08:00">2020-08-27</time>
               
             
           </span>
@@ -819,6 +819,88 @@
  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(userId), <span class="keyword">SUM</span>(total)</span><br><span class="line"><span class="keyword">FROM</span> (<span class="keyword">SELECT</span> userId, <span class="keyword">SUM</span>(price) <span class="keyword">AS</span> total</span><br><span class="line">	<span class="keyword">FROM</span> orderinfo <span class="keyword">AS</span> o</span><br><span class="line">	<span class="keyword">WHERE</span> isPaid = <span class="string">'已支付'</span></span><br><span class="line">	<span class="keyword">GROUP</span> <span class="keyword">BY</span> userId</span><br><span class="line">	<span class="keyword">ORDER</span> <span class="keyword">BY</span> total <span class="keyword">DESC</span></span><br><span class="line">	<span class="keyword">LIMIT</span> <span class="number">17000</span>) <span class="keyword">AS</span> t;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<hr>
+<h2 id="练习三"><a href="#练习三" class="headerlink" title="练习三"></a>练习三</h2><h3 id="准备数据-2"><a href="#准备数据-2" class="headerlink" title="准备数据"></a>准备数据</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> datafrog_test1</span><br><span class="line">(userid <span class="built_in">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">changjing <span class="built_in">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">int_time <span class="built_in">VARCHAR</span>(<span class="number">20</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> datafrog_test1 </span><br><span class="line"><span class="keyword">VALUES</span> 	(<span class="number">1</span>,<span class="number">1001</span>,<span class="number">1400</span>),</span><br><span class="line">		(<span class="number">2</span>,<span class="number">1002</span>,<span class="number">1401</span>),</span><br><span class="line">        (<span class="number">1</span>,<span class="number">1002</span>,<span class="number">1402</span>),</span><br><span class="line">        (<span class="number">1</span>,<span class="number">1001</span>,<span class="number">1402</span>),</span><br><span class="line">        (<span class="number">2</span>,<span class="number">1003</span>,<span class="number">1403</span>),</span><br><span class="line">        (<span class="number">2</span>,<span class="number">1004</span>,<span class="number">1404</span>),</span><br><span class="line">        (<span class="number">3</span>,<span class="number">1003</span>,<span class="number">1400</span>),</span><br><span class="line">        (<span class="number">4</span>,<span class="number">1004</span>,<span class="number">1402</span>),</span><br><span class="line">        (<span class="number">4</span>,<span class="number">1003</span>,<span class="number">1403</span>),</span><br><span class="line">        (<span class="number">4</span>,<span class="number">1001</span>,<span class="number">1403</span>),</span><br><span class="line">        (<span class="number">4</span>,<span class="number">1002</span>,<span class="number">1404</span>),</span><br><span class="line">        (<span class="number">5</span>,<span class="number">1002</span>,<span class="number">1402</span>),</span><br><span class="line">        (<span class="number">5</span>,<span class="number">1002</span>,<span class="number">1403</span>),</span><br><span class="line">        (<span class="number">5</span>,<span class="number">1001</span>,<span class="number">1404</span>),</span><br><span class="line">        (<span class="number">5</span>,<span class="number">1003</span>,<span class="number">1405</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>求用户id对应的<strong>前两个不同场景</strong>。(场景重复的话，选场景的第一个访问时间，场景不足两个也输出其场景)</p>
+<hr>
+<h3 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h3><hr>
+<h2 id="Leetcode-上的SQL题"><a href="#Leetcode-上的SQL题" class="headerlink" title="Leetcode 上的SQL题"></a>Leetcode 上的SQL题</h2><ul>
+<li><p><a href="https://leetcode-cn.com/problems/second-highest-salary/" target="_blank" rel="noopener">176. 第二高的薪水</a></p>
+<ul>
+<li><p><code>LIMIT/OFFSET</code></p>
+</li>
+<li><p><code>IFNULL()/ISNULL()</code>函数</p>
+</li>
+</ul>
+</li>
+<li><p><a href="https://leetcode-cn.com/problems/nth-highest-salary/submissions/" target="_blank" rel="noopener">177. 第N高的薪水</a></p>
+<ul>
+<li><code>CREATE FUNCTION</code></li>
+<li><code>LIMIT/OFFSET</code>之后<strong>不能包含运算表达式</strong></li>
+</ul>
+</li>
+<li><p><a href="https://leetcode-cn.com/problems/department-top-three-salaries/submissions/" target="_blank" rel="noopener">185. 部门工资前三高的所有员工 </a></p>
+<ul>
+<li><strong>窗口函数</strong>——<code>DENSE_RANK()</code>：<strong>有并列名次的行，不占用下一名次的位置</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><a href="https://leetcode-cn.com/problems/rank-scores/submissions/" target="_blank" rel="noopener">178. 分数排名</a></p>
+<ul>
+<li><strong>窗口函数</strong>——<code>DENSE_RANK()</code></li>
+<li>MySQL如果<strong>要 将保留字转义 用作列名</strong>，可以<strong>在关键字之前和之后使用撇号</strong>。例如<strong>`Rank`</strong></li>
+</ul>
+</li>
+<li><p><a href="https://leetcode-cn.com/problems/consecutive-numbers/solution/sql-server-jie-fa-by-neilsons/" target="_blank" rel="noopener">SQL SERVER 解法 - 连续出现的数字 - 力扣（LeetCode）</a></p>
+</li>
+<li><p>※<a href="https://leetcode-cn.com/problems/consecutive-numbers/" target="_blank" rel="noopener">180. 连续出现的数字</a></p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> <span class="keyword">Num</span> <span class="keyword">AS</span> ConsecutiveNums</span><br><span class="line"><span class="keyword">FROM</span> (<span class="keyword">SELECT</span> <span class="keyword">Num</span>, <span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> num_cnt </span><br><span class="line">      <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> <span class="keyword">id</span>, <span class="keyword">num</span>, </span><br><span class="line">            (ROW_NUMBER() <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">id</span>) - ROW_NUMBER() <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">num</span> </span><br><span class="line">                                                               <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">id</span>)) <span class="keyword">AS</span> orde</span><br><span class="line">           <span class="keyword">FROM</span> <span class="keyword">logs</span>) <span class="keyword">AS</span> W</span><br><span class="line">     <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">num</span>, orde) <span class="keyword">AS</span> S</span><br><span class="line"><span class="keyword">WHERE</span> num_cnt &gt;= <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://leetcode-cn.com/problems/employees-earning-more-than-their-managers/" target="_blank" rel="noopener">181. 超过经理收入的员工</a></p>
+</li>
+<li><p><a href="https://leetcode-cn.com/problems/customers-who-never-order/submissions/" target="_blank" rel="noopener">183. 从不订购的客户</a></p>
+<ul>
+<li><strong>空值的筛选</strong>为<code>IS NULL</code>/<code>IS NOT NULL</code>，不是<code>= NULL</code></li>
+</ul>
+</li>
+<li><p><a href="https://leetcode-cn.com/problems/department-highest-salary/submissions/" target="_blank" rel="noopener">184. 部门工资最高的员工</a></p>
+<ul>
+<li><strong>每个组内比较</strong>，使用<strong>子查询</strong></li>
+</ul>
+</li>
+<li><p><a href="https://leetcode-cn.com/problems/delete-duplicate-emails/" target="_blank" rel="noopener">196. 删除重复的电子邮箱 </a></p>
+<ul>
+<li>子查询</li>
+<li>EXISTS 和 IN的运用(<strong>EXISTS 更高效</strong>)</li>
+</ul>
+</li>
+<li><p><a href="https://leetcode-cn.com/problems/rising-temperature/" target="_blank" rel="noopener">197. 上升的温度</a></p>
+<ul>
+<li>时间处理函数<code>DATE_ADD()</code></li>
+</ul>
+</li>
+<li><p><a href="https://leetcode-cn.com/problems/trips-and-users/submissions/" target="_blank" rel="noopener">262. 行程和用户</a></p>
+<ul>
+<li><code>BETWEEN ... AND ...</code></li>
+<li>IF表达式</li>
+<li>ROUND函数<strong>舍入小数</strong></li>
+<li><code>COUNT</code>函数/<code>AVG</code>函数</li>
+</ul>
+</li>
+<li><p><a href="https://leetcode-cn.com/problems/big-countries/" target="_blank" rel="noopener">595. 大的国家</a></p>
+<ul>
+<li>UNION和OR的选择</li>
+</ul>
+</li>
+<li><p><a href="https://leetcode-cn.com/problems/swap-salary/" target="_blank" rel="noopener">627. 交换工资</a></p>
+<ul>
+<li><code>CASE... WHEN</code></li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -1118,7 +1200,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#练习一"><span class="nav-number">1.</span> <span class="nav-text">练习一</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备数据"><span class="nav-number">1.1.</span> <span class="nav-text">准备数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#建表语句"><span class="nav-number">1.1.1.</span> <span class="nav-text">建表语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入数据"><span class="nav-number">1.1.2.</span> <span class="nav-text">插入数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#练习题"><span class="nav-number">1.2.</span> <span class="nav-text">练习题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习二"><span class="nav-number">2.</span> <span class="nav-text">练习二</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备数据-1"><span class="nav-number">2.1.</span> <span class="nav-text">准备数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#建表语句-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">建表语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导入数据"><span class="nav-number">2.1.2.</span> <span class="nav-text">导入数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#练习题-1"><span class="nav-number">2.2.</span> <span class="nav-text">练习题</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#练习一"><span class="nav-number">1.</span> <span class="nav-text">练习一</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备数据"><span class="nav-number">1.1.</span> <span class="nav-text">准备数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#建表语句"><span class="nav-number">1.1.1.</span> <span class="nav-text">建表语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入数据"><span class="nav-number">1.1.2.</span> <span class="nav-text">插入数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#练习题"><span class="nav-number">1.2.</span> <span class="nav-text">练习题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习二"><span class="nav-number">2.</span> <span class="nav-text">练习二</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备数据-1"><span class="nav-number">2.1.</span> <span class="nav-text">准备数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#建表语句-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">建表语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导入数据"><span class="nav-number">2.1.2.</span> <span class="nav-text">导入数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#练习题-1"><span class="nav-number">2.2.</span> <span class="nav-text">练习题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习三"><span class="nav-number">3.</span> <span class="nav-text">练习三</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备数据-2"><span class="nav-number">3.1.</span> <span class="nav-text">准备数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">3.2.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解答"><span class="nav-number">3.3.</span> <span class="nav-text">解答</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Leetcode-上的SQL题"><span class="nav-number">4.</span> <span class="nav-text">Leetcode 上的SQL题</span></a></li></ol></div>
             
 
           </div>
