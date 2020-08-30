@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="特叔服务">
 <meta property="og:description" content="第1章 了解SQL 数据库软件应称为DBMS（数据库管理系统）。  数据库是通过DBMS创建和操纵的容器。  在很大程度上说，数据库究竟是文件还是别的什么东西并不重要，因为你并不直接访问数据库；你使用的是DBMS，它替你访问数据库。  模式（schema）： 关于数据库和表的布局及特性的信息。  有时，模式用作数据库的同义词。遗憾的是，模式的含义通常在上下文中并不是很清晰。  主键（primary">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-28T02:11:24.483Z">
+<meta property="og:updated_time" content="2020-08-30T14:52:21.160Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL必知必会">
 <meta name="twitter:description" content="第1章 了解SQL 数据库软件应称为DBMS（数据库管理系统）。  数据库是通过DBMS创建和操纵的容器。  在很大程度上说，数据库究竟是文件还是别的什么东西并不重要，因为你并不直接访问数据库；你使用的是DBMS，它替你访问数据库。  模式（schema）： 关于数据库和表的布局及特性的信息。  有时，模式用作数据库的同义词。遗憾的是，模式的含义通常在上下文中并不是很清晰。  主键（primary">
@@ -473,7 +473,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-08-28 10:11:24" itemprop="dateModified" datetime="2020-08-28T10:11:24+08:00">2020-08-28</time>
+                <time title="修改时间：2020-08-30 22:52:21" itemprop="dateModified" datetime="2020-08-30T22:52:21+08:00">2020-08-30</time>
               
             
           </span>
@@ -1084,48 +1084,18 @@
 <p>  <code>SELECT &#39;Hello&#39; REGEXP &#39;[0-9]&#39;</code>，这个例子显然返回0。 </p>
 </li>
 </ul>
-<h2 id="第10章-创建计算字段"><a href="#第10章-创建计算字段" class="headerlink" title="第10章 创建计算字段"></a>第10章 创建计算字段</h2><blockquote>
-<p>与前面各章介绍过的列不同，计算字段并不实际存在于数据库表中。计算字段是运行时在SELECT语句内创建的。</p>
-</blockquote>
-<blockquote>
-<p>只有数据库知道SELECT语句中哪些列是实际的表列，哪些列是计算字段。从客户机（如应用程序）的角度来看，计算字段的数据是以与其他列的数据相同的方式返回的。</p>
-</blockquote>
-<blockquote>
-<p>。在MySQL的SELECT语句中，可使用Concat()函数来拼接两个列。</p>
-</blockquote>
-<blockquote>
-<p> 多数DBMS使用+或||来实现拼接，MySQL则使用Concat()函数来实现。当把SQL语句转换成MySQL语句时一定要把这个区别铭记在心。</p>
-</blockquote>
-<blockquote>
-<p>Concat()需要一个或多个指定的串，各个串之间用逗号分隔。</p>
-</blockquote>
-<blockquote>
-<p>在第8章中曾提到通过删除数据右侧多余的空格来整理数据，这可以使用MySQL的RTrim()函数来完成</p>
-</blockquote>
-<blockquote>
-<p>RTrim()函数去掉值右边的所有空格。通过使用RTrim()，各个列都进行了整理。</p>
-</blockquote>
-<blockquote>
-<p>MySQL除了支持RTrim()（正如刚才所见，它去掉串右边的空格），还支持LTrim()（去掉串左边的空格）以及Trim()（去掉串左右两边的空格）。</p>
-</blockquote>
-<blockquote>
-<p>SQL支持列别名。别名（alias）是一个字段或值的替换名。别名用AS关键字赋予。请看下面的SELECT语句：</p>
-</blockquote>
-<blockquote>
-<p>从输出中可以看到，结果与以前的相同，但现在列名为vend_title，任何客户机应用都可以按名引用这个列，就像它是一个实际的表列一样。</p>
-</blockquote>
-<blockquote>
-<p>别名还有其他用途。常见的用途包括在实际的表列名包含不符合规定的字符（如空格）时重新命名它，在原来的名字含混或容易误解时扩充它，等等。</p>
-</blockquote>
-<blockquote>
-<p>别名有时也称为导出列（derived column）</p>
-</blockquote>
-<blockquote>
-<p>MySQL支持表10-1中列出的基本算术操作符。此外，圆括号可用来区分优先顺序。</p>
-</blockquote>
-<blockquote>
-<p>SELECT提供了测试和试验函数与计算的一个很好的办法。虽然SELECT通常用来从表中检索数据，但可以省略FROM子句以便简单地访问和处理表达式。例如，SELECT 3*2；将返回6, SELECT Trim(‘abc’)；将返回abc，而SELECT NOW()利用NOW()函数返回当前日期和时间。通过这些例子，可以明白如何根据需要使</p>
-</blockquote>
+<h2 id="第10章-创建计算字段"><a href="#第10章-创建计算字段" class="headerlink" title="第10章 创建计算字段"></a>第10章 创建计算字段</h2><h3 id="计算字段"><a href="#计算字段" class="headerlink" title="计算字段"></a>计算字段</h3><p>计算字段的作用是<strong>将数据库中几列所需的数据进行连接，直接从数据库中检索出转换、计算或格式化过的数据；而不是检索出数据后，在客户端应用程序中重新格式化</strong>。一般来说，在数据库服务器上完成这些操作比在客户端中完成要快得多，因为DBMS是设计来快速有效地完成这种处理的。</p>
+<p><strong>计算字段并不实际存在于数据库表中，是运行时在SELECT语句内创建的</strong>。</p>
+<hr>
+<h3 id="拼接字段"><a href="#拼接字段" class="headerlink" title="拼接字段"></a>拼接字段</h3><p><strong>拼接</strong>(<strong>concat</strong>enate)：将值联结到一起构成单个值，具体就是<strong>把两个列拼接起来</strong>。</p>
+<p><strong>多数DBMS使用<code>+</code>或<code>||</code>来实现拼接，MySQL则使用<code>Concat()</code>函数来实现</strong>。当把SQL语句转换成MySQL语句时一定要把这个区别铭记在心。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">Concat</span>(vend_name, <span class="string">'('</span>, vend_country, <span class="string">')'</span>)</span><br><span class="line"><span class="keyword">FROM</span> vendors</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> vend_name;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Concat()</code>需要一个或多个指定的串，各个串之间<strong>用逗号分隔</strong>。</li>
+</ul>
+<p>在第8章中曾提到通过<strong>删除数据右侧多余的空格</strong>来整理数据，这可以使用MySQL的<code>RTrim()</code>函数(第11章 文本处理函数)来完成：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">Concat</span>(<span class="keyword">RTrim</span>(vend_name), <span class="string">'('</span>, <span class="keyword">RTrim</span>(vend_country), <span class="string">')'</span>)</span><br><span class="line"><span class="keyword">FROM</span> vendors</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> vend_name;</span><br></pre></td></tr></table></figure>
+<hr>
 <h2 id="第11章-使用数据处理函数"><a href="#第11章-使用数据处理函数" class="headerlink" title="第11章 使用数据处理函数"></a>第11章 使用数据处理函数</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ul>
 <li><p>相对来说，多数<strong>SQL语句是可移植的</strong>，在SQL实现之间有差异时，这些差异通常不那么难处理。而<strong>函数的可移植性却不强</strong>。几乎每种主要的DBMS的实现都支持其他实现不支持的函数，而且有时差异还很大。</p>
 </li>
@@ -1481,7 +1451,7 @@
 <hr>
 <h5 id="聚合函数作为窗口函数"><a href="#聚合函数作为窗口函数" class="headerlink" title="聚合函数作为窗口函数"></a>聚合函数作为窗口函数</h5><p>聚和窗口函数和上面提到的专用窗口函数<strong>用法完全相同</strong>，只需要把聚合函数写在窗口函数的位置即可，但是<strong>函数后面括号里面不能为空，需要指定聚合的列名</strong>。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *,</span><br><span class="line">	<span class="keyword">SUM</span>(成绩) <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> 学号) <span class="keyword">AS</span> current_sum,</span><br><span class="line">	<span class="keyword">AVG</span>(成绩) <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> 学号) <span class="keyword">AS</span> current_avg,</span><br><span class="line">	<span class="keyword">COUNT</span>(成绩) <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> 学号) <span class="keyword">AS</span> current_count,</span><br><span class="line">	<span class="keyword">MAX</span>(成绩) <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> 学号) <span class="keyword">AS</span> current_max,</span><br><span class="line">	<span class="keyword">MIN</span>(成绩) <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> 学号) <span class="keyword">AS</span> current_min</span><br><span class="line"><span class="keyword">FROM</span> 班级表;</span><br></pre></td></tr></table></figure>
-<p>上述聚合函数，都是<strong>针对自身记录</strong>以及自身记录<strong>之上(已查询出来的行)</strong>的所有数据进行计算(<strong>从第一行到当前为止</strong>)。</p>
+<p>上述聚合函数，都是<strong>针对自身记录</strong>以及自身记录<strong>之前(已查询出来的行)</strong>的所有数据进行计算(<strong>从第一行到当前为止</strong>)。</p>
 <p>聚合函数作为窗口函数，可以在每一行的数据里直观的看到，<strong>截止到本行数据，统计数据是多少</strong>（最大值、最小值等），同时<strong>可以看出每一行数据，对整体统计数据的影响</strong>。</p>
 <hr>
 <h5 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h5><p>PARTITION子句可以省略，即<strong>不指定分组</strong>。但这样就失去了窗口函数的功能，所以<strong>一般不要这么使用</strong>。</p>
@@ -1769,49 +1739,69 @@
 <li><p><strong>涉及外部查询</strong>的子查询称为<strong>相关子查询</strong>。任何时候<strong>只要列名可能有多义性</strong>，就必须使用这种语法（<strong>表名和列名由一个句点分隔</strong>）。</p>
 </li>
 </ul>
-<h2 id="第15章-联结表"><a href="#第15章-联结表" class="headerlink" title="第15章 联结表"></a>第15章 联结表</h2><ul>
-<li><p><strong>联结</strong>是利用SQL的<strong>SELECT</strong>能执行的<strong>最重要</strong>的操作</p>
-</li>
-<li><p>假如有由同一供应商生产的多种物品，那么在何处存储供应商信息（如，供应商名、地址、联系方法等）呢？将这些数据与产品信息分开存储的理由如下。</p>
-<ul>
+<h2 id="第15章-联结表"><a href="#第15章-联结表" class="headerlink" title="第15章 联结表"></a>第15章 联结表</h2><h3 id="联结"><a href="#联结" class="headerlink" title="联结"></a>联结</h3><ul>
+<li><strong>联结</strong>是利用SQL的<strong>SELECT</strong>能执行的<strong>最重要</strong>的操作</li>
+</ul>
+<h4 id="关系表"><a href="#关系表" class="headerlink" title="关系表"></a>关系表</h4><ul>
+<li>假如有由同一供应商生产的多种物品，那么在何处存储供应商信息（如，供应商名、地址、联系方法等）呢？将这些数据与产品信息分开存储的理由如下。<ul>
 <li>因为同一供应商生产的每个产品的供应商信息都是相同的，对每个产品重复此信息既浪费时间又浪费存储空间。</li>
 <li>如果供应商信息改变（例如，供应商搬家或电话号码变动），只需改动一次即可。</li>
 <li>如果有重复数据（即每种产品都存储供应商信息），很难保证每次输入该数据的方式都相同。不一致的数据在报表中很难利用。</li>
 </ul>
 </li>
-<li><p>相同数据出现多次决不是一件好事，此因素是关系数据库设计的基础</p>
-</li>
-<li><p><strong>一类数据一个表</strong>。各表通过某些常用的值（即关系设计中的关系（relational））互相关联。</p>
+</ul>
+<p>相同数据出现多次决不是一件好事，此因素是关系数据库设计的基础。<strong>关系表的设计就是要保证把信息分解成多个表，一类数据一个表</strong>。各表通过某些常用的值（即关系设计中的关系（relational））互相关联。</p>
+<p>在这个例子中，可建立两个表，一个存储<strong>供应商信息</strong>，另一个存储<strong>产品信息</strong>。</p>
+<ul>
+<li>vendors表包含所有供应商信息，每个供应商占一行，每个供应商具有唯一的标识。此标识称为<strong>主键（primary key）</strong>，可以是供应商ID或任何其他唯一值。</li>
+<li><p>products表只存储产品信息，它除了存储供应商ID（vendors表的主键）外不存储其他供应商信息。</p>
 </li>
 <li><p>vendors表的<strong>主键</strong>又叫作<strong>products的外键</strong>，它将vendors表与products表关联，利用供应商ID能从vendors表中找出相应供应商的详细信息。</p>
+<blockquote>
+<p><strong>外键（foreign key）</strong>为某个表中的一列，它<strong>包含另一个表的主键值</strong>，定义了两个表之间的关系。</p>
+</blockquote>
 </li>
-<li><p><strong>外键（foreign key）</strong>为某个表中的一列，它<strong>包含另一个表的主键值</strong>，定义了两个表之间的关系。</p>
-</li>
-<li><p>关系数据可以有效地存储和方便地处理。因此，<strong>关系数据库</strong>的<strong>可伸缩性</strong>远比非关系数据库要好。</p>
-</li>
-<li><p><strong>可伸缩性（scale）</strong> 能够适应不断增加的工作量而不失败。设计良好的数据库或应用程序称之为可伸缩性好（<strong>scale well</strong>）</p>
-</li>
-<li><p>联结是一种机制，用来在一条SELECT语句中关联表，因此称之为联结。使用特殊的语法，可以联结多个表返回一组输出，联结在运行时关联表中正确的行。</p>
-</li>
-<li><p>联结的创建非常简单，规定要联结的所有表以及它们如何关联即可</p>
-</li>
-<li><p>在一条SELECT语句中<strong>联结几个表时</strong>，相应的<strong>关系是在运行中构造</strong>的</p>
+</ul>
+<p>总之，关系数据可以有效地存储和方便地处理。因此，<strong>关系数据库</strong>的<strong>可伸缩性</strong>远比非关系数据库要好。</p>
+<blockquote>
+<p><strong>可伸缩性（scale）</strong> 能够适应不断增加的工作量而不失败。设计良好的数据库或应用程序称之为可伸缩性好（<strong>scale well</strong>）</p>
+</blockquote>
+<hr>
+<h4 id="为什么要使用联结"><a href="#为什么要使用联结" class="headerlink" title="为什么要使用联结"></a>为什么要使用联结</h4><p>如果数据存储在多个表中，<strong>要使用单条SELECT语句检索出数据</strong>，则需要使用联结。</p>
+<p>联结是一种机制，<strong>用来在一条SELECT语句中关联表，因此称之为联结</strong>。使用特殊的语法，可以联结多个表返回一组输出，联结在运行时关联表中正确的行。</p>
+<hr>
+<h3 id="创建联结"><a href="#创建联结" class="headerlink" title="创建联结"></a>创建联结</h3><p>联结的创建非常简单，规定要联结的所有表以及它们如何关联即可。</p>
+<p>例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> vend_name, prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> vendors, products</span><br><span class="line"><span class="keyword">WHERE</span> vendors.vend_id = products.vend_id</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> vend_name, prod_name;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这条语句的FROM子句列出了两个表，分别是vendors和products</li>
+</ul>
+<hr>
+<h4 id="WHERE子句的重要性"><a href="#WHERE子句的重要性" class="headerlink" title="WHERE子句的重要性"></a>WHERE子句的重要性</h4><ul>
+<li><p>在一条SELECT语句中<strong>联结几个表时</strong>，相应的<strong>关系是在运行中构造</strong>的。</p>
 </li>
 <li><p>在联结两个表时，你实际上做的是<strong>将第一个表中的每一行与第二个表中的每一行配对</strong>。WHERE子句作为过滤条件，它只包含那些匹配给定条件（这里是联结条件）的行</p>
 </li>
-<li><p><strong>没有WHERE子句，第一个表中的每个行将与第二个表中的每个行配对</strong>，而不管它们逻辑上是否可以配在一起。由没有联结条件的表关系返回的结果为<strong>笛卡儿积</strong>。检索出的<strong>行的数目</strong>将是<strong>第一个表中的行数乘以第二个表中的行数</strong>。</p>
-</li>
-<li><p>应该保证所有联结都有WHERE子句，否则MySQL将返回比想要的数据多得多的数据。同理，应该保证WHERE子句的正确性。</p>
-</li>
-<li><p>有时我们会听到返回称为<strong>叉联结（cross join）</strong>的笛卡儿积的联结类型。</p>
-</li>
-<li><p><strong>等值联结（equijoin）</strong>，它基于两个表之间的相等测试，也称为<strong>内部联结</strong>。</p>
-</li>
-<li><p>这里，两个表之间的关系是FROM子句的组成部分，以<strong>INNER JOIN</strong>指定。在使用这种语法时，<strong>联结条件</strong>用特定的<strong>ON子句</strong>而不是WHERE子句给出。传递给ON的实际条件与传递给WHERE的相同。ANSI SQL规范首选INNER JOIN语法。此外，尽管使用WHERE子句定义联结的确比较简单，但是使用明确的联结语法能够确保不会忘记联结条件，有时候这样做也能影响性能。</p>
-</li>
-<li><p>MySQL在运行时关联指定的每个表以处理联结。这种处理可能是非常耗费资源的，因此应该仔细，不要联结不必要的表。联结的表越多，性能下降越厉害。</p>
+<li><p><strong>没有WHERE子句，第一个表中的每个行将与第二个表中的每个行配对</strong>，而不管它们逻辑上是否可以配在一起。由没有联结条件的表关系返回的结果为<strong>笛卡儿积</strong>。</p>
+<blockquote>
+<p>笛卡尔积：检索出的<strong>行的数目</strong>将是<strong>第一个表中的行数乘以第二个表中的行数</strong>。</p>
+</blockquote>
+<p>  有时我们会听到返回称为<strong>叉联结（cross join）</strong>的笛卡儿积的联结类型。</p>
 </li>
 </ul>
+<hr>
+<h4 id="内部联结"><a href="#内部联结" class="headerlink" title="内部联结"></a>内部联结</h4><p>目前上述的联结称为<strong>等值联结（equijoin）</strong>，它基于两个表之间的相等测试，也称为<strong>内部联结</strong>。</p>
+<p>下面的SELECT语句返回与前面例子完全相同的数据：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> vend_name, prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> vendors <span class="keyword">INNER</span> <span class="keyword">JOIN</span> products</span><br><span class="line"><span class="keyword">ON</span> vendors.vend_id = products.vend_id</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> vend_name, prod_name;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里，两个表之间的关系是FROM子句的组成部分，以<strong>INNER JOIN</strong>指定。在使用这种语法时，<strong>联结条件</strong>用特定的<strong>ON子句</strong>而不是WHERE子句给出。传递给ON的实际条件与传递给WHERE的相同。</li>
+<li>ANSI SQL规范<strong>首选INNER JOIN语法</strong>。此外，尽管使用WHERE子句定义联结的确比较简单，但是使用明确的联结语法能够确保不会忘记联结条件，有时候这样做也能影响性能。</li>
+</ul>
+<hr>
+<h4 id="联结多个表"><a href="#联结多个表" class="headerlink" title="联结多个表"></a>联结多个表</h4><ul>
+<li>MySQL在运行时<strong>关联指定的每个表以处理联结。这种处理可能是非常耗费资源的</strong>，因此应该仔细，不要联结不必要的表。联<strong>结的表越多，性能下降越厉害</strong>。</li>
+</ul>
+<hr>
 <h2 id="第16章-创建高级联结"><a href="#第16章-创建高级联结" class="headerlink" title="第16章 创建高级联结"></a>第16章 创建高级联结</h2><ul>
 <li><p>给列起<strong>别名</strong>的语法如下：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">Concat</span>(<span class="keyword">RTrim</span>(vend_name), <span class="string">' ('</span>, <span class="keyword">RTrim</span>(vend_country), <span class="string">') '</span>) <span class="keyword">AS</span></span><br><span class="line">vend_title</span><br><span class="line"><span class="keyword">FROM</span> vendors</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> vend_name;</span><br></pre></td></tr></table></figure>
@@ -2040,21 +2030,17 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">UNIQUE</span> <span class="keyword">INDEX</span> idx_name_phone</span><br><span class="line"><span class="keyword">ON</span> contacts(first_name,last_name, phone);</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="索引的使用场景"><a href="#索引的使用场景" class="headerlink" title="索引的使用场景"></a>索引的使用场景</h3><ol>
-<li><p>主键(PRIMARY KEY)<strong>自动建立唯一索引</strong></p>
-</li>
-<li><p>存在<strong>频繁作为查询条件的字段</strong>，应该创建索引</p>
-</li>
-<li><p>查询中与其他表关联的字段，<strong>外键关系建立索引</strong></p>
-</li>
-<li><p><strong>频繁更新</strong>的字段<strong>不适合建立索引</strong>，因为每次更新不单单时更新了记录还会更新索引</p>
-</li>
-<li><p>WHERE条件里<strong>用不到的字段不创建索引</strong></p>
-</li>
-<li><p>查询中排序的字段，<strong>排序的字段若通过索引去访问将会大大提高排序速度</strong></p>
-</li>
-<li><p>查询中<strong>统计或者分组的字段</strong></p>
-</li>
+<li>主键(PRIMARY KEY)<strong>自动建立唯一索引</strong></li>
+<li>存在<strong>频繁作为查询条件的字段</strong>，应该创建索引</li>
+<li>查询中与其他表关联的字段，<strong>外键关系建立索引</strong></li>
+<li><strong>频繁更新</strong>的字段<strong>不适合建立索引</strong>，因为每次更新不单单时更新了记录还会更新索引</li>
+<li>WHERE条件里<strong>用不到的字段不创建索引</strong></li>
+<li>查询中排序的字段，<strong>排序的字段若通过索引去访问将会大大提高排序速度</strong></li>
+<li>查询中<strong>统计或者分组的字段</strong></li>
 </ol>
+<hr>
+<h3 id="强制索引"><a href="#强制索引" class="headerlink" title="强制索引"></a>强制索引</h3><p><strong>FORCE INDEX</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * </span><br><span class="line"><span class="keyword">FROM</span> salaries </span><br><span class="line"><span class="keyword">FORCE</span> <span class="keyword">INDEX</span> idx_emp_no <span class="comment">-- idx_emp_no 是预设的索引</span></span><br><span class="line"><span class="keyword">WHERE</span> emp_no = <span class="number">10005</span>;</span><br></pre></td></tr></table></figure>
 <hr>
 <h2 id="第18章-全文本搜索"><a href="#第18章-全文本搜索" class="headerlink" title="第18章 全文本搜索"></a>第18章 全文本搜索</h2><h3 id="理解全文本搜索"><a href="#理解全文本搜索" class="headerlink" title="理解全文本搜索"></a>理解全文本搜索</h3><p>MySQL支持几种<strong>基本的数据库引擎</strong>。<strong>并非所有的引擎都支持本书所描述的全文本搜索</strong>。两个最常使用的引擎为<strong>MyISAM</strong>和<strong>InnoDB</strong>，<strong>前者支持全文本搜索，而后者不支持</strong>。</p>
 <p><strong>第8章和第9章介绍LIKE和正则表达式的搜索机制，存在几个重要的限制</strong>：</p>
@@ -2591,7 +2577,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> vendors</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">COLUMN</span> vend_phone;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>ALTER TABLE的一种常见用途是<strong>定义外键</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> orderitems</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> fk_orderitems_orders</span><br><span class="line"><span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (order_num) <span class="keyword">REFERENCES</span> orders (order_num);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> orderitems</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> fk_orderitems_orders <span class="comment">-- CONSTRAINT fk_name 定义外键名，可以不定义</span></span><br><span class="line"><span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (order_num) <span class="keyword">REFERENCES</span> orders (order_num);</span><br></pre></td></tr></table></figure>
 <p>如果<strong>对单个表进行多个更改</strong>，可以<strong>使用单条ALTER TABLE语句</strong>，<strong>每个更改用逗号分隔</strong>。</p>
 </li>
 <li><p><strong>复杂的表结构更改</strong>一般需要<strong>手动删除过程</strong>：</p>
@@ -2615,7 +2601,7 @@
 </li>
 </ul>
 <hr>
-<h3 id="重命名表"><a href="#重命名表" class="headerlink" title="重命名表"></a>重命名表</h3><ul>
+<h3 id="重命名表"><a href="#重命名表" class="headerlink" title="重命名表"></a>重命名表</h3><h4 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h4><ul>
 <li><p>使用<strong>RENAME TABLE语句</strong>可以重命名一个表。如：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RENAME</span> <span class="keyword">TABLE</span> customers2 <span class="keyword">TO</span> customers;</span><br></pre></td></tr></table></figure>
 </li>
@@ -2623,51 +2609,86 @@
 </li>
 </ul>
 <hr>
-<h2 id="第22章-使用视图"><a href="#第22章-使用视图" class="headerlink" title="第22章 使用视图"></a>第22章 使用视图</h2><blockquote>
-<p>MySQL 5添加了对视图的支持</p>
-</blockquote>
-<blockquote>
-<p>虚拟的表</p>
-</blockquote>
-<blockquote>
-<p>只包含使用时动态检索数据的查询</p>
-</blockquote>
-<blockquote>
-<p>productcustomers是一个视图，作为视图，它不包含表中应该有的任何列或数据，它包含的是一个SQL查询</p>
-</blockquote>
-<blockquote>
-<p>视图的一些常见应用。❑ 重用SQL语句。❑ 简化复杂的SQL操作。在编写查询后，可以方便地重用它而不必知道它的基本查询细节。❑ 使用表的组成部分而不是整个表。❑ 保护数据。可以给用户授予表的特定部分的访问权限而不是整个表的访问权限。❑ 更改数据格式和表示。视图可返回与底层表的表示和格式不同的数据。</p>
-</blockquote>
-<blockquote>
-<p>如果你用多个联结和过滤创建了复杂的视图或者嵌套了视图，可能会发现性能下降得很厉害。因此，在部署使用了大量视图的应用前，应该进行测试。</p>
-</blockquote>
-<blockquote>
-<p>视图创建和使用的一些最常见的规则和限制。❑ 与表一样，视图必须唯一命名（不能给视图取与别的视图或表相同的名字）。❑ 对于可以创建的视图数目没有限制。❑ 为了创建视图，必须具有足够的访问权限。这些限制通常由数据库管理人员授予。❑ 视图可以嵌套，即可以利用从其他视图中检索数据的查询来构造一个视图。❑ ORDER BY可以用在视图中，但如果从该视图检索数据的SELECT语句中也含有ORDERBY，那么该视图中的ORDER BY将被覆盖。❑ 视图不能索引，也不能有关联的触发器或默认值。❑ 视图可以和表一起使用。例如，编写一条联结表和视图的SELECT语句。</p>
-</blockquote>
-<blockquote>
-<p>视图的创建。❑ 视图用CREATE VIEW语句来创建。❑ 使用SHOW CREATE VIEW viewname；来查看创建视图的语句。❑ 用DROP删除视图，其语法为DROP VIEW viewname;。❑ 更新视图时，可以先用DROP再用CREATE，也可以直接用CREATE OR REPLACEVIEW。如果要更新的视图不存在，则第2条更新语句会创建一个视图；如果要更新的视图存在，则第2条更新语句会替换原有视图。</p>
-</blockquote>
-<blockquote>
-<p>隐藏复杂的SQL</p>
-</blockquote>
-<blockquote>
-<p>[插图]创建可重用的视图 创建不受特定数据限制的视图是一种好办法</p>
-</blockquote>
-<blockquote>
-<p>扩展视图的范围不仅使得它能被重用，而且甚至更有用。这样做不需要创建和维护多个类似视图</p>
-</blockquote>
-<blockquote>
-<p>视图的数据能否更新？答案视情况而定。</p>
-</blockquote>
-<blockquote>
-<p>更新一个视图将更新其基表（可以回忆一下，视图本身没有数据）。如果你对视图增加或删除行，实际上是对其基表增加或删除行。</p>
-</blockquote>
-<blockquote>
-<p>如果视图定义中有以下操作，则不能进行视图的更新：❑ 分组（使用GROUP BY和HAVING）；❑ 联结；❑ 子查询；❑ 并；❑ 聚集函数（Min()、Count()、Sum()等）；❑ DISTINCT；❑ 导出（计算）列。</p>
-</blockquote>
-<blockquote>
-<p> 一般，应该将视图用于检索（SELECT语句）而不用于更新（INSERT、UPDATE和DELETE）。</p>
-</blockquote>
+<h4 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> customers2 <span class="keyword">RENAME</span> <span class="keyword">TO</span> customers;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="第22章-使用视图"><a href="#第22章-使用视图" class="headerlink" title="第22章 使用视图"></a>第22章 使用视图</h2><h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>MySQL <strong>5</strong>添加了对视图的支持。视图是<strong>虚拟的表</strong>，<strong>只包含</strong>使用时动态检索数据的<strong>查询</strong>，<strong>不包含数据</strong>。</p>
+<p>例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cust_name, cust_contact</span><br><span class="line"><span class="keyword">FROM</span> customers, orders, orderitems</span><br><span class="line"><span class="keyword">WHERE</span> customers.cust_id = orders.cust_id</span><br><span class="line">		<span class="keyword">AND</span> orderitems.order_num = orders.order_num</span><br><span class="line">		<span class="keyword">AND</span> prod_id = <span class="string">'TNT2'</span>;</span><br></pre></td></tr></table></figure>
+<p>​    此查询用来检索订购了某个特定产品的客户。<strong>任何需要这个数据的人都必须理解相关表的结构，并且知道如何创建查询和对表进行联结。为了检索其他产品的相同数据，必须修改最后的WHERE子句</strong>。假如可以<strong>把整个查询包装成一个名为productcustomers的虚拟表</strong>，则可以如下轻松地检索出相同的数据：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cust_name, cust_contact</span><br><span class="line"><span class="keyword">FROM</span> productcustomers</span><br><span class="line"><span class="keyword">WHERE</span> prod_id = <span class="string">'TNT2'</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>这就是视图的作用</strong>。productcustomers是一个视图，<strong>作为视图，它不包含表中应该有的任何列或数据，它包含的是一个SQL查询</strong>。</p>
+<hr>
+<h4 id="为什么使用视图"><a href="#为什么使用视图" class="headerlink" title="为什么使用视图"></a>为什么使用视图</h4><p>视图的一些常见应用：</p>
+<ol>
+<li>重用SQL语句。</li>
+<li>简化复杂的SQL操作。在编写查询后，可以方便地重用它而不必知道它的基本查询细节。</li>
+<li>使用表的组成部分而不是整个表。</li>
+<li>保护数据。可以<strong>给用户授予表的特定部分的访问权限</strong>而不是整个表的访问权限。</li>
+<li><strong>更改数据格式和表示</strong>。视图可返回与底层表的表示和格式不同的数据。</li>
+</ol>
+<p>视图本身不包含数据，因此它们<strong>返回的数据是从其他表中检索出来的</strong>。<strong>在添加或更改这些表中的数据时，视图将返回改变过的数据</strong>。</p>
+<p><strong>性能问题</strong>：因为视图不包含数据，所以<strong>每次使用视图时，都必须处理查询执行时所需的任一个检索</strong>。因此，<strong>如果用多个联结和过滤创建了复杂的视图或者嵌套了视图，可能会发现性能下降得很厉害</strong>。因此，在部署使用了大量视图的应用前，应该进行测试。</p>
+<hr>
+<h4 id="视图的规则和限制"><a href="#视图的规则和限制" class="headerlink" title="视图的规则和限制"></a>视图的规则和限制</h4><p>视图创建和使用的一些最常见的规则和限制：</p>
+<ol>
+<li>与表一样，视图必须唯一命名（<strong>不能给视图取</strong>与别的视图或<strong>表</strong>相同的名字）。</li>
+<li>对于可以创建的视图数目没有限制。</li>
+<li>为了创建视图，必须具有<strong>足够的访问权限</strong>。这些<strong>限制通常由数据库管理人员授予</strong>。</li>
+<li>视图<strong>可以嵌套</strong>，即<strong>可以利用从其他视图中检索数据的查询来构造一个视图</strong>。</li>
+<li>ORDER BY可以用在视图中，但<strong>如果从该视图检索数据的SELECT语句中也含有ORDER BY，那么该视图中的ORDER BY将被覆盖</strong>。</li>
+<li><strong>视图不能索引，也不能有关联的触发器或默认值</strong>。</li>
+<li><strong>视图可以和表一起使用</strong>。例如，编写一条联结表和视图的SELECT语句。</li>
+</ol>
+<hr>
+<h3 id="使用视图"><a href="#使用视图" class="headerlink" title="使用视图"></a>使用视图</h3><p>视图的创建：</p>
+<ol>
+<li>视图用<strong>CREATE VIEW语句</strong>来创建。</li>
+<li>使用<code>SHOW CREATE VIEW viewname;</code>来<strong>查看创建视图的语句</strong>。</li>
+<li><strong>用DROP删除视图</strong>，其语法为<code>DROP VIEW viewname;</code>。</li>
+<li><strong>更新视图</strong>时，可以<strong>先用DROP再用CREATE</strong>，也可以直接用<strong>CREATE OR REPLACEVIEW</strong>。</li>
+</ol>
+<hr>
+<h4 id="利用视图简化复杂的联结"><a href="#利用视图简化复杂的联结" class="headerlink" title="利用视图简化复杂的联结"></a>利用视图简化复杂的联结</h4><p>视图<strong>最常见的应用</strong>之一是<strong>隐藏复杂的SQL</strong>，这通常都会涉及联结：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> productcustomers <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> cust_name, cust_contact, prod_id</span><br><span class="line"><span class="keyword">FROM</span> customers, orders, orderitems</span><br><span class="line"><span class="keyword">WHERE</span> customers.cust_id = orders.cust_id </span><br><span class="line">		<span class="keyword">AND</span> orderitems.order_num = orders.order_num;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>这条语句创建了一个名为productcustomers的视图，它联结三个表，以返回已订购了任意产品的所有客户的列表。如果执行<code>SELECT * FROM productcustomers;</code>，将列出订购了任意产品的客户。</p>
+</li>
+<li><p>为检索订购了产品TNT2的客户，可如下进行：</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cust_name, cust_contact</span><br><span class="line"><span class="keyword">FROM</span> productcustomers</span><br><span class="line"><span class="keyword">WHERE</span> prod_id = <span class="string">'TNT2'</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这条语句通过WHERE子句从视图中检索特定数据。在MySQL处理此查询时，它<strong>将指定的WHERE子句添加到视图查询中的已有WHERE子句中</strong>，以便正确过滤数据。</li>
+<li>可以看出，视图极大地简化了复杂SQL的使用。利用视图，可一次性编写基础的SQL，然后根据需要多次使用。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="用视图重新格式化检索出的数据"><a href="#用视图重新格式化检索出的数据" class="headerlink" title="用视图重新格式化检索出的数据"></a>用视图重新格式化检索出的数据</h4><p>如下SELECT语句在单个组合计算列中返回供应商名和位置：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">Concat</span>(<span class="keyword">RTrim</span>(vend_name), <span class="string">'('</span>, <span class="keyword">RTrim</span>(vend_country), <span class="string">')'</span>) <span class="keyword">AS</span> vend_title</span><br><span class="line"><span class="keyword">FROM</span> vendors</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> vend_name;</span><br></pre></td></tr></table></figure>
+<p>假如经常需要这个格式的结果，不必在每次需要时执行联结，创建一个视图，每次需要时使用它即可：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> vendorlocations <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">Concat</span>(<span class="keyword">RTrim</span>(vend_name), <span class="string">'('</span>, <span class="keyword">RTrim</span>(vend_country), <span class="string">')'</span>) <span class="keyword">AS</span> vend_title</span><br><span class="line"><span class="keyword">FROM</span> vendors</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> vend_name;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> vendorlocations;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="用视图过滤不想要的数据"><a href="#用视图过滤不想要的数据" class="headerlink" title="用视图过滤不想要的数据"></a>用视图过滤不想要的数据</h4><p>例如，可以定义customeremaillist视图，它<strong>过滤没有电子邮件地址的客户</strong>。为此目的，可使用下面的语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> customeremaillist <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> cust_id, cust_name, cust_email</span><br><span class="line"><span class="keyword">FROM</span> customers</span><br><span class="line"><span class="keyword">WHERE</span> cust_email <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> customeremaillist;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="使用视图与计算字段"><a href="#使用视图与计算字段" class="headerlink" title="使用视图与计算字段"></a>使用视图与计算字段</h4><p>视图对于<strong>简化计算字段的使用</strong>特别有用。下面是第10章中介绍的一条SELECT语句。它检索某个特定订单中的物品，计算每种物品的总价格：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id,</span><br><span class="line">		quantity,</span><br><span class="line">		item_price,</span><br><span class="line">		quantity * item_price <span class="keyword">AS</span> expanded_price</span><br><span class="line"><span class="keyword">FROM</span> orderitems</span><br><span class="line"><span class="keyword">WHERE</span> order_num = <span class="number">20005</span>;</span><br></pre></td></tr></table></figure>
+<p>为其转换为一个视图：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> orderitemsexpanded <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_id,</span><br><span class="line">		quantity,</span><br><span class="line">		item_price,</span><br><span class="line">		quantity * item_price <span class="keyword">AS</span> expanded_price</span><br><span class="line"><span class="keyword">FROM</span> orderitems;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> orderitemsexpanded</span><br><span class="line"><span class="keyword">WHERE</span> order_num = <span class="number">20005</span>;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="更新视图"><a href="#更新视图" class="headerlink" title="更新视图"></a>更新视图</h4><p><strong>视图的数据能否更新？答案视情况而定</strong>。</p>
+<p><strong>通常，视图是可更新的</strong>（即，可以对它们使用INSERT、UPDATE和DELETE）。<strong>更新一个视图将更新其基表（可以回忆一下，视图本身没有数据）。如果你对视图增加或删除行，实际上是对其基表增加或删除行</strong>。</p>
+<p>但是，<strong>并非所有视图都是可更新的</strong>。基本上可以说，如果MySQL<strong>不能正确地确定被更新的基数据</strong>，则不允许更新（包括插入和删除）。这实际上意味着，如果视图定义中有以下操作，则不能进行视图的更新：</p>
+<ol>
+<li>分组（使用GROUP BY和HAVING）；</li>
+<li>联结；</li>
+<li>子查询；</li>
+<li>并；</li>
+<li>聚集函数（Min()、Count()、Sum()等）；</li>
+<li>DISTINCT；</li>
+<li>导出（计算）列。</li>
+</ol>
+<p><strong>看上去好像是一个严重的限制，但实际上不是，因为视图主要用于数据检索(SELECT)</strong>。</p>
+<hr>
 <h2 id="第23章-使用存储过程"><a href="#第23章-使用存储过程" class="headerlink" title="第23章 使用存储过程"></a>第23章 使用存储过程</h2><h3 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h3><p>迄今为止，<strong>使用的大多数SQL语句都是</strong>针对一个或多个表的<strong>单条语句</strong>。并非所有操作都那么简单，经常会有一个完整的操作需要多条语句才能完成。例如如下场景：</p>
 <ol>
 <li>为了处理订单，需要核对以保证库存中有相应的物品。</li>
@@ -2707,7 +2728,7 @@
 <li><strong>BEGIN和END语句用来限定存储体</strong>，存储体本身是一个简单的SELECT语句</li>
 </ul>
 <p><strong>MySQL命令行的分隔符</strong>：</p>
-<p>默认的MySQL语句分隔符为<code>;</code>，如果<strong>命令行实用程序</strong>要解释存储过程自身内的<code>;</code>字符，会<strong>使存储过程中的SQL语句出现语法错误</strong>。通过<strong>*临时更改命令行实用程序的语句分隔符</strong>来解决：</p>
+<p>默认的MySQL语句分隔符为<code>;</code>，如果<strong>命令行实用程序</strong>要解释存储过程自身内的<code>;</code>字符，会<strong>使存储过程中的SQL语句出现语法错误</strong>。通过<strong>临时更改命令行实用程序的语句分隔符</strong>来解决：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER //</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> productpricing()</span><br><span class="line"><span class="keyword">BEGIN</span> </span><br><span class="line">	<span class="keyword">SELECT</span> <span class="keyword">AVG</span>(prod_price) <span class="keyword">AS</span> priceaverage</span><br><span class="line">	<span class="keyword">FROM</span> products;</span><br><span class="line"><span class="keyword">END</span> //</span><br><span class="line"></span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p><code>DELIMITER //</code>指明<strong>使用<code>//</code>作为新的语句结束分隔符</strong>；<code>DELIMITER ;</code>指明<strong>使用<code>;</code>作为新的语句结束分隔符</strong></p>
@@ -2863,45 +2884,78 @@
 <blockquote>
 <p>REPEAT语句的语法使它更适合于对游标进行循环。</p>
 </blockquote>
-<h2 id="第25章-使用触发器"><a href="#第25章-使用触发器" class="headerlink" title="第25章 使用触发器"></a>第25章 使用触发器</h2><blockquote>
-<p>要在某个表发生更改时自动处理。这确切地说就是触发器</p>
-</blockquote>
-<blockquote>
-<p>在创建触发器时，需要给出4条信息：❑ 唯一的触发器名；❑ 触发器关联的表；❑ 触发器应该响应的活动（DELETE、INSERT或UPDATE）；❑ 触发器何时执行（处理之前或之后）</p>
-</blockquote>
-<blockquote>
-<p>AFTER INSERT，</p>
-</blockquote>
-<blockquote>
-<p>，文本Product added将对每个插入的行显示一次</p>
-</blockquote>
-<blockquote>
-<p>触发器不能更新或覆盖。为了修改一个触发器，必须先删除它，然后再重新创建</p>
-</blockquote>
-<blockquote>
-<p>引用一个名为NEW的虚拟表，访问被插入的行</p>
-</blockquote>
-<blockquote>
-<p>NEW. order_num</p>
-</blockquote>
-<blockquote>
-<p>通常，将BEFORE用于数据验证和净化（目的是保证插入表中的数据确实是需要的数据</p>
-</blockquote>
-<blockquote>
-<p>引用一个名为OLD的虚拟表，访问被删除的行</p>
-</blockquote>
-<blockquote>
-<p>OLD中的值全都是只读的，不能更新。</p>
-</blockquote>
-<blockquote>
-<p>使用BEFORE DELETE触发器的优点（相对于AFTER DELETE触发器来说）为，如果由于某种原因，订单不能存档，DELETE本身将被放弃</p>
-</blockquote>
-<blockquote>
-<p>使用BEGIN END块的好处是触发器能容纳多条SQL语句（在BEGIN END块中一条挨着一条）</p>
-</blockquote>
-<blockquote>
-<p>引用一个名为OLD的虚拟表访问以前（UPDATE语句前）的值，引用一个名为NEW的虚拟表访问新更新的值</p>
-</blockquote>
+<h2 id="第25章-使用触发器"><a href="#第25章-使用触发器" class="headerlink" title="第25章 使用触发器"></a>第25章 使用触发器</h2><h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><p><strong>MySQL语句在需要时被执行，存储过程也是如此</strong>。但是，如果你<strong>想要某条语句（或某些语句）在事件发生时自动执行</strong>，怎么办呢？例如：</p>
+<ol>
+<li><strong>每当增加一个</strong>顾客到某个数据库表时，都检查其电话号码格式是否正确，州的缩写是否为大写；</li>
+<li><strong>每当订购一个</strong>产品时，都从库存数量中减去订购的数量；</li>
+<li>无论何时<strong>删除一行</strong>，都在某个存档表中保留一个副本。</li>
+</ol>
+<p>这些例子的共同之处在于<strong>它们都需要在某个表发生更改时自动处理</strong>，<strong>触发器就是提供这样功能</strong>的工具。触发器是MySQL<strong>响应DELETE/INSERT/UPDATE语句</strong>而自动执行的<strong>一条</strong>（或<strong>位于BEGIN和END语句之间的一组语句</strong>）MySQL语句。<strong>其他MySQL语句不支持触发器</strong>。</p>
+<hr>
+<h3 id="创建触发器"><a href="#创建触发器" class="headerlink" title="创建触发器"></a>创建触发器</h3><p>在创建触发器时，需要给出4条信息：</p>
+<ol>
+<li>唯一的<strong>触发器名</strong>；</li>
+<li>触发器<strong>关联的表</strong>；</li>
+<li>触发器应该<strong>响应的活动</strong>（<strong>DELETE、INSERT或UPDATE</strong>）；</li>
+<li>触发器<strong>何时执行</strong>（<strong>处理之前或之后</strong>）</li>
+</ol>
+<p><strong>保持每个数据库的触发器名唯一</strong></p>
+<p>​    在MySQL 5中，触发器名必须在<strong>每个表中唯一</strong>，<strong>但不是在每个数据库中唯一</strong>。<strong>这在其他每个数据库触发器名必须唯一的DBMS中是不允许的，</strong>而且以后的MySQL版本很可能会使命名规则更为严格。因此，现在最好是在数据库范围内使用唯一的触发器名。</p>
+<p>触发器用<strong>CREATE TRIGGER语句</strong>创建：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> newproduct </span><br><span class="line"><span class="keyword">AFTER</span> <span class="keyword">INSERT</span> <span class="keyword">ON</span> products</span><br><span class="line"><span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span> </span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">'Product added'</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>只有表才支持触发器</strong>，<strong>视图</strong>和<strong>临时表都不支持触发器</strong>。</li>
+<li>触发器<strong>按每个表每个事件每次地定义，每个表每个事件每次只允许一个触发器</strong>。因此，每个表最多支持6个触发器（每条INSERT、UPDATE和DELETE的之前和之后）。</li>
+<li>如果<strong>BEFORE触发器失败</strong>，则MySQL<strong>将不执行请求的操作</strong>。此外，如果<strong>BEFORE触发器或语句本身失败</strong>，MySQL<strong>将不执行AFTER触发器</strong>（如果有的话）。</li>
+</ul>
+<hr>
+<h3 id="删除触发器"><a href="#删除触发器" class="headerlink" title="删除触发器"></a>删除触发器</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> newproduct;</span><br></pre></td></tr></table></figure>
+<p>触发器<strong>不能更新或覆盖</strong>，<strong>为了修改一个触发器，必须先删除它，然后再重新创建</strong>。</p>
+<hr>
+<h3 id="使用触发器"><a href="#使用触发器" class="headerlink" title="使用触发器"></a>使用触发器</h3><h4 id="INSERT触发器"><a href="#INSERT触发器" class="headerlink" title="INSERT触发器"></a>INSERT触发器</h4><p>INSERT触发器在INSERT语句执行之前或之后执行。需要知道以下几点：</p>
+<ol>
+<li>在INSERT<strong>触发器代码内</strong>，可<strong>引用一个名为NEW的虚拟表</strong>，<strong>访问被插入的行</strong>；</li>
+<li>在<strong>BEFORE</strong> INSERT触发器中，<strong>NEW中的值也可以被更新</strong>（允许更改被插入的值）；</li>
+<li>对于<strong>AUTO_INCREMENT列</strong>，<strong>NEW在INSERT执行之前包含0</strong>，在INSERT执行之后包含新的自动生成值。</li>
+</ol>
+<p><strong>AUTO_INCREMENT列</strong>具有MySQL自动赋予的值。第21章建议了几种<strong>确定新生成值</strong>的方法，但下面是一种更好的方法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> neworder</span><br><span class="line"><span class="keyword">AFTER</span> <span class="keyword">INSERT</span> <span class="keyword">ON</span> orders</span><br><span class="line"><span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span> </span><br><span class="line"><span class="keyword">SELECT</span> NEW.order_num; <span class="comment">-- 引用一个名为NEW的虚拟表，访问被插入的行</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>在插入一个新订单到orders表时，<strong>MySQL生成一个新订单号并保存到order_num中</strong>。触发器<strong>从NEW. order_num取得这个值并返回它</strong>。<strong>此触发器必须按照AFTER INSERT执行，因为在BEFORE INSERT语句执行之前，新order_num还没有生成</strong>。对于orders的每次插入使用这个触发器将总是返回新的订单号。</li>
+</ul>
+<p>通常，<strong>将BEFORE用于数据验证和净化</strong>（目的是保证插入表中的数据确实是需要的数据，对于UPDATE触发器也适用）。</p>
+<hr>
+<h4 id="DELETE触发器"><a href="#DELETE触发器" class="headerlink" title="DELETE触发器"></a>DELETE触发器</h4><ul>
+<li>在DELETE触发器代码内，<strong>可以引用一个名为OLD的虚拟表</strong>，<strong>访问被删除的行</strong></li>
+<li>OLD中的值全都是<strong>只读</strong>的，<strong>不能更新</strong></li>
+</ul>
+<p>下面的例子演示<strong>使用OLD保存将要被删除的行到一个存档表中</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> deleteorder </span><br><span class="line"><span class="keyword">BEFORE</span> <span class="keyword">DELETE</span> <span class="keyword">ON</span> orders</span><br><span class="line"><span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">	<span class="keyword">INSERT</span> <span class="keyword">INTO</span> archive_orders(order_num, order_date, cust_id)</span><br><span class="line">	<span class="keyword">VALUES</span>(OLD.order_num, OLD.order_date, OLD.cust_id);</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在<strong>任意订单被删除前</strong>将执行此触发器。</li>
+<li><p>使用<strong>BEFORE DELETE触发器的优点</strong>（相对于AFTER DELETE触发器来说）为，<strong>如果由于某种原因，订单不能存档，DELETE本身将被放弃</strong>。</p>
+</li>
+<li><p>使用<strong>BEGIN END语句</strong>标记触发器体的好处是<strong>触发器能容纳多条SQL语句</strong>（在BEGIN END块中一条挨着一条）。</p>
+</li>
+</ul>
+<hr>
+<h4 id="UPDATE触发器"><a href="#UPDATE触发器" class="headerlink" title="UPDATE触发器"></a>UPDATE触发器</h4><ul>
+<li>在UPDATE触发器代码中，你<strong>可以引用一个名为OLD的虚拟表访问以前（UPDATE语句前）的值</strong>，<strong>引用一个名为NEW的虚拟表访问新更新的值</strong>；</li>
+<li>在<strong>BEFORE UPDATE触发器中</strong>，<strong>NEW中的值可能也被更新（允许更改将要用于UPDATE语句中的值）</strong>；</li>
+<li><strong>OLD中的值全都是只读的，不能更新</strong>。</li>
+</ul>
+<p>下面的例子<strong>保证州名缩写总是大写</strong>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> updatevendor </span><br><span class="line"><span class="keyword">BEFORE</span> <span class="keyword">UPDATE</span> <span class="keyword">ON</span> vendors</span><br><span class="line"><span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span></span><br><span class="line"><span class="keyword">SET</span> NEW.vend_state = <span class="keyword">Upper</span>(NEW.vend_state);</span><br></pre></td></tr></table></figure>
+<p>显然，任<strong>何数据净化都需要在UPDATE语句之前进行</strong>。</p>
+<hr>
+<h4 id="关于触发器的进一步介绍"><a href="#关于触发器的进一步介绍" class="headerlink" title="关于触发器的进一步介绍"></a>关于触发器的进一步介绍</h4><ol>
+<li>与其他DBMS相比，MySQL 5中支持的触发器相当初级。未来的MySQL版本中有一些改进和增强触发器支持的计划。</li>
+<li><strong>创建</strong>触发器<strong>可能需要特殊的安全访问权限</strong>，但是，<strong>触发器的执行是自动的</strong>。如果INSERT、UPDATE或DELETE语句能够执行，则相关的触发器也能执行。</li>
+<li>应该<strong>用触发器来保证数据的一致性（大小写、格式等）</strong>。在触发器中<strong>执行这种类型的处理的优点是它总是进行这种处理，而且是透明地进行，与客户机应用无关</strong>。</li>
+<li>触发器的一种非常有意义的使用是<strong>创建审计跟踪</strong>。使用触发器，<strong>把更改（如果需要，甚至还有之前和之后的状态）记录到另一个表非常容易</strong>。</li>
+<li>遗憾的是，MySQL<strong>触发器中不支持CALL语句</strong>。这表示<strong>不能从触发器内调用存储过程。所需的存储过程代码需要复制到触发器内</strong>。</li>
+</ol>
+<hr>
 <h2 id="第26章-管理事务处理"><a href="#第26章-管理事务处理" class="headerlink" title="第26章 管理事务处理"></a>第26章 管理事务处理</h2><blockquote>
 <p>事务处理（transaction processing）可以用来维护数据库的完整性，它保证成批的MySQL操作要么完全执行，要么完全不执行。</p>
 </blockquote>
@@ -3635,7 +3689,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第1章-了解SQL"><span class="nav-number">1.</span> <span class="nav-text">第1章 了解SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第2章-MySQL简介"><span class="nav-number">2.</span> <span class="nav-text">第2章 MySQL简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置MySQL环境变量"><span class="nav-number">2.1.</span> <span class="nav-text">配置MySQL环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统一字符集为UTF-8"><span class="nav-number">2.2.</span> <span class="nav-text">统一字符集为UTF-8</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第3章-使用MySQL"><span class="nav-number">3.</span> <span class="nav-text">第3章 使用MySQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第4章-检索数据"><span class="nav-number">4.</span> <span class="nav-text">第4章 检索数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第5章-排序检索数据"><span class="nav-number">5.</span> <span class="nav-text">第5章 排序检索数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第6章-过滤数据"><span class="nav-number">6.</span> <span class="nav-text">第6章 过滤数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第7章-数据过滤"><span class="nav-number">7.</span> <span class="nav-text">第7章 数据过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组合WHERE子句"><span class="nav-number">7.1.</span> <span class="nav-text">组合WHERE子句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#计算次序"><span class="nav-number">7.1.1.</span> <span class="nav-text">计算次序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IN操作符"><span class="nav-number">7.2.</span> <span class="nav-text">IN操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NOT操作符"><span class="nav-number">7.3.</span> <span class="nav-text">NOT操作符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第8章-用通配符进行过滤"><span class="nav-number">8.</span> <span class="nav-text">第8章 用通配符进行过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LIKE操作符"><span class="nav-number">8.1.</span> <span class="nav-text">LIKE操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#百分号-通配符"><span class="nav-number">8.1.1.</span> <span class="nav-text">百分号(%)通配符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下划线-通配符"><span class="nav-number">8.1.2.</span> <span class="nav-text">下划线(_)通配符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用通配符的技巧"><span class="nav-number">8.2.</span> <span class="nav-text">使用通配符的技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第9章-用正则表达式进行搜索"><span class="nav-number">9.</span> <span class="nav-text">第9章 用正则表达式进行搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式介绍"><span class="nav-number">9.1.</span> <span class="nav-text">正则表达式介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用MySQL正则表达式"><span class="nav-number">9.2.</span> <span class="nav-text">使用MySQL正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本字符匹配"><span class="nav-number">9.2.1.</span> <span class="nav-text">基本字符匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进行OR匹配"><span class="nav-number">9.2.2.</span> <span class="nav-text">进行OR匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#匹配几个字符之一"><span class="nav-number">9.2.3.</span> <span class="nav-text">匹配几个字符之一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#匹配范围"><span class="nav-number">9.2.4.</span> <span class="nav-text">匹配范围</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#匹配特殊字符"><span class="nav-number">9.2.5.</span> <span class="nav-text">匹配特殊字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#匹配字符类"><span class="nav-number">9.2.6.</span> <span class="nav-text">匹配字符类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#匹配多个实例"><span class="nav-number">9.2.7.</span> <span class="nav-text">匹配多个实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定位符"><span class="nav-number">9.2.8.</span> <span class="nav-text">定位符</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第10章-创建计算字段"><span class="nav-number">10.</span> <span class="nav-text">第10章 创建计算字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第11章-使用数据处理函数"><span class="nav-number">11.</span> <span class="nav-text">第11章 使用数据处理函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">11.1.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用函数"><span class="nav-number">11.2.</span> <span class="nav-text">使用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#转换数据类型函数"><span class="nav-number">11.2.1.</span> <span class="nav-text">转换数据类型函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文本处理函数"><span class="nav-number">11.2.2.</span> <span class="nav-text">文本处理函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日期和时间处理函数"><span class="nav-number">11.2.3.</span> <span class="nav-text">日期和时间处理函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数值处理函数"><span class="nav-number">11.2.4.</span> <span class="nav-text">数值处理函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IF-表达式"><span class="nav-number">11.2.5.</span> <span class="nav-text">IF 表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IFNULL函数"><span class="nav-number">11.2.6.</span> <span class="nav-text">IFNULL函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开窗函数-窗口函数"><span class="nav-number">11.2.7.</span> <span class="nav-text">开窗函数/窗口函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#窗口函数的作用"><span class="nav-number">11.2.7.1.</span> <span class="nav-text">窗口函数的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#什么是窗口函数"><span class="nav-number">11.2.7.2.</span> <span class="nav-text">什么是窗口函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#专用窗口函数RANK"><span class="nav-number">11.2.7.3.</span> <span class="nav-text">专用窗口函数RANK</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#其他专用窗口函数"><span class="nav-number">11.2.7.4.</span> <span class="nav-text">其他专用窗口函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#聚合函数作为窗口函数"><span class="nav-number">11.2.7.5.</span> <span class="nav-text">聚合函数作为窗口函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注意事项"><span class="nav-number">11.2.7.6.</span> <span class="nav-text">注意事项</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第12章-汇总数据"><span class="nav-number">12.</span> <span class="nav-text">第12章 汇总数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#聚集函数"><span class="nav-number">12.1.</span> <span class="nav-text">聚集函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AVG-函数"><span class="nav-number">12.1.1.</span> <span class="nav-text">AVG()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#COUNT-函数"><span class="nav-number">12.1.2.</span> <span class="nav-text">COUNT()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MAX-函数"><span class="nav-number">12.1.3.</span> <span class="nav-text">MAX()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MIN-函数"><span class="nav-number">12.1.4.</span> <span class="nav-text">MIN()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SUM-函数"><span class="nav-number">12.1.5.</span> <span class="nav-text">SUM()函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚集不同值"><span class="nav-number">12.2.</span> <span class="nav-text">聚集不同值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合聚集函数"><span class="nav-number">12.3.</span> <span class="nav-text">组合聚集函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第13章-分组数据"><span class="nav-number">13.</span> <span class="nav-text">第13章 分组数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据分组"><span class="nav-number">13.1.</span> <span class="nav-text">数据分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建分组"><span class="nav-number">13.2.</span> <span class="nav-text">创建分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤分组"><span class="nav-number">13.3.</span> <span class="nav-text">过滤分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组和排序"><span class="nav-number">13.4.</span> <span class="nav-text">分组和排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT子句顺序"><span class="nav-number">13.5.</span> <span class="nav-text">SELECT子句顺序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第14章-使用子查询"><span class="nav-number">14.</span> <span class="nav-text">第14章 使用子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#子查询"><span class="nav-number">14.1.</span> <span class="nav-text">子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用子查询进行过滤"><span class="nav-number">14.2.</span> <span class="nav-text">利用子查询进行过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作为计算字段使用子查询"><span class="nav-number">14.3.</span> <span class="nav-text">作为计算字段使用子查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第15章-联结表"><span class="nav-number">15.</span> <span class="nav-text">第15章 联结表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第16章-创建高级联结"><span class="nav-number">16.</span> <span class="nav-text">第16章 创建高级联结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自联结"><span class="nav-number">16.1.</span> <span class="nav-text">自联结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自然联结"><span class="nav-number">16.2.</span> <span class="nav-text">自然联结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外部联结"><span class="nav-number">16.3.</span> <span class="nav-text">外部联结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用联结和联结条件"><span class="nav-number">16.4.</span> <span class="nav-text">使用联结和联结条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第17章-组合查询"><span class="nav-number">17.</span> <span class="nav-text">第17章 组合查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组合查询"><span class="nav-number">17.1.</span> <span class="nav-text">组合查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建组合查询"><span class="nav-number">17.2.</span> <span class="nav-text">创建组合查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用UNION"><span class="nav-number">17.2.1.</span> <span class="nav-text">使用UNION</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UNION规则"><span class="nav-number">17.2.2.</span> <span class="nav-text">UNION规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#包含或取消重复的行"><span class="nav-number">17.2.3.</span> <span class="nav-text">包含或取消重复的行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对组合查询结果排序"><span class="nav-number">17.2.4.</span> <span class="nav-text">对组合查询结果排序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">18.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL创建索引"><span class="nav-number">18.1.</span> <span class="nav-text">MySQL创建索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#索引的介绍"><span class="nav-number">18.1.1.</span> <span class="nav-text">索引的介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CREATE-INDEX语句"><span class="nav-number">18.1.2.</span> <span class="nav-text">CREATE INDEX语句</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL删除索引"><span class="nav-number">18.2.</span> <span class="nav-text">MySQL删除索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL查询索引信息"><span class="nav-number">18.3.</span> <span class="nav-text">MySQL查询索引信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用唯一索引，避免重复"><span class="nav-number">18.4.</span> <span class="nav-text">使用唯一索引，避免重复</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子"><span class="nav-number">18.4.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的使用场景"><span class="nav-number">18.5.</span> <span class="nav-text">索引的使用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第18章-全文本搜索"><span class="nav-number">19.</span> <span class="nav-text">第18章 全文本搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#理解全文本搜索"><span class="nav-number">19.1.</span> <span class="nav-text">理解全文本搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用全文本搜索"><span class="nav-number">19.2.</span> <span class="nav-text">使用全文本搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启用全文本搜索支持"><span class="nav-number">19.2.1.</span> <span class="nav-text">启用全文本搜索支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进行全文本搜索"><span class="nav-number">19.2.2.</span> <span class="nav-text">进行全文本搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用查询扩展-QUERY-EXPANSION"><span class="nav-number">19.2.3.</span> <span class="nav-text">使用查询扩展(QUERY EXPANSION)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布尔文本搜索"><span class="nav-number">19.2.4.</span> <span class="nav-text">布尔文本搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全文本搜索的使用说明"><span class="nav-number">19.2.5.</span> <span class="nav-text">全文本搜索的使用说明</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL如何提高查询效率"><span class="nav-number">20.</span> <span class="nav-text">SQL如何提高查询效率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-参数是子查询-14章-时，使用-EXISTS-代替-IN"><span class="nav-number">20.1.</span> <span class="nav-text">1. 参数是子查询(14章)时，使用 EXISTS 代替 IN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-避免排序"><span class="nav-number">20.2.</span> <span class="nav-text">2. 避免排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用UNION-ALL代替UNION"><span class="nav-number">20.2.1.</span> <span class="nav-text">使用UNION ALL代替UNION</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用EXISTS代替DISTINCT"><span class="nav-number">20.2.2.</span> <span class="nav-text">使用EXISTS代替DISTINCT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在极值函数-MAX-MIN-中使用索引"><span class="nav-number">20.2.3.</span> <span class="nav-text">在极值函数(MAX/MIN)中使用索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#能写在WHERE子句里的条件不要写在HAVING子句里"><span class="nav-number">20.2.4.</span> <span class="nav-text">能写在WHERE子句里的条件不要写在HAVING子句里</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-真正把索引利用起来"><span class="nav-number">20.3.</span> <span class="nav-text">3. 真正把索引利用起来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#减少中间表"><span class="nav-number">20.4.</span> <span class="nav-text">减少中间表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL语句的查询顺序"><span class="nav-number">21.</span> <span class="nav-text">SQL语句的查询顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CASE语句"><span class="nav-number">22.</span> <span class="nav-text">CASE语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第19章-插入数据"><span class="nav-number">23.</span> <span class="nav-text">第19章 插入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据插入"><span class="nav-number">23.1.</span> <span class="nav-text">数据插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入完整的行"><span class="nav-number">23.2.</span> <span class="nav-text">插入完整的行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入多个行"><span class="nav-number">23.3.</span> <span class="nav-text">插入多个行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入检索出的数据"><span class="nav-number">23.4.</span> <span class="nav-text">插入检索出的数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第20章-更新和删除数据"><span class="nav-number">24.</span> <span class="nav-text">第20章 更新和删除数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#更新数据"><span class="nav-number">24.1.</span> <span class="nav-text">更新数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#用一张表的记录去更新另一张表的记录"><span class="nav-number">24.1.0.1.</span> <span class="nav-text">用一张表的记录去更新另一张表的记录</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除数据"><span class="nav-number">24.2.</span> <span class="nav-text">删除数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新和删除的指导原则"><span class="nav-number">24.3.</span> <span class="nav-text">更新和删除的指导原则</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#第21章-创建和操纵表"><span class="nav-number">25.</span> <span class="nav-text">第21章 创建和操纵表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表"><span class="nav-number">25.1.</span> <span class="nav-text">创建表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表创建基础"><span class="nav-number">25.1.1.</span> <span class="nav-text">表创建基础</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用NULL值"><span class="nav-number">25.1.2.</span> <span class="nav-text">使用NULL值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主键再介绍"><span class="nav-number">25.1.3.</span> <span class="nav-text">主键再介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用AUTO-INCREMENT"><span class="nav-number">25.1.4.</span> <span class="nav-text">使用AUTO_INCREMENT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指定默认值"><span class="nav-number">25.1.5.</span> <span class="nav-text">指定默认值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引擎类型"><span class="nav-number">25.1.6.</span> <span class="nav-text">引擎类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例"><span class="nav-number">25.1.7.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新表"><span class="nav-number">25.2.</span> <span class="nav-text">更新表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除表"><span class="nav-number">25.3.</span> <span class="nav-text">删除表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重命名表"><span class="nav-number">25.4.</span> <span class="nav-text">重命名表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第22章-使用视图"><span class="nav-number">26.</span> <span class="nav-text">第22章 使用视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第23章-使用存储过程"><span class="nav-number">27.</span> <span class="nav-text">第23章 使用存储过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储过程"><span class="nav-number">27.1.</span> <span class="nav-text">存储过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要使用存储过程"><span class="nav-number">27.2.</span> <span class="nav-text">为什么要使用存储过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用存储过程"><span class="nav-number">27.3.</span> <span class="nav-text">使用存储过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#执行存储过程"><span class="nav-number">27.3.1.</span> <span class="nav-text">执行存储过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建存储过程"><span class="nav-number">27.3.2.</span> <span class="nav-text">创建存储过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除存储过程"><span class="nav-number">27.3.3.</span> <span class="nav-text">删除存储过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用参数"><span class="nav-number">27.3.4.</span> <span class="nav-text">使用参数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#例1"><span class="nav-number">27.3.4.1.</span> <span class="nav-text">例1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#例2"><span class="nav-number">27.3.4.2.</span> <span class="nav-text">例2</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#建立智能存储过程"><span class="nav-number">27.3.5.</span> <span class="nav-text">建立智能存储过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#检查存储过程"><span class="nav-number">27.3.6.</span> <span class="nav-text">检查存储过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第24章-使用游标"><span class="nav-number">28.</span> <span class="nav-text">第24章 使用游标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第25章-使用触发器"><span class="nav-number">29.</span> <span class="nav-text">第25章 使用触发器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第26章-管理事务处理"><span class="nav-number">30.</span> <span class="nav-text">第26章 管理事务处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第27章-全球化和本地化"><span class="nav-number">31.</span> <span class="nav-text">第27章 全球化和本地化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第28章-安全管理"><span class="nav-number">32.</span> <span class="nav-text">第28章 安全管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第29章-数据库维护"><span class="nav-number">33.</span> <span class="nav-text">第29章 数据库维护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第30章-改善性能"><span class="nav-number">34.</span> <span class="nav-text">第30章 改善性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录C-MySQL语句的语法"><span class="nav-number">35.</span> <span class="nav-text">附录C MySQL语句的语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录D-MySQL数据类型"><span class="nav-number">36.</span> <span class="nav-text">附录D MySQL数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串数据类型"><span class="nav-number">36.1.</span> <span class="nav-text">字符串数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值数据类型"><span class="nav-number">36.2.</span> <span class="nav-text">数值数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日期和时间数据类型"><span class="nav-number">36.3.</span> <span class="nav-text">日期和时间数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二进制数据类型"><span class="nav-number">36.4.</span> <span class="nav-text">二进制数据类型</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第1章-了解SQL"><span class="nav-number">1.</span> <span class="nav-text">第1章 了解SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第2章-MySQL简介"><span class="nav-number">2.</span> <span class="nav-text">第2章 MySQL简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置MySQL环境变量"><span class="nav-number">2.1.</span> <span class="nav-text">配置MySQL环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统一字符集为UTF-8"><span class="nav-number">2.2.</span> <span class="nav-text">统一字符集为UTF-8</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第3章-使用MySQL"><span class="nav-number">3.</span> <span class="nav-text">第3章 使用MySQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第4章-检索数据"><span class="nav-number">4.</span> <span class="nav-text">第4章 检索数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第5章-排序检索数据"><span class="nav-number">5.</span> <span class="nav-text">第5章 排序检索数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第6章-过滤数据"><span class="nav-number">6.</span> <span class="nav-text">第6章 过滤数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第7章-数据过滤"><span class="nav-number">7.</span> <span class="nav-text">第7章 数据过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组合WHERE子句"><span class="nav-number">7.1.</span> <span class="nav-text">组合WHERE子句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#计算次序"><span class="nav-number">7.1.1.</span> <span class="nav-text">计算次序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IN操作符"><span class="nav-number">7.2.</span> <span class="nav-text">IN操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NOT操作符"><span class="nav-number">7.3.</span> <span class="nav-text">NOT操作符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第8章-用通配符进行过滤"><span class="nav-number">8.</span> <span class="nav-text">第8章 用通配符进行过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LIKE操作符"><span class="nav-number">8.1.</span> <span class="nav-text">LIKE操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#百分号-通配符"><span class="nav-number">8.1.1.</span> <span class="nav-text">百分号(%)通配符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下划线-通配符"><span class="nav-number">8.1.2.</span> <span class="nav-text">下划线(_)通配符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用通配符的技巧"><span class="nav-number">8.2.</span> <span class="nav-text">使用通配符的技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第9章-用正则表达式进行搜索"><span class="nav-number">9.</span> <span class="nav-text">第9章 用正则表达式进行搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式介绍"><span class="nav-number">9.1.</span> <span class="nav-text">正则表达式介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用MySQL正则表达式"><span class="nav-number">9.2.</span> <span class="nav-text">使用MySQL正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本字符匹配"><span class="nav-number">9.2.1.</span> <span class="nav-text">基本字符匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进行OR匹配"><span class="nav-number">9.2.2.</span> <span class="nav-text">进行OR匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#匹配几个字符之一"><span class="nav-number">9.2.3.</span> <span class="nav-text">匹配几个字符之一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#匹配范围"><span class="nav-number">9.2.4.</span> <span class="nav-text">匹配范围</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#匹配特殊字符"><span class="nav-number">9.2.5.</span> <span class="nav-text">匹配特殊字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#匹配字符类"><span class="nav-number">9.2.6.</span> <span class="nav-text">匹配字符类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#匹配多个实例"><span class="nav-number">9.2.7.</span> <span class="nav-text">匹配多个实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定位符"><span class="nav-number">9.2.8.</span> <span class="nav-text">定位符</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第10章-创建计算字段"><span class="nav-number">10.</span> <span class="nav-text">第10章 创建计算字段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算字段"><span class="nav-number">10.1.</span> <span class="nav-text">计算字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拼接字段"><span class="nav-number">10.2.</span> <span class="nav-text">拼接字段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第11章-使用数据处理函数"><span class="nav-number">11.</span> <span class="nav-text">第11章 使用数据处理函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">11.1.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用函数"><span class="nav-number">11.2.</span> <span class="nav-text">使用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#转换数据类型函数"><span class="nav-number">11.2.1.</span> <span class="nav-text">转换数据类型函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文本处理函数"><span class="nav-number">11.2.2.</span> <span class="nav-text">文本处理函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日期和时间处理函数"><span class="nav-number">11.2.3.</span> <span class="nav-text">日期和时间处理函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数值处理函数"><span class="nav-number">11.2.4.</span> <span class="nav-text">数值处理函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IF-表达式"><span class="nav-number">11.2.5.</span> <span class="nav-text">IF 表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IFNULL函数"><span class="nav-number">11.2.6.</span> <span class="nav-text">IFNULL函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开窗函数-窗口函数"><span class="nav-number">11.2.7.</span> <span class="nav-text">开窗函数/窗口函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#窗口函数的作用"><span class="nav-number">11.2.7.1.</span> <span class="nav-text">窗口函数的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#什么是窗口函数"><span class="nav-number">11.2.7.2.</span> <span class="nav-text">什么是窗口函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#专用窗口函数RANK"><span class="nav-number">11.2.7.3.</span> <span class="nav-text">专用窗口函数RANK</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#其他专用窗口函数"><span class="nav-number">11.2.7.4.</span> <span class="nav-text">其他专用窗口函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#聚合函数作为窗口函数"><span class="nav-number">11.2.7.5.</span> <span class="nav-text">聚合函数作为窗口函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注意事项"><span class="nav-number">11.2.7.6.</span> <span class="nav-text">注意事项</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第12章-汇总数据"><span class="nav-number">12.</span> <span class="nav-text">第12章 汇总数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#聚集函数"><span class="nav-number">12.1.</span> <span class="nav-text">聚集函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AVG-函数"><span class="nav-number">12.1.1.</span> <span class="nav-text">AVG()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#COUNT-函数"><span class="nav-number">12.1.2.</span> <span class="nav-text">COUNT()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MAX-函数"><span class="nav-number">12.1.3.</span> <span class="nav-text">MAX()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MIN-函数"><span class="nav-number">12.1.4.</span> <span class="nav-text">MIN()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SUM-函数"><span class="nav-number">12.1.5.</span> <span class="nav-text">SUM()函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚集不同值"><span class="nav-number">12.2.</span> <span class="nav-text">聚集不同值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合聚集函数"><span class="nav-number">12.3.</span> <span class="nav-text">组合聚集函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第13章-分组数据"><span class="nav-number">13.</span> <span class="nav-text">第13章 分组数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据分组"><span class="nav-number">13.1.</span> <span class="nav-text">数据分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建分组"><span class="nav-number">13.2.</span> <span class="nav-text">创建分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤分组"><span class="nav-number">13.3.</span> <span class="nav-text">过滤分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组和排序"><span class="nav-number">13.4.</span> <span class="nav-text">分组和排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT子句顺序"><span class="nav-number">13.5.</span> <span class="nav-text">SELECT子句顺序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第14章-使用子查询"><span class="nav-number">14.</span> <span class="nav-text">第14章 使用子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#子查询"><span class="nav-number">14.1.</span> <span class="nav-text">子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用子查询进行过滤"><span class="nav-number">14.2.</span> <span class="nav-text">利用子查询进行过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作为计算字段使用子查询"><span class="nav-number">14.3.</span> <span class="nav-text">作为计算字段使用子查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第15章-联结表"><span class="nav-number">15.</span> <span class="nav-text">第15章 联结表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#联结"><span class="nav-number">15.1.</span> <span class="nav-text">联结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关系表"><span class="nav-number">15.1.1.</span> <span class="nav-text">关系表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要使用联结"><span class="nav-number">15.1.2.</span> <span class="nav-text">为什么要使用联结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建联结"><span class="nav-number">15.2.</span> <span class="nav-text">创建联结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#WHERE子句的重要性"><span class="nav-number">15.2.1.</span> <span class="nav-text">WHERE子句的重要性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内部联结"><span class="nav-number">15.2.2.</span> <span class="nav-text">内部联结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#联结多个表"><span class="nav-number">15.2.3.</span> <span class="nav-text">联结多个表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第16章-创建高级联结"><span class="nav-number">16.</span> <span class="nav-text">第16章 创建高级联结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自联结"><span class="nav-number">16.1.</span> <span class="nav-text">自联结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自然联结"><span class="nav-number">16.2.</span> <span class="nav-text">自然联结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外部联结"><span class="nav-number">16.3.</span> <span class="nav-text">外部联结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用联结和联结条件"><span class="nav-number">16.4.</span> <span class="nav-text">使用联结和联结条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第17章-组合查询"><span class="nav-number">17.</span> <span class="nav-text">第17章 组合查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组合查询"><span class="nav-number">17.1.</span> <span class="nav-text">组合查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建组合查询"><span class="nav-number">17.2.</span> <span class="nav-text">创建组合查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用UNION"><span class="nav-number">17.2.1.</span> <span class="nav-text">使用UNION</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UNION规则"><span class="nav-number">17.2.2.</span> <span class="nav-text">UNION规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#包含或取消重复的行"><span class="nav-number">17.2.3.</span> <span class="nav-text">包含或取消重复的行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对组合查询结果排序"><span class="nav-number">17.2.4.</span> <span class="nav-text">对组合查询结果排序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">18.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL创建索引"><span class="nav-number">18.1.</span> <span class="nav-text">MySQL创建索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#索引的介绍"><span class="nav-number">18.1.1.</span> <span class="nav-text">索引的介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CREATE-INDEX语句"><span class="nav-number">18.1.2.</span> <span class="nav-text">CREATE INDEX语句</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL删除索引"><span class="nav-number">18.2.</span> <span class="nav-text">MySQL删除索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL查询索引信息"><span class="nav-number">18.3.</span> <span class="nav-text">MySQL查询索引信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用唯一索引，避免重复"><span class="nav-number">18.4.</span> <span class="nav-text">使用唯一索引，避免重复</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子"><span class="nav-number">18.4.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的使用场景"><span class="nav-number">18.5.</span> <span class="nav-text">索引的使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#强制索引"><span class="nav-number">18.6.</span> <span class="nav-text">强制索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第18章-全文本搜索"><span class="nav-number">19.</span> <span class="nav-text">第18章 全文本搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#理解全文本搜索"><span class="nav-number">19.1.</span> <span class="nav-text">理解全文本搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用全文本搜索"><span class="nav-number">19.2.</span> <span class="nav-text">使用全文本搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启用全文本搜索支持"><span class="nav-number">19.2.1.</span> <span class="nav-text">启用全文本搜索支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进行全文本搜索"><span class="nav-number">19.2.2.</span> <span class="nav-text">进行全文本搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用查询扩展-QUERY-EXPANSION"><span class="nav-number">19.2.3.</span> <span class="nav-text">使用查询扩展(QUERY EXPANSION)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布尔文本搜索"><span class="nav-number">19.2.4.</span> <span class="nav-text">布尔文本搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全文本搜索的使用说明"><span class="nav-number">19.2.5.</span> <span class="nav-text">全文本搜索的使用说明</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL如何提高查询效率"><span class="nav-number">20.</span> <span class="nav-text">SQL如何提高查询效率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-参数是子查询-14章-时，使用-EXISTS-代替-IN"><span class="nav-number">20.1.</span> <span class="nav-text">1. 参数是子查询(14章)时，使用 EXISTS 代替 IN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-避免排序"><span class="nav-number">20.2.</span> <span class="nav-text">2. 避免排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用UNION-ALL代替UNION"><span class="nav-number">20.2.1.</span> <span class="nav-text">使用UNION ALL代替UNION</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用EXISTS代替DISTINCT"><span class="nav-number">20.2.2.</span> <span class="nav-text">使用EXISTS代替DISTINCT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在极值函数-MAX-MIN-中使用索引"><span class="nav-number">20.2.3.</span> <span class="nav-text">在极值函数(MAX/MIN)中使用索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#能写在WHERE子句里的条件不要写在HAVING子句里"><span class="nav-number">20.2.4.</span> <span class="nav-text">能写在WHERE子句里的条件不要写在HAVING子句里</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-真正把索引利用起来"><span class="nav-number">20.3.</span> <span class="nav-text">3. 真正把索引利用起来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#减少中间表"><span class="nav-number">20.4.</span> <span class="nav-text">减少中间表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL语句的查询顺序"><span class="nav-number">21.</span> <span class="nav-text">SQL语句的查询顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CASE语句"><span class="nav-number">22.</span> <span class="nav-text">CASE语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第19章-插入数据"><span class="nav-number">23.</span> <span class="nav-text">第19章 插入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据插入"><span class="nav-number">23.1.</span> <span class="nav-text">数据插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入完整的行"><span class="nav-number">23.2.</span> <span class="nav-text">插入完整的行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入多个行"><span class="nav-number">23.3.</span> <span class="nav-text">插入多个行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入检索出的数据"><span class="nav-number">23.4.</span> <span class="nav-text">插入检索出的数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第20章-更新和删除数据"><span class="nav-number">24.</span> <span class="nav-text">第20章 更新和删除数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#更新数据"><span class="nav-number">24.1.</span> <span class="nav-text">更新数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#用一张表的记录去更新另一张表的记录"><span class="nav-number">24.1.0.1.</span> <span class="nav-text">用一张表的记录去更新另一张表的记录</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除数据"><span class="nav-number">24.2.</span> <span class="nav-text">删除数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新和删除的指导原则"><span class="nav-number">24.3.</span> <span class="nav-text">更新和删除的指导原则</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#第21章-创建和操纵表"><span class="nav-number">25.</span> <span class="nav-text">第21章 创建和操纵表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表"><span class="nav-number">25.1.</span> <span class="nav-text">创建表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表创建基础"><span class="nav-number">25.1.1.</span> <span class="nav-text">表创建基础</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用NULL值"><span class="nav-number">25.1.2.</span> <span class="nav-text">使用NULL值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主键再介绍"><span class="nav-number">25.1.3.</span> <span class="nav-text">主键再介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用AUTO-INCREMENT"><span class="nav-number">25.1.4.</span> <span class="nav-text">使用AUTO_INCREMENT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指定默认值"><span class="nav-number">25.1.5.</span> <span class="nav-text">指定默认值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引擎类型"><span class="nav-number">25.1.6.</span> <span class="nav-text">引擎类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例"><span class="nav-number">25.1.7.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新表"><span class="nav-number">25.2.</span> <span class="nav-text">更新表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除表"><span class="nav-number">25.3.</span> <span class="nav-text">删除表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重命名表"><span class="nav-number">25.4.</span> <span class="nav-text">重命名表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方式一"><span class="nav-number">25.4.1.</span> <span class="nav-text">方式一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方式二"><span class="nav-number">25.4.2.</span> <span class="nav-text">方式二</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第22章-使用视图"><span class="nav-number">26.</span> <span class="nav-text">第22章 使用视图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#视图"><span class="nav-number">26.1.</span> <span class="nav-text">视图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么使用视图"><span class="nav-number">26.1.1.</span> <span class="nav-text">为什么使用视图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#视图的规则和限制"><span class="nav-number">26.1.2.</span> <span class="nav-text">视图的规则和限制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用视图"><span class="nav-number">26.2.</span> <span class="nav-text">使用视图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#利用视图简化复杂的联结"><span class="nav-number">26.2.1.</span> <span class="nav-text">利用视图简化复杂的联结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用视图重新格式化检索出的数据"><span class="nav-number">26.2.2.</span> <span class="nav-text">用视图重新格式化检索出的数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用视图过滤不想要的数据"><span class="nav-number">26.2.3.</span> <span class="nav-text">用视图过滤不想要的数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用视图与计算字段"><span class="nav-number">26.2.4.</span> <span class="nav-text">使用视图与计算字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新视图"><span class="nav-number">26.2.5.</span> <span class="nav-text">更新视图</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第23章-使用存储过程"><span class="nav-number">27.</span> <span class="nav-text">第23章 使用存储过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储过程"><span class="nav-number">27.1.</span> <span class="nav-text">存储过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要使用存储过程"><span class="nav-number">27.2.</span> <span class="nav-text">为什么要使用存储过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用存储过程"><span class="nav-number">27.3.</span> <span class="nav-text">使用存储过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#执行存储过程"><span class="nav-number">27.3.1.</span> <span class="nav-text">执行存储过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建存储过程"><span class="nav-number">27.3.2.</span> <span class="nav-text">创建存储过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除存储过程"><span class="nav-number">27.3.3.</span> <span class="nav-text">删除存储过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用参数"><span class="nav-number">27.3.4.</span> <span class="nav-text">使用参数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#例1"><span class="nav-number">27.3.4.1.</span> <span class="nav-text">例1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#例2"><span class="nav-number">27.3.4.2.</span> <span class="nav-text">例2</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#建立智能存储过程"><span class="nav-number">27.3.5.</span> <span class="nav-text">建立智能存储过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#检查存储过程"><span class="nav-number">27.3.6.</span> <span class="nav-text">检查存储过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第24章-使用游标"><span class="nav-number">28.</span> <span class="nav-text">第24章 使用游标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第25章-使用触发器"><span class="nav-number">29.</span> <span class="nav-text">第25章 使用触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#触发器"><span class="nav-number">29.1.</span> <span class="nav-text">触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建触发器"><span class="nav-number">29.2.</span> <span class="nav-text">创建触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除触发器"><span class="nav-number">29.3.</span> <span class="nav-text">删除触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用触发器"><span class="nav-number">29.4.</span> <span class="nav-text">使用触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#INSERT触发器"><span class="nav-number">29.4.1.</span> <span class="nav-text">INSERT触发器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DELETE触发器"><span class="nav-number">29.4.2.</span> <span class="nav-text">DELETE触发器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UPDATE触发器"><span class="nav-number">29.4.3.</span> <span class="nav-text">UPDATE触发器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于触发器的进一步介绍"><span class="nav-number">29.4.4.</span> <span class="nav-text">关于触发器的进一步介绍</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第26章-管理事务处理"><span class="nav-number">30.</span> <span class="nav-text">第26章 管理事务处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第27章-全球化和本地化"><span class="nav-number">31.</span> <span class="nav-text">第27章 全球化和本地化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第28章-安全管理"><span class="nav-number">32.</span> <span class="nav-text">第28章 安全管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第29章-数据库维护"><span class="nav-number">33.</span> <span class="nav-text">第29章 数据库维护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第30章-改善性能"><span class="nav-number">34.</span> <span class="nav-text">第30章 改善性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录C-MySQL语句的语法"><span class="nav-number">35.</span> <span class="nav-text">附录C MySQL语句的语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录D-MySQL数据类型"><span class="nav-number">36.</span> <span class="nav-text">附录D MySQL数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串数据类型"><span class="nav-number">36.1.</span> <span class="nav-text">字符串数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值数据类型"><span class="nav-number">36.2.</span> <span class="nav-text">数值数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日期和时间数据类型"><span class="nav-number">36.3.</span> <span class="nav-text">日期和时间数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二进制数据类型"><span class="nav-number">36.4.</span> <span class="nav-text">二进制数据类型</span></a></li></ol></li></div>
             
 
           </div>
