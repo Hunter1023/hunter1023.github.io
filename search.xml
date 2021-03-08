@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>Java入门及环境搭建</title>
+      <link href="/2021/03/08/Java%E5%85%A5%E9%97%A8%E5%8F%8A%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+      <url>/2021/03/08/Java%E5%85%A5%E9%97%A8%E5%8F%8A%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+      
+        <content type="html"><![CDATA[<h2 id="卸载JDK"><a href="#卸载JDK" class="headerlink" title="卸载JDK"></a>卸载JDK</h2><ol><li>删除Java的安装目录及其下所有文件</li><li>删除<strong>系统环境变量</strong> - JAVA_HOME</li><li>删除<strong>系统环境变量Path</strong>下关于Java的目录</li><li>通过<code>java -version</code>命令，验证是否成功卸载(报错即成功卸载)</li></ol><hr><h2 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h2><ol><li>下载JDK 8</li><li>双击安装JDK</li><li><strong>记住安装的路径</strong></li></ol><h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><ol><li><p>我的电脑 - 右键 - 属性 - 高级系统设置 - 环境变量</p></li><li><p><strong>系统变量</strong> - 新建 </p><ol><li>变量名：<code>JAVA_HOME</code></li><li>变量值：<code>C:\Program Files\Java\jdk1.8.0_201</code></li></ol></li><li><p><strong>系统变量</strong> - Path - 编辑 - 新建</p><ul><li>输入<code>%JAVA_HOME%\bin</code>（<code>%%</code>的作用：<strong>引用路径</strong>）</li><li><p>输入<code>%JAVA_HOME%\jre\bin</code></p><p>确定，保存。</p></li></ul></li><li><p>测试JDK是否安装成功</p><p> 打开命令行，输入<code>java -version</code></p></li></ol><hr><h2 id="Hello-World-及-简单语法规则"><a href="#Hello-World-及-简单语法规则" class="headerlink" title="Hello World 及 简单语法规则"></a>Hello World 及 简单语法规则</h2><ol><li><p>创建一个java文件</p><ul><li>文件后缀名为<code>.java</code></li></ul></li><li><p>编写代码</p> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         System.out.print(<span class="string">"Hello, World!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>编译java文件</p><p> <code>javac xxx.java</code>，会生成一个class文件</p></li><li><p>运行class文件</p><p> <code>java xxx</code>(<strong>不写文件类型后缀</strong>)</p></li></ol><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol><li>Java是严格<strong>区分大小写</strong>的</li><li><strong>文件名</strong>和<strong>类名</strong>必须<strong>保持一致</strong>，并且<strong>首字母大写</strong></li></ol><hr><h2 id="Java程序运行机制"><a href="#Java程序运行机制" class="headerlink" title="Java程序运行机制"></a>Java程序运行机制</h2><p><img src="https://i.loli.net/2021/03/09/uLsJEczonA53mKD.png" alt></p><hr><h2 id="使用IDEA"><a href="#使用IDEA" class="headerlink" title="使用IDEA"></a>使用IDEA</h2><h3 id="什么是IDE"><a href="#什么是IDE" class="headerlink" title="什么是IDE"></a>什么是IDE</h3><p>IDE(Integrated Development Environment，集成开发环境)</p><hr><h3 id="IDEA-使用技巧"><a href="#IDEA-使用技巧" class="headerlink" title="IDEA 使用技巧"></a>IDEA 使用技巧</h3><ol><li><p>快速输入<code>public static void main(String[] args){}</code></p><p> <code>psvm</code> + tab即可</p></li><li><p>快速输入<code>System.out.println();</code></p><p> <code>sout</code> + tab即可</p></li><li><p>谷歌<code>IDEA优化</code>，进行相关操作</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java全栈 </category>
+          
+          <category> JavaSE </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 安装 </tag>
+            
+            <tag> 卸载 </tag>
+            
+            <tag> IDEA </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Outlook邮件管理技巧</title>
       <link href="/2020/10/11/%E9%82%AE%E4%BB%B6%E7%AE%A1%E7%90%86%E6%8A%80%E5%B7%A7/"/>
       <url>/2020/10/11/%E9%82%AE%E4%BB%B6%E7%AE%A1%E7%90%86%E6%8A%80%E5%B7%A7/</url>
@@ -107,9 +142,9 @@
       
         <tags>
             
-            <tag> MySQL </tag>
-            
             <tag> Navicat </tag>
+            
+            <tag> MySQL </tag>
             
         </tags>
       
