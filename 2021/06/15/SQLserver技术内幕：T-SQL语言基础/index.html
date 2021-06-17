@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":true,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-3001225672102099",
+    enable_page_level_ads: true
+  });
+</script>
+
+
+  
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "3a22f8cc"
+    });
+  daovoice('update');
+  </script>
+
+
+
+  <meta name="description" content="T-SQL查询和编程基础数据生命周期联机事务处理 (OLTP，OnLine Transactional Processing)OLTP系统的重点是数据输入，而不是生成报表。主要处理的事务包括插入、更新和删除数据。关系模型的目标主要定位于OLTP系统，一个规范化的模型可以为数据输入和数据一致性提供更好的性能。在规范化的环境中，每个数据表用于表示一个实体，并将数据冗余保持在最低限度。当要修改一个实体事">
+<meta name="keywords" content="SQL Server,T-SQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQLserver技术内幕：T-SQL语言基础">
+<meta property="og:url" content="https://hunter1023.github.io/2021/06/15/SQLserver技术内幕：T-SQL语言基础/index.html">
+<meta property="og:site_name" content="特叔服务">
+<meta property="og:description" content="T-SQL查询和编程基础数据生命周期联机事务处理 (OLTP，OnLine Transactional Processing)OLTP系统的重点是数据输入，而不是生成报表。主要处理的事务包括插入、更新和删除数据。关系模型的目标主要定位于OLTP系统，一个规范化的模型可以为数据输入和数据一致性提供更好的性能。在规范化的环境中，每个数据表用于表示一个实体，并将数据冗余保持在最低限度。当要修改一个实体事">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2021/06/16/VYkyw7CdstlTjUq.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/17/MQ5EuVK2q4ZPhms.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/17/Ddl54MWCvLm6tsB.png">
+<meta property="og:updated_time" content="2021-06-17T14:08:14.717Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQLserver技术内幕：T-SQL语言基础">
+<meta name="twitter:description" content="T-SQL查询和编程基础数据生命周期联机事务处理 (OLTP，OnLine Transactional Processing)OLTP系统的重点是数据输入，而不是生成报表。主要处理的事务包括插入、更新和删除数据。关系模型的目标主要定位于OLTP系统，一个规范化的模型可以为数据输入和数据一致性提供更好的性能。在规范化的环境中，每个数据表用于表示一个实体，并将数据冗余保持在最低限度。当要修改一个实体事">
+<meta name="twitter:image" content="https://i.loli.net/2021/06/16/VYkyw7CdstlTjUq.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://hunter1023.github.io/2021/06/15/SQLserver技术内幕：T-SQL语言基础/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>SQLserver技术内幕：T-SQL语言基础 | 特叔服务</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-121247993-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">特叔服务</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hunter1023.github.io/2021/06/15/SQLserver技术内幕：T-SQL语言基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hunter">
+      <meta itemprop="description" content="Tough times never last, but tough people do.">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="特叔服务">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQLserver技术内幕：T-SQL语言基础
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+			
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-06-15 08:38:03" itemprop="dateCreated datePublished" datetime="2021-06-15T08:38:03+08:00">2021-06-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-17 22:08:14" itemprop="dateModified" datetime="2021-06-17T22:08:14+08:00">2021-06-17</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2021/06/15/SQLserver技术内幕：T-SQL语言基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/06/15/SQLserver技术内幕：T-SQL语言基础/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="T-SQL查询和编程基础"><a href="#T-SQL查询和编程基础" class="headerlink" title="T-SQL查询和编程基础"></a>T-SQL查询和编程基础</h2><h3 id="数据生命周期"><a href="#数据生命周期" class="headerlink" title="数据生命周期"></a>数据生命周期</h3><h4 id="联机事务处理-OLTP，OnLine-Transactional-Processing"><a href="#联机事务处理-OLTP，OnLine-Transactional-Processing" class="headerlink" title="联机事务处理 (OLTP，OnLine Transactional Processing)"></a>联机事务处理 (OLTP，OnLine Transactional Processing)</h4><p>OLTP系统的<strong>重点</strong>是<strong>数据输入</strong>，而不是生成报表。主要处理的事务包括插入、更新和删除数据。关系模型的目标主要定位于OLTP系统，一个规范化的模型可以为数据输入和数据一致性提供更好的性能。在<strong>规范化</strong>的环境中，<strong>每个数据表用于表示一个实体，并将数据冗余保持在最低限度</strong>。当要修改一个实体事实时，只要在一个地方进行修改，使修改操作得以优化，同时也减少了发生错误的机会。</p>
+<p>但<strong>OLTP环境不适合生成报表</strong>，因为规范化的数据模型通常涉及许多表，表间关系非常复杂，导致查询复杂、性能低下。</p>
+<hr>
+<h4 id="数据仓库-Data-Warehouse"><a href="#数据仓库-Data-Warehouse" class="headerlink" title="数据仓库 (Data Warehouse)"></a>数据仓库 (Data Warehouse)</h4><p>数据仓库是专门针对<strong>数据检索</strong>和<strong>生成报表</strong>而设计的环境。当这样的环境服务于整个企业，就称之为数据仓库。主要为了支持数据检索，而对数据仓库中的数据模型进行设计和优化。<strong>模型有意保持了一定的冗余，允许通过更少的表和更简单的关系，得到比OLTP环境更加简单和有效的查询</strong>。</p>
+<p>数据仓库最简单的设计是<strong>star schema</strong>，它包括<strong>多个维度表(dimension table)和一个事实表(fact table)</strong>。<strong>每个维度代表一个如何分析数据的主题。</strong></p>
+<p>例如，在处理订单和销售的系统中，可能要按照客户、产品、雇员、时间等不同的维度对数据进行分析。在star schema中，<strong>每个维度实现为一个具有冗余数据的表</strong>。例如，一个产品维度应该实现为一个ProductDim表，而不是规范化的三个表：Products、ProductSubCategories和ProductCategories。如果<strong>规范化一个维度表，生成表示该维度的多个表</strong>，得到的就是所谓的<strong>雪花形维度(snowflake dimension)</strong>，包含雪花形维度的模式就称为<strong>雪花模式(snowflake schema)</strong>。</p>
+<p><strong>事实表存储用户感兴趣的事实和度量(measure)</strong>，比如与维度主键的每个组合相关的数量和值。例如，对于客户、产品、雇员，以及日期的每个组合，在事实表中将有一行相关的数量和值。<strong>数据仓库中的数据通常会预先聚合到某个特定级别的粒度(如日期)</strong>，而<strong>在OLTP环境中的数据通常按照事务级别来记录</strong>。</p>
+<p><strong>ETL（Extract Transform and Load）</strong>：从源系统(OLTP以及其它系统)<strong>抽取</strong>数据，对数据进行<strong>处理</strong>，并将数据<strong>加载到数据仓库</strong>的工具。SQL Server提供了叫做Microsoft SQL Server Intergration Services(<strong>SSIS</strong>)的工具来处理ETL请求。</p>
+<hr>
+<h4 id="联机分析处理技术-OLAP-OnLine-Analytical-Processing"><a href="#联机分析处理技术-OLAP-OnLine-Analytical-Processing" class="headerlink" title="联机分析处理技术(OLAP, OnLine Analytical Processing)"></a>联机分析处理技术(OLAP, OnLine Analytical Processing)</h4><p>OLAP系统支持对聚合后的数据进行<strong>动态的在线分析</strong>，这通常涉及<strong>频繁地请求不同级别的聚合</strong>。后者又必须对数据进行<strong>切片(slicing)</strong>和<strong>切块(dicing)</strong>。如果对于每个这样的请求都要扫描和聚合大量数据，代价高，响应时间久，因此<strong>可以预先计算好不同级别的聚合</strong>，如时间维度、产品维度。</p>
+<p>预先计算不同级别聚合的方法：</p>
+<ol>
+<li>在关系数据仓库中计算和存储不同级别的聚合。这需要编写一套复杂的过程来处理聚合的初始化和增量更新。</li>
+<li>适用专门为OLAP需求而设计的特殊产品——Microsoft SQL Server Analysis Services（<strong>SSAS</strong>）。SSAS是<strong>独立于SQL Server服务的一种服务(或引擎)</strong>，它可以<strong>计算不同级别的聚合</strong>，并将其<strong>保存在一种经过优化的多维结构(多维数据集，cube)</strong>中。用于<strong>管理和查询SSAS数据方块</strong>的语言称为<strong>多维表达式</strong>(<strong>MDX, Multidimensional Expressions</strong>)。</li>
+</ol>
+<hr>
+<h4 id="数据挖掘-DM-Data-Mining"><a href="#数据挖掘-DM-Data-Mining" class="headerlink" title="数据挖掘(DM, Data Mining)"></a>数据挖掘(DM, Data Mining)</h4><p>在动态分析处理中，为了找到有用的信息，用户必须<strong>不断地从一种聚合视图定位到另一种视图</strong>(进行<strong>数据切片和切块</strong>)。<strong>数据挖掘算法</strong>可以梳理数据，从中筛选出有用的信息。</p>
+<p><strong>SSAS支持用数据挖掘算法(聚类分析、决策树等)来解决这些需求</strong>。用于<strong>管理和查询数据挖掘模型的语言</strong>是<strong>数据挖掘扩展插件语句</strong>(<strong>DMX, Data Mining Extensions</strong>)。</p>
+<p><img src="https://i.loli.net/2021/06/16/VYkyw7CdstlTjUq.png" alt="数据生命周期"></p>
+<hr>
+<h3 id="SQL-Server体系结构"><a href="#SQL-Server体系结构" class="headerlink" title="SQL Server体系结构"></a>SQL Server体系结构</h3><h4 id="SQL-Server实例"><a href="#SQL-Server实例" class="headerlink" title="SQL Server实例"></a>SQL Server实例</h4><p><strong>SQL Server实例</strong>是指安装的一个<strong>SQL Server数据库引擎/服务</strong>。一台计算机上可以安装多个实例。</p>
+<hr>
+<h4 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h4><p>每个SQL Server实例可以包含多个数据库。安装程序创建的<strong>系统数据库</strong>包括：</p>
+<ol>
+<li><p>master</p>
+<p>保存SQL Server实例范围内的源数据信息、服务器配置、实例中所有数据库的信息，以及初始化信息。</p>
+</li>
+<li><p>model </p>
+<p> model数据库是<strong>创建新数据库的模板</strong>。每个新创建的数据库最初都是model的一个副本(copy)。如果想在所有新创建的数据库中都<strong>包含特定的对象</strong>(比如数据类型)，或者想在所有新创建的数据库中都以特定的方式来配置某些数据库属性，就可以先把这些对象或配置属性放在model数据库中。</p>
+<p> <strong>对model数据库做出的修改不会影响已有的数据库，只影响之后新创建的数据库</strong></p>
+</li>
+<li><p>tempdb</p>
+<p> tempdb数据库是SQL Server<strong>保存临时数据</strong>的地方，包括工作表(work table)、排序空间(sort space)、行版本控制(row versioning)信息等。<strong>SQL Server允许用户创建临时表，其存储位置就是tempdb。</strong></p>
+<p> <strong>每次重新启动SQL Server实例时，会删除这个数据库的内容，并将其重新创建为model的一个副本</strong>。</p>
+</li>
+<li><p>msdb</p>
+<p> msdb是<strong>SQL Server Agent保存其数据</strong>的地方。SQL Server Agent负责<strong>自动化处理</strong>，包括<strong>记录有关作业(job)、计划(schedule)和警报等实体的信息</strong>。SQL Server Agent也是<strong>负责复制</strong>的服务。msdb还用于保存一些有关其他SQL Server功能的信息，例如Database Mail和Service Broker。</p>
+</li>
+</ol>
+<p>可以在<strong>数据库级上定义</strong>一个称为<strong>collation（排序规则）</strong>的属性，由它确定数据库中字符数据使用的排序规则信息（<strong>包括支持的语言、区分大小写和排序顺序</strong>）。如果在创建数据库时不指定collation属性，将使用<strong>实例默认的排序规则</strong>设置。</p>
+<p>如下图，数据库在物理上由<strong>数据文件</strong>和<strong>事务日志文件</strong>组成。当创建数据库时，能够定义每个文件的各种属性，包括<strong>文件名、保存位置</strong>，以及<strong>文件自动扩展的增量</strong>。</p>
+<p>每个数据库必须<strong>至少有一个数据文件和一个日志文件</strong>。</p>
+<ul>
+<li>数据文件(.mdf, .ndf)：保存数据库对象数据；</li>
+<li>日志文件(.ldf, log data file)：保存SQL Server为了<strong>维护事务而需要的信息</strong>；</li>
+</ul>
+<p>SQL Server可以并行写多个数据文件，但<strong>只能顺序写日志文件</strong>，因此<strong>使用多个日志文件也不能提升系统的性能</strong>。多个数据文件在逻辑上按照<strong>文件组（filegroup）的形式</strong>进行分组管理。对象数据可能会保存在<strong>属于目标文件组</strong>的多个文件中。数据库<strong>至少要有一个主文件组</strong>。PRIMARY文件组包含主数据文件（<strong>.mdf</strong>, Master Data File）和数据库的系统目录（catalog），可以选择性地为PRIMARY增加多个辅助数据文件(<strong>.ndf</strong>, secondary data file)。<strong>用户定义的文件组只能包含辅助数据文件</strong>。</p>
+<p>可以<strong>指定默认文件组</strong>，当对象创建语句没有明确指定目标文件组时，就将其创建在默认文件组中。</p>
+<p><img src="https://i.loli.net/2021/06/17/MQ5EuVK2q4ZPhms.png" alt="数据布局"></p>
+<hr>
+<h4 id="架构（Schema）和对象"><a href="#架构（Schema）和对象" class="headerlink" title="架构（Schema）和对象"></a>架构（Schema）和对象</h4><p>如下图所示，一个数据库包含多个架构，每个架构包含多个对象。可以将架构（Schema）看作是<strong>各种对象的容器</strong>，这些对象可以是表（table）、视图（view）、存储过程（store procedure）等。</p>
+<p><img src="https://i.loli.net/2021/06/17/Ddl54MWCvLm6tsB.png" alt="数据库架构和对象"></p>
+<p>可以在架构级别上控制对象的访问权限。</p>
+<p>另外架构也是一个命名空间，用作对象名称的前缀。<strong>如果在引用对象时省略架构名称，SQL Server会自行分析</strong>，导致可能得到的对象不是原本想要的。</p>
+<hr>
+<h3 id="创建表和定义数据完整性"><a href="#创建表和定义数据完整性" class="headerlink" title="创建表和定义数据完整性"></a>创建表和定义数据完整性</h3><p><strong>表属于架构，架构属于数据库</strong>。</p>
+<p>在SQL Server环境中创建一个名为testdb的数据库：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IF DB_ID('testdb') IS NULL</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> testdb;</span><br></pre></td></tr></table></figure>
+<p>DB_ID函数接受一个<strong>数据库名称</strong>作为参数，返回它的<strong>内部数据库ID</strong>，如果<strong>指定的数据库不存在，将返回NULL</strong>。<br>在这个简单的CREATE DATABASE语句中，<strong>采用了默认的文件设置（例如区域和初始大小）</strong>。<strong>在产品环境中，通常应该显式指定所有需要的数据库和文件的设置</strong>。</p>
+<p>上述例子中使用的架构是dbo，在<strong>每个数据库中都会自动创建dbo架构，并作为默认架构</strong>。</p>
+<hr>
+<h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><p>以下代码创建一个名为Employees的表：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">USE</span> testdb;</span><br><span class="line"></span><br><span class="line">IF OBJECT_ID('dbo.Employees', 'U') IS NOT NULL</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> dbo.Employees;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> dbo.Employees</span><br><span class="line">(</span><br><span class="line">	empId		<span class="built_in">INT</span>			<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	firstName	<span class="built_in">VARCHAR</span>(<span class="number">30</span>)	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	lastName 	<span class="built_in">VARCHAR</span>(<span class="number">30</span>)	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	hireDate	<span class="built_in">DATE</span>		<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	mgrid		<span class="built_in">INT</span>			<span class="literal">NULL</span>,</span><br><span class="line">	ssn			<span class="built_in">VARCHAR</span>(<span class="number">20</span>)	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	salary		MONEY		<span class="keyword">NOT</span> <span class="literal">NULL</span>	</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>USE语句将当前的数据库上下文切换为testdb，它能<strong>确保后续操作会在目标数据库中进行</strong>。<br>IF语句调用OBJECT_ID函数，检查当前数据库中是否已经存在Employees表。<strong>OBJECT_ID函数</strong>接受一个<strong>对象名称</strong>和<strong>类型</strong>作为参数，<strong>U代表用户定义的表</strong>。可填写的类型见<a href="https://www.cnblogs.com/nimorl/p/4867422.html" target="_blank" rel="noopener">SQL SERVER 中的 object_id()函数</a>。如果匹配给定参数的对象存在，该函数就返回内部的对象ID，否则返回NULL。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Hunter</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://hunter1023.github.io/2021/06/15/SQLserver技术内幕：T-SQL语言基础/" title="SQLserver技术内幕：T-SQL语言基础">https://hunter1023.github.io/2021/06/15/SQLserver技术内幕：T-SQL语言基础/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQL-Server/" rel="tag"><i class="fa fa-tag"></i> SQL Server</a>
+          
+            <a href="/tags/T-SQL/" rel="tag"><i class="fa fa-tag"></i> T-SQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/04/17/多线程详解/" rel="next" title="多线程详解">
+                <i class="fa fa-chevron-left"></i> 多线程详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/06/17/SSMS不能在一个窗口中打开多个-sql文件/" rel="prev" title="SSMS不能在一个窗口中打开多个.sql文件">
+                SSMS不能在一个窗口中打开多个.sql文件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+				<a href="/">
+				  <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Hunter">
+				</a>
+            
+              <p class="site-author-name" itemprop="name">Hunter</p>
+              <div class="site-description motion-element" itemprop="description">Tough times never last, but tough people do.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#T-SQL查询和编程基础"><span class="nav-number">1.</span> <span class="nav-text">T-SQL查询和编程基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据生命周期"><span class="nav-number">1.1.</span> <span class="nav-text">数据生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#联机事务处理-OLTP，OnLine-Transactional-Processing"><span class="nav-number">1.1.1.</span> <span class="nav-text">联机事务处理 (OLTP，OnLine Transactional Processing)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据仓库-Data-Warehouse"><span class="nav-number">1.1.2.</span> <span class="nav-text">数据仓库 (Data Warehouse)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#联机分析处理技术-OLAP-OnLine-Analytical-Processing"><span class="nav-number">1.1.3.</span> <span class="nav-text">联机分析处理技术(OLAP, OnLine Analytical Processing)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据挖掘-DM-Data-Mining"><span class="nav-number">1.1.4.</span> <span class="nav-text">数据挖掘(DM, Data Mining)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-Server体系结构"><span class="nav-number">1.2.</span> <span class="nav-text">SQL Server体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-Server实例"><span class="nav-number">1.2.1.</span> <span class="nav-text">SQL Server实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库"><span class="nav-number">1.2.2.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#架构（Schema）和对象"><span class="nav-number">1.2.3.</span> <span class="nav-text">架构（Schema）和对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表和定义数据完整性"><span class="nav-number">1.3.</span> <span class="nav-text">创建表和定义数据完整性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建表"><span class="nav-number">1.3.1.</span> <span class="nav-text">创建表</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hunter</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<span id="busuanzi_container_site_uv">
+  本站访问次数：<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+</span>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'bfNJwb6OakQAqcsORwzGDDVj-gzGzoHsz',
+    appKey: 'bSLvxGSfThsJp8vbhiMV4LUd',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<style>
+  .copy-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 20px;
+    color: #333;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+    
+    user-select: none;
+    outline: 0;
+  }
+
+  .highlight-wrap .copy-btn {
+    transition: opacity .3s ease-in-out;
+    opacity: 0;
+    padding: 2px 6px;
+    position: absolute;
+    
+      right: 4px;
+      top: 8px;
+    
+  }
+
+  .highlight-wrap:hover .copy-btn,
+  .highlight-wrap .copy-btn:focus {
+    opacity: 1;
+  }
+
+  .highlight-wrap {
+    position: relative;
+  }
+</style>
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+</body>
+</html>
