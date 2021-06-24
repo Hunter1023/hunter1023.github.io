@@ -156,7 +156,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/06/16/VYkyw7CdstlTjUq.png">
 <meta property="og:image" content="https://i.loli.net/2021/06/17/MQ5EuVK2q4ZPhms.png">
 <meta property="og:image" content="https://i.loli.net/2021/06/17/Ddl54MWCvLm6tsB.png">
-<meta property="og:updated_time" content="2021-06-17T14:08:14.717Z">
+<meta property="og:updated_time" content="2021-06-24T01:50:44.934Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQLserver技术内幕：T-SQL语言基础">
 <meta name="twitter:description" content="T-SQL查询和编程基础数据生命周期联机事务处理 (OLTP，OnLine Transactional Processing)OLTP系统的重点是数据输入，而不是生成报表。主要处理的事务包括插入、更新和删除数据。关系模型的目标主要定位于OLTP系统，一个规范化的模型可以为数据输入和数据一致性提供更好的性能。在规范化的环境中，每个数据表用于表示一个实体，并将数据冗余保持在最低限度。当要修改一个实体事">
@@ -477,7 +477,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-06-17 22:08:14" itemprop="dateModified" datetime="2021-06-17T22:08:14+08:00">2021-06-17</time>
+                <time title="修改时间：2021-06-24 09:50:44" itemprop="dateModified" datetime="2021-06-24T09:50:44+08:00">2021-06-24</time>
               
             
           </span>
@@ -610,8 +610,364 @@
 <p>DB_ID函数接受一个<strong>数据库名称</strong>作为参数，返回它的<strong>内部数据库ID</strong>，如果<strong>指定的数据库不存在，将返回NULL</strong>。<br>在这个简单的CREATE DATABASE语句中，<strong>采用了默认的文件设置（例如区域和初始大小）</strong>。<strong>在产品环境中，通常应该显式指定所有需要的数据库和文件的设置</strong>。</p>
 <p>上述例子中使用的架构是dbo，在<strong>每个数据库中都会自动创建dbo架构，并作为默认架构</strong>。</p>
 <hr>
-<h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><p>以下代码创建一个名为Employees的表：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">USE</span> testdb;</span><br><span class="line"></span><br><span class="line">IF OBJECT_ID('dbo.Employees', 'U') IS NOT NULL</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> dbo.Employees;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> dbo.Employees</span><br><span class="line">(</span><br><span class="line">	empId		<span class="built_in">INT</span>			<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	firstName	<span class="built_in">VARCHAR</span>(<span class="number">30</span>)	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	lastName 	<span class="built_in">VARCHAR</span>(<span class="number">30</span>)	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	hireDate	<span class="built_in">DATE</span>		<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	mgrid		<span class="built_in">INT</span>			<span class="literal">NULL</span>,</span><br><span class="line">	ssn			<span class="built_in">VARCHAR</span>(<span class="number">20</span>)	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	salary		MONEY		<span class="keyword">NOT</span> <span class="literal">NULL</span>	</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
-<p>USE语句将当前的数据库上下文切换为testdb，它能<strong>确保后续操作会在目标数据库中进行</strong>。<br>IF语句调用OBJECT_ID函数，检查当前数据库中是否已经存在Employees表。<strong>OBJECT_ID函数</strong>接受一个<strong>对象名称</strong>和<strong>类型</strong>作为参数，<strong>U代表用户定义的表</strong>。可填写的类型见<a href="https://www.cnblogs.com/nimorl/p/4867422.html" target="_blank" rel="noopener">SQL SERVER 中的 object_id()函数</a>。如果匹配给定参数的对象存在，该函数就返回内部的对象ID，否则返回NULL。</p>
+<h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><p>以下代码创建一个名为Employees的表：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">USE</span> testdb;</span><br><span class="line"></span><br><span class="line">IF OBJECT_ID('dbo.Employees', 'U') IS NOT NULL</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> dbo.Employees;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> dbo.Employees</span><br><span class="line">(</span><br><span class="line">	empId	<span class="built_in">INT</span>	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	firstName	<span class="built_in">VARCHAR</span>(<span class="number">30</span>)	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	lastName	<span class="built_in">VARCHAR</span>(<span class="number">30</span>)	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	hireDate	<span class="built_in">DATE</span>	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	mgrId	<span class="built_in">INT</span>	<span class="literal">NULL</span>, <span class="comment">-- 经理ID，允许有雇员没有经理，如CEO</span></span><br><span class="line">	ssn	<span class="built_in">VARCHAR</span>(<span class="number">20</span>)	<span class="keyword">NOT</span> <span class="literal">NULL</span>, <span class="comment">-- social security number，社会保险号</span></span><br><span class="line">	salary	MONEY	<span class="keyword">NOT</span> <span class="literal">NULL</span>	</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>USE语句将当前的数据库上下文切换为testdb，它能<strong>确保后续操作会在目标数据库中进行</strong>。<br>IF语句调用OBJECT_ID函数，检查当前数据库中是否已经存在Employees表。<strong>OBJECT_ID函数</strong>接受一个<strong>对象名称</strong>和<strong>类型</strong>作为参数，<strong>U代表用户定义的表</strong>。可填写的类型见<a href="https://www.cnblogs.com/nimorl/p/4867422.html" target="_blank" rel="noopener">SQL SERVER 中的 object_id()函数</a>。<strong>如果匹配给定参数的对象存在，该函数就返回内部的对象ID</strong>，否则返回NULL。</p>
+<p>对于表的<strong>每个属性</strong>，需要指定它的属性名称、数据类型和<strong>是否允许NULL值</strong>。如果<strong>不显式指定一个列是否允许NULL值，SQL Server则采用默认值</strong>，<a href="https://baike.baidu.com/item/%E7%BE%8E%E5%9B%BD%E5%9B%BD%E5%AE%B6%E6%A0%87%E5%87%86%E5%AD%A6%E4%BC%9A/1351184?fromtitle=ANSI&amp;fromid=14955#viewPageContent" target="_blank" rel="noopener">ANSI</a>规定<strong>默认为NULL</strong>。<strong>除非有明显的原因必须要支持NULL，各属性最好都定义为NOT NULL</strong>。</p>
+<hr>
+<h4 id="定义数据完整性"><a href="#定义数据完整性" class="headerlink" title="定义数据完整性"></a>定义数据完整性</h4><ul>
+<li><strong>声明式</strong>(declarative)数据完整性：<strong>作为表定义的一部分</strong>而实施的数据完整性。</li>
+<li><strong>过程式</strong>(procedural)数据完整性：<strong>用代码来实施</strong>的数据完整性。</li>
+</ul>
+<p>为属性选择数据类型和是否与允许NULL值，甚至数据模型本身，都是声明式数据完整性约束的例子。当用<strong>CREATE TABLE</strong>语句创建表时，可以同时定义这些约束；或者在表已创建的情况下，用<strong>ALTER TABLE</strong>语句增加这些约束。</p>
+<p><strong>除了DEFAULT约束以外，其他所有约束都可以定义为组合约束</strong>(即基于一个或多个属性的约束)。</p>
+<hr>
+<h5 id="主键约束（Primary-Key-Constraints）"><a href="#主键约束（Primary-Key-Constraints）" class="headerlink" title="主键约束（Primary Key Constraints）"></a>主键约束（Primary Key Constraints）</h5><p>主键约束用于实施<strong>行的唯一约束</strong>，同时<strong>不允许约束属性取NULL值</strong>，表内的<strong>每行数据可以被唯一确定</strong>。<strong>每个表只能定义一个主键</strong>。</p>
+<p>以上述创建的Employees表为例，在empId上定义一个主键约束：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> dbo.Employees</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> PK_Employees</span><br><span class="line">PRIMARY <span class="keyword">KEY</span>(empId);</span><br></pre></td></tr></table></figure>
+<p>为了实施逻辑主键约束的唯一约束，SQL Server<strong>在幕后创建一个唯一索引(unique index)</strong>。也可以<strong>用索引来加速查询的处理，避免对整个表进行不必要的扫描</strong>。</p>
+<hr>
+<h5 id="唯一约束（Unique-Constraints）"><a href="#唯一约束（Unique-Constraints）" class="headerlink" title="唯一约束（Unique Constraints）"></a>唯一约束（Unique Constraints）</h5><p>唯一约束用来<strong>保证数据行的一个列(或一组列)数据的唯一</strong>，可以在数据库中<strong>实现关系模型的替换键（alternate key）</strong>的概念。与主键不同，<strong>同一个表中可以定义多个唯一约束</strong>，唯一约束也<strong>不限于只定义在NOT NULL列上</strong>。SQL Server支持<strong>只允许在唯一约束列中有一个列可以为NULL值</strong>。</p>
+<p>以下代码在Employees表中定义了ssn列上的一个唯一约束：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> dbo.Employees</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> UNQ_Employees_ssn <span class="comment">-- 增加约束</span></span><br><span class="line"><span class="keyword">UNIQUE</span>(ssn);</span><br></pre></td></tr></table></figure>
+<p><strong>和主键约束一样，SQL Server也在幕后为唯一约束创建一个唯一索引</strong>。</p>
+<hr>
+<h5 id="外键约束"><a href="#外键约束" class="headerlink" title="外键约束"></a>外键约束</h5><p>外键约束用于实施<strong>引用完整性</strong>。这种约束在引用表（referencing table）的一组属性上进行定义，并<strong>指向被引用表（referenced table）中的一组候选键（主键或唯一约束）</strong>。<strong>引用表和被引用表可能是同一个表</strong>。外键的目的是为了将外键列允许的值域<strong>限制为被引用列中现有的值</strong>。</p>
+<p>以下代码创建了一个名为Orders的表，其主键定义在orderid列上：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">IF OBJECT_ID('dbo.Orders', 'U') IS NOT NULL</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> dbo.Orders;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> dbo.Orders</span><br><span class="line">(</span><br><span class="line">	orderId	<span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    empId	<span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    custId	<span class="built_in">VARCHAR</span>(<span class="number">10</span>)	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    orderTs	DATETIME	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    qty	<span class="built_in">INT</span>	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    <span class="keyword">CONSTRAINT</span> PK_Orders <span class="comment">-- 定义约束</span></span><br><span class="line">    PRIMARY <span class="keyword">KEY</span>(OrderID)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>接下来在Orders表的empId列上定义一个外键约束，让它指向Employees表的empId列：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> dbo.Orders</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> FK_Orders_Employees</span><br><span class="line"><span class="keyword">FOREIGN</span> <span class="keyword">KEY</span>(empId)</span><br><span class="line"><span class="keyword">REFERENCES</span> dbo.Employees(empId);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>引用表和被引用表可能是同一个表</strong>。</p>
+</blockquote>
+<p>限制Employees表的mgrId列的值域为<strong>同一个表中已存在的那些empId列的值</strong>，可以增加如下外键约束：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> dbo.Employees</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> FK_Employees_Employees</span><br><span class="line"><span class="keyword">FOREIGN</span> <span class="keyword">KEY</span>(mgrId) <span class="comment">-- 依然允许NULL值</span></span><br><span class="line"><span class="keyword">REFERENCES</span> dbo.Employees(empId);</span><br></pre></td></tr></table></figure>
+<p><strong>注意：即使被引用的候选列不存在NULL值，在外键列中也允许NULL值</strong>。</p>
+<p>以上定义的外键，当试图删除或更新<strong>被引用的</strong>相关数据时，<strong>如果在引用表中存在相关的行，则操作不能执行</strong>。这种情况可以通过定义具有<strong>级联操作</strong>的外键来解决，可在外键定义中将<strong>ON DELETE</strong>和<strong>ON UPDATE</strong>选项定义为<strong>CASCADE</strong>、<strong>SET DEFAULT</strong>和<strong>SET NULL</strong>之类的操作。</p>
+<ul>
+<li><strong>CASCADE</strong>：操作被<strong>级联到引用表中相关的列</strong></li>
+<li>SET DEFAULT / SET NULL：将引用表中相关行的外键属性<strong>设置为列的默认值</strong>或<strong>NULL</strong></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> dbo.Employees</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">CONSTRAINT</span> FK_Employees_Employees</span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> dbo.Employees</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> FK_Employees_Employees</span><br><span class="line"><span class="keyword">FOREIGN</span> <span class="keyword">KEY</span>(mgrId) <span class="comment">-- 依然允许NULL值</span></span><br><span class="line"><span class="keyword">REFERENCES</span> dbo.Employees(empId)</span><br><span class="line"><span class="keyword">ON</span> <span class="keyword">DELETE</span> <span class="keyword">CASCADE</span></span><br><span class="line"><span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="keyword">SET</span> <span class="keyword">DEFAULT</span>;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="检查约束（Check）"><a href="#检查约束（Check）" class="headerlink" title="检查约束（Check）"></a>检查约束（Check）</h5><p>检查约束用于定义在表中输入或修改一行数据<strong>之前</strong>必须满足的一个谓词。</p>
+<p>以下的检查约束可以保证Employees表的salary列只支持正数：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> dbo.Employees</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> CHK_Employees_salary</span><br><span class="line"><span class="keyword">CHECK</span>(salary &gt; <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>当谓词计算结果为TRUE或<strong>UNKNOWN</strong>时，RDBMS<strong>接受对数据行的修改</strong>，即<strong>NULL值会被接受</strong>。</p>
+<hr>
+<h5 id="默认约束（Default）"><a href="#默认约束（Default）" class="headerlink" title="默认约束（Default）"></a>默认约束（Default）</h5><p>默认约束与特定的属性关联。当插入一行数据时，如果没有为属性显式指定明确的值，就可以<strong>用一个表达式作为其默认值</strong>。</p>
+<p>例如，以下代码为orderTs属性定义了一个默认约束（表示订单时间的时间戳）：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> dbo.Orders</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> DFT_Orders_orderTs</span><br><span class="line"><span class="keyword">DEFAULT</span>(<span class="keyword">CURRENT_TIMESTAMP</span>) <span class="keyword">FOR</span> orderTs;</span><br></pre></td></tr></table></figure>
+<p>CURRENT_TIMESTAMP函数<strong>返回当前的日期和时间值</strong>。</p>
+<hr>
+<h2 id="单表查询"><a href="#单表查询" class="headerlink" title="单表查询"></a>单表查询</h2><p>先执行示例数据库脚本，构建一个示例数据库。</p>
+<hr>
+<h3 id="SELECT-语句的元素"><a href="#SELECT-语句的元素" class="headerlink" title="SELECT 语句的元素"></a>SELECT 语句的元素</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">USE</span> TSQLFundamentals2008;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> empid, <span class="keyword">YEAR</span>(orderdate) <span class="keyword">AS</span> orderYear, <span class="keyword">count</span>(*) <span class="keyword">AS</span> numOrders</span><br><span class="line"><span class="keyword">from</span> Sales.Orders</span><br><span class="line"><span class="keyword">where</span> custid = <span class="number">71</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> empid, <span class="keyword">YEAR</span>(orderdate)</span><br><span class="line"><span class="keyword">having</span> <span class="keyword">count</span>(*) &gt; <span class="number">1</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> empid, orderYear;</span><br></pre></td></tr></table></figure>
+<p>各子句在逻辑上按以下顺序进行处理：</p>
+<ol>
+<li>FROM</li>
+<li>WHERE</li>
+<li>GROUP BY</li>
+<li>HAVING</li>
+<li>SELECT</li>
+<li>ORDER BY</li>
+</ol>
+<p>因此，上述代码<strong>实际的处理顺序</strong>如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from Sales.Orders <span class="comment">-- 查询数据行</span></span><br><span class="line">where custid = 71 <span class="comment">-- 保留客户ID = 71 的记录</span></span><br><span class="line">group by empid, YEAR(orderdate) <span class="comment">-- 按雇员ID和订单年份进行分组</span></span><br><span class="line">having count(*) &gt; 1 -- 保留具有多个订单的分组</span><br><span class="line"><span class="keyword">select</span> empid, <span class="keyword">YEAR</span>(orderdate) <span class="keyword">AS</span> orderYear, <span class="keyword">count</span>(*) <span class="keyword">AS</span> numOrders <span class="comment">-- 返回指定行</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> empid, orderYear <span class="comment">-- 按指定顺序对输出结果进行排序</span></span><br></pre></td></tr></table></figure>
+<p><strong>分隔标识符名称</strong>：</p>
+<p>如果标识符是非常规的（例如名称中<strong>嵌入了空格或其他特殊字符</strong>、<strong>以数字开头</strong>、或是SQL Server的<strong>保留字</strong>），就必须分隔这样的标识符。ANSI SQL分隔标识符的标准格式是<strong>使用双引号（例如，“Order Details”）</strong>。SQL Server的特殊格式是使用方括号（[Order Details]）。</p>
+<hr>
+<h4 id="WHERE子句"><a href="#WHERE子句" class="headerlink" title="WHERE子句"></a>WHERE子句</h4><p>WHERE子句<strong>对查询性能有重要影响</strong>。在过滤表达式的基础上，<strong>SQL Server会计算使用什么索引来访问请求的数据</strong>。通过<strong>使用索引</strong>，<strong>有时可以大幅减少</strong>SQL Server在获取请求的数据时<strong>付出的代价</strong>。</p>
+<p>要实可记住T-SQL使用的是<strong>三值谓词逻辑（TRUE, FALSE, UNKNOWN）</strong>。如果WHERE阶段要返回结果为TRUE的行，UNKNOWN也不会被返回。</p>
+<hr>
+<h4 id="GROUP-BY-子句"><a href="#GROUP-BY-子句" class="headerlink" title="GROUP BY 子句"></a>GROUP BY 子句</h4><p>所有的聚合函数都会忽略NULL值，除了<strong>COUNT(*)</strong>。</p>
+<p>例如，假设一个组有5行，其qty列的值分别为30、10、NULL、10、10。<strong>COUNT(*)返回5，COUNT(qty)返回4</strong>，<strong>COUNT(DISTINCT qty)返回2</strong>；</p>
+<hr>
+<h4 id="SELECT子句"><a href="#SELECT子句" class="headerlink" title="SELECT子句"></a>SELECT子句</h4><p>当表达式中进行了一定的处理（例如，YEAR(orderDate)），或者没有基于原始表的列（如调用CURRENT_TIMESTAMP函数），这时如果不为表达式起一个别名，查询的结果集中就不能拥有列名。<strong>在某些情况下，T-SQL允许查询返回没有名称的结果集列，但关系模型不允许这样。因此强烈推荐将诸如YEAR(orderDate)之类的表达式</strong>起一个别名<strong>。<br>除了<code>&lt;表达式&gt; AS &lt;别名&gt;</code>这种格式，T-SQL还支持<code>&lt;别名&gt; = &lt;表达式&gt;</code>，和<code>&lt;表达式&gt; &lt;别名&gt;</code>这两种格式，</strong>后者非常不明确，避免使用这种定义别名的方式<strong>。<br>由于SELECT字句是在FROM、WHERE、GROUP BY，以及</strong>HAVING子句之后处理<strong>。这意味着</strong>在SELECT子句中为表达式分配的别名，在SELECT子句之前处理的那些子句中并不存在<strong>。<br>以下就是在WHERE子句中使用这种</strong>无效引用**的一个例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> orderId, <span class="keyword">YEAR</span>(orderDate) <span class="keyword">AS</span> orderYear</span><br><span class="line"><span class="keyword">FROM</span> Sales.Orders</span><br><span class="line"><span class="keyword">WHERE</span> orderYear &gt; <span class="number">2006</span>;</span><br></pre></td></tr></table></figure>
+<p>解决这一问题的一种方法就是在WHERE子句和SELECT子句中<strong>重复使用表达式YEAR(orderDate)，SQL Server能够标识在查询中重复使用的同一表达式</strong>，因此，<strong>表达式其实只会被计算一次</strong>。<br>除了很少数的例外，<strong>在绝大多数情况下，使用星号*是一种糟糕的编程习惯</strong>。建议<strong>即使需要被查询表的所有列，也应该显式地指定它们</strong>。虽然使用星号时，为了解析列名需要付出一些额外的代价，但<strong>重要的问题在于查询过程中无法察觉到的代价，前者的代价反而显得微不足道</strong>。<br>在SELECT子句中<strong>不能引用当前SELECT子句中创建的别名列</strong>，例如：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> orderId, <span class="keyword">YEAR</span>(orderDate) <span class="keyword">AS</span> orderYear, orderYear + <span class="number">1</span> <span class="keyword">AS</span> nextYear</span><br><span class="line"><span class="keyword">FROM</span> Sales.Orders;</span><br></pre></td></tr></table></figure></p>
+<p>如前所述，解决这一问题的方法就是<strong>重复使用表达式</strong>（虽然繁琐，但这就是SQL…）。</p>
+<hr>
+<h4 id="ORDER-BY-子句"><a href="#ORDER-BY-子句" class="headerlink" title="ORDER BY 子句"></a>ORDER BY 子句</h4><p><strong>带有ORDER BY 子句的查询</strong>会产生一种ANSI称之为<strong>游标（cursor）的结果</strong>（一种<strong>非关系结果，其中的行有固定的顺序</strong>）。<br>在SQL中的某些语言元素和运算预期<strong>只对查询的表结果进行处理，而不能处理游标</strong>，例如<strong>表表达式</strong>和<strong>集合运算</strong>。</p>
+<p>下例中的查询，按照雇员ID和顶顶那年份对输出结果进行排序：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> empid, <span class="keyword">YEAR</span>(orderDate) <span class="keyword">AS</span> orderYear, <span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> numOrders</span><br><span class="line"><span class="keyword">FROM</span> Sales.Orders</span><br><span class="line"><span class="keyword">WHERE</span> custId = <span class="number">71</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> empid, <span class="keyword">YEAR</span>(orderDate)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> empId, orderYear;</span><br></pre></td></tr></table></figure></p>
+<p>可见，<strong>ORDER BY 子句成功引用了SELECT子句中的别名列</strong>orderYear——可知<strong>ORDER BY子句是在SELECT阶段之后被处理的</strong>。<br>SQL和T-SQL都支持在ORDER BY子句中<strong>指定表示该列名称或别名在SELECT列表中所处位置的非负整数</strong>。<br>上述代码的<code>GROUP BY empId, orderYear</code>也可以写成<code>GROUP BY 1, 2</code>，<strong>但这是一种糟糕的方式</strong>。首先，在关系模型中，属性本身没有顺序位置，要通过名称来引用它们。其次，<strong>当修改SELECT子句时，可能会忘记对ORRDER BY 子句中的引用位置做相应的修改</strong>。<br><strong>T-SQL支持在ORDER BY子句中指定没有在SELECT子句中出现过的元素</strong>，例如，如下查询按照雇佣日期对雇员行进行排序，但最后并没有返回hireDate列：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> empId, firstName, lastName, country</span><br><span class="line"><span class="keyword">FROM</span> HR.Employees</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> hireDate;</span><br></pre></td></tr></table></figure></p>
+<p><strong>当指定了DISTINCT以后，ORDER BY子句就只能选取在SELECT列中出现的元素</strong>。因为当指定DISTINCT时，一个结果行可能代表多个原始行，因此无法判断应该使用ORDER BY列表值中多个可能值中的哪一个。</p>
+<hr>
+<h4 id="TOP选项"><a href="#TOP选项" class="headerlink" title="TOP选项"></a>TOP选项</h4><p>TOP选项是<strong>T-SQL特有</strong>的，用于限制查询返回的<strong>行数</strong>或<strong>百分比</strong>。当在查询中<strong>指定了ORDER BY子句</strong>时，TOP将<strong>依赖该子句来定义行的逻辑优先顺序</strong>。例如，从Orders表返回最近的5个订单的代码如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP (<span class="number">5</span>) orderId, orderDate, custId, empId</span><br><span class="line"><span class="keyword">FROM</span> Sales.Orders</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> orderDate <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure></p>
+<p>从逻辑查询处理的角度来看，TOP选项是<strong>作为SELECT阶段的一部分</strong>而处理，<strong>紧接着DISTINCT子句处理之后</strong>。当查询中指定了TOP以后，ORDER BY子句就起到了<strong>双重作用</strong>。首先，作为SELECT处理阶段一部分的TOP选项要<strong>依靠ORDER BY子句先为各个行定义它们的逻辑优先顺序</strong>，在此基础上再去过滤其他请求。其次，作为SELECT处理阶段之后的ORDER BY阶段，与为了展示数据而行进行排序的ORDER BY子句完全一样。<br>当使用TOP时，同一ORDER BY子句既担当了<strong>为TOP决定行的逻辑优先顺序的角色</strong>，也担当了展示数据的常规角色，最终生成的结果由表变成了具有固定顺序的游标。<br>在TOP选项中可以使用<strong>PERCENT关键字</strong>，SQL Server会<strong>按照百分比</strong>来计算应该返回的满足条件的行数（<strong>向上取整</strong>）。例如，以下查询请求最近更新过的前1%（<strong>向上取整</strong>）个订单：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP (<span class="number">1</span>) <span class="keyword">PERCENT</span> orderId, orderDate, custId, empId</span><br><span class="line"><span class="keyword">FROM</span> Sales.Orders</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> orderDate <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure></p>
+<p>由于orderDate 的<strong>取值不是唯一</strong>的，具有相同订单日期的行之间的优先关系没有定义，<strong>这会让查询结果具有不确定性，多个查询结果都可以认为是正确的。SQL Server只是根据物理上最先访问到了哪行，就选择相应的行。</strong>如果想让查询结果是确定的，就要<strong>让ORDER BY列表能唯一地决定一行</strong>。<br>除了在ORDER BY列表增加额外的属性，还可以请求返回所有<strong>与TOP n行中最后一行具有相同结果的行</strong>，为此必须<strong>增加一个WITH TIES选项</strong>。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP (<span class="number">5</span>) <span class="keyword">WITH</span> <span class="keyword">TIES</span> orderId, orderDate, custId, empId</span><br><span class="line"><span class="keyword">FROM</span> Sales.Orders</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> orderDate <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h4 id="OVER子句"><a href="#OVER子句" class="headerlink" title="OVER子句"></a>OVER子句</h4><p>OVER子句用于<strong>为行定义一个窗口（window），以便进行特定的运算</strong>，可以把行的窗口简单地认为是<strong>运算将要操作的一个行的集合</strong>。<strong>聚合函数</strong>和<strong>排名函数</strong>都是可以支持OVER子句的运算类型，由于OVER子句为这些函数提供了一个行的窗口，所以这些函数也称之为<strong>开窗函数（window function）</strong>。<br>聚合函数传统上一直以GROUP BY查询作为操作的上下文，聚合开窗函数使用OVER子句提供的窗口作为上下文，<strong>对窗口中的一组值进行操作</strong>。这样就能<strong>在不进行分组的情况下，在同一行中同时返回基础行的列和聚合列</strong>。<br>带有空的圆括号的OVER子句会提供<strong>所有行</strong>进行计算，这里的<strong>所有行是在FROM、WHERE、GROUP BY以及HAVING处理阶段完成后仍然可用的行</strong>。注意：<strong>只有在SELECT和ORDER BY处理阶段才允许使用OVER子句</strong>。<br>如果<strong>想对行进行限制或分区，可以使用PARTITION BY子句</strong>。例如，想返回<strong>当前客户</strong>（<strong>和当前行具有相同</strong>custId(某属性)的所有行）的总价格，则可以指定<code>SUM(val) OVER(PARTITION BY custId)</code>。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> orderId, custId, val,</span><br><span class="line">	<span class="keyword">SUM</span>(val) <span class="keyword">OVER</span>() <span class="keyword">AS</span> TTLvalue,</span><br><span class="line">	<span class="keyword">SUM</span>(val) <span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> custId) <span class="keyword">AS</span> custTTLvalue</span><br><span class="line"><span class="keyword">FROM</span> Sales.OrderValues;</span><br></pre></td></tr></table></figure></p>
+<p>OVER子句还可以<strong>在表达式中混合使用基本列和聚合值列</strong>。例如，以下查询为OrderValues的每一行<strong>计算当前价格占总价格的百分比</strong>，以及<strong>当前价格占客户总价格的百分比</strong>：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> orderId, custId, val,</span><br><span class="line">	<span class="number">100.</span> * val / <span class="keyword">SUM</span>(val) <span class="keyword">OVER</span>() <span class="keyword">AS</span> pctAll,</span><br><span class="line">	<span class="number">100.</span> * val / <span class="keyword">SUM</span>(val) <span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> custId) <span class="keyword">AS</span> pctCust</span><br><span class="line"><span class="keyword">FROM</span> Sales.OrderValues;</span><br></pre></td></tr></table></figure></p>
+<p>表达式中使用的是<strong>十进制实数100.</strong>，这样可以<strong>隐式地将整数值val和SUM(val)转换成十进制实数值</strong>。<br>OVER子句也支持四种<strong>排名函数</strong>：</p>
+<ul>
+<li>ROW_NUMBER 行号</li>
+<li>RANK 排名</li>
+<li>DENSE_RANK 密集排名</li>
+<li>NTILE<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> orderId, custId, val,</span><br><span class="line">	ROW_NUMBER() <span class="keyword">OVER</span>(<span class="keyword">ORDER</span> <span class="keyword">BY</span> val) <span class="keyword">AS</span> <span class="keyword">rowNum</span>,</span><br><span class="line">	<span class="keyword">RANK</span>() <span class="keyword">OVER</span>(<span class="keyword">ORDER</span> <span class="keyword">BY</span> val) <span class="keyword">AS</span> <span class="keyword">rank</span>,</span><br><span class="line">	<span class="keyword">DENSE_RANK</span>() <span class="keyword">OVER</span>(<span class="keyword">ORDER</span> <span class="keyword">BY</span> val) <span class="keyword">AS</span> <span class="keyword">dense_rank</span>,</span><br><span class="line">	NTILE(<span class="number">10</span>) <span class="keyword">OVER</span>(<span class="keyword">ORDER</span> <span class="keyword">BY</span> val) <span class="keyword">AS</span> ntile</span><br><span class="line"><span class="keyword">FROM</span> Sales.OrderValues</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> val;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>ROW_NUMBER</strong>函数用于为查询的结果集中的各行<strong>分配递增的序列号</strong>，<strong>即使行的排序值相同，也会生成唯一的行号值，如果ORDER BY不能唯一确定行的顺序，查询可能会返回多个正确的结果</strong>。如果<strong>想对排序值中的相同值以同样的方式处理</strong>，可以考虑使用<strong>RANK或DENSE_RANK函数</strong>。<br>RANK和DENSE_RANK与ROW_NUMBER类似，但它们<strong>为具有相同逻辑排序值的所有行生成同样的排名</strong>。RANK和DENSE_RANK的区别是：RANK表示之前<strong>有多少个具有更低的排序值的行</strong>，而DENSE_RANK则表示之前<strong>有多少个更低的排序值</strong>（这正是该函数被称为<strong>密集</strong>排名的原因）。<br><strong>NTILE</strong>函数可以把结果中的行<strong>关联到组（title，相当于由行组成的</strong>指定数目的组<strong>）</strong>，并为每一行分配一个所属的组的编号。NTILE函数<strong>接受一个表示组的数量的参数，并要在OVER子句中指定逻辑顺序</strong>。上述的查询例子有830行，请求将其分成10组，因此组的大小就是83。<br>NTILE函数在逻辑上需要依赖于ROW_NUMBER函数，整个过程是先根据对val的排序结果，为每一行分配行号；再基于前面计算好的组的大小83行，将第1行到第83行分配到第1组，以此类推。<strong>如果组数无法整除行数，余数会被一一分配到前面的每个组</strong>。例如，<strong>假设有102行，请求分成5组，那么前两组将有21行</strong>。<br><strong>OVER子句中指定的ORDER BY逻辑与数据展示没什么关系，不会改变查询结果表最终的任何内容</strong>。如果在SELECT处理阶段指定了开窗函数，开窗计算会<strong>在DISTINCT子句之前</strong>进行处理（TOP选项是紧接着DISTINCT处理之后）。<br>总结目前位置讨论过的所有子句的逻辑处理顺序：</p>
+<ol>
+<li>FROM</li>
+<li>WHERE</li>
+<li>GROUP BY</li>
+<li>HAVING</li>
+<li>SELECT<ul>
+<li>OVER</li>
+<li>DISTINCT</li>
+<li>TOP</li>
+</ul>
+</li>
+<li>ORDER BY</li>
+</ol>
+<hr>
+<h3 id="谓词和运算符"><a href="#谓词和运算符" class="headerlink" title="谓词和运算符"></a>谓词和运算符</h3><p>T-SQL支持的谓词包括IN、BETWEEN以及LIKE等。</p>
+<ul>
+<li>BETWEEN这个谓词用于检查一个值是否在指定的范围内，<strong>包括两个指定的边界值</strong>。</li>
+<li><p>LIKE这个谓词用于检查一个字符串是否与指定的模式匹配。例如，如下查询返回lastName以字符D开头的所有雇员：</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> empId, firstName, lastName</span><br><span class="line"><span class="keyword">FROM</span> HR.Employees</span><br><span class="line"><span class="keyword">WHERE</span> lastname <span class="keyword">LIKE</span> N<span class="string">'D%'</span>;</span><br></pre></td></tr></table></figure>
+<p>  <strong>字符串’D%’前面的字母N代表National</strong>，用于表示<strong>Unicode</strong>数据类型（NCHAR或NVARCHAR），与之对应的是<strong>常规</strong>的字符数据类型（CHAR或VARCHAR）。<strong>因为lastName字段的数据类型是NVARCHAR(40)，所以就要在字符串前面加个字母N</strong>。</p>
+</li>
+</ul>
+<hr>
+<h3 id="CASE-表达式"><a href="#CASE-表达式" class="headerlink" title="CASE 表达式"></a>CASE 表达式</h3><p>CASE表达式是一个标量<strong>表达式</strong>，它<strong>基于条件逻辑来返回一个值</strong>。CASE表达式不能被用于控制活动的流程，也不能根据条件逻辑来做某些处理。相反，它<strong>只是根据条件逻辑来返回某个值</strong>。因为CASE是一个标量表达式，所以它<strong>支持任何标量表达式</strong>（如SELECT、WHERE、HAVING以及ORDER BY子句）、<strong>CHECK约束</strong>等。</p>
+<p>CASE表达式有两种格式：<strong>简单表达式</strong>和<strong>搜索表达式</strong>。</p>
+<hr>
+<h4 id="简单表达式"><a href="#简单表达式" class="headerlink" title="简单表达式"></a>简单表达式</h4><p>CASE简单格式<strong>将一个值（或一个标量表达式）与一组可能的取值进行比较</strong>，并<strong>返回第一个匹配的结果</strong>。如果列表中没有值等于测试值，CASE表达式就返回其<strong>ELSE子句中列出的值</strong>。<strong>如果没有ELSE子句，则默认将其视为ELSE NULL</strong>。</p>
+<p>例如，以下对Production.Products表的查询就在SELECT子句中使用了CASE表达式，以生成用于描述categoryId列取值的信息：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> productId, productName, categoryId,</span><br><span class="line">	<span class="keyword">CASE</span> categoryId</span><br><span class="line">		<span class="keyword">WHEN</span> <span class="number">1</span> <span class="keyword">THEN</span> <span class="string">'Beverages'</span></span><br><span class="line">		<span class="keyword">WHEN</span> <span class="number">2</span> <span class="keyword">THEN</span> <span class="string">'Condiments'</span></span><br><span class="line">		<span class="keyword">WHEN</span> <span class="number">3</span> <span class="keyword">THEN</span> <span class="string">'Confections'</span></span><br><span class="line">		<span class="keyword">ELSE</span> <span class="string">'Unknown Category'</span></span><br><span class="line">    <span class="keyword">END</span> <span class="keyword">AS</span> CategoryName</span><br><span class="line"><span class="keyword">FROM</span> Production.Products;</span><br></pre></td></tr></table></figure>
+<p>除非商品种类的数量非常少，而且也是静态的，否则最好的设计选择可能是应该在另一个单独的表中来维护商品种类，当需要获取种类描述时，把那个表和Products进行连接join。事实上，TSQLFundamentals2008本身提供了一个这样的Categories表。</p>
+<p>作为CASE简单表达式的另一个演示，以下对Sales.OrderValues视图的查询先根据val的逻辑顺序生成3个组，再把组的编号翻译成组的描述信息（Low、Medium和High）;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> orderId, custId, val,</span><br><span class="line">	<span class="keyword">CASE</span> NTILE(<span class="number">3</span>) <span class="keyword">OVER</span>(<span class="keyword">ORDER</span> <span class="keyword">BY</span> val)</span><br><span class="line">		<span class="keyword">WHEN</span> <span class="number">1</span> <span class="keyword">THEN</span> <span class="string">'Low'</span></span><br><span class="line">		<span class="keyword">WHEN</span> <span class="number">2</span> <span class="keyword">THEN</span> <span class="string">'Medium'</span></span><br><span class="line">		<span class="keyword">WHEN</span> <span class="number">3</span> <span class="keyword">THEN</span> <span class="string">'High'</span></span><br><span class="line">		<span class="keyword">ELSE</span> <span class="string">'Unknown'</span></span><br><span class="line">	<span class="keyword">END</span> <span class="keyword">AS</span> titleDesc</span><br><span class="line"><span class="keyword">FROM</span> Sales.OrderValues</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> val;</span><br></pre></td></tr></table></figure>
+<p>CASE<strong>简单表达式只有一个测试值（或表达式），它紧跟在CASE关键字后面，与WHEN子句中的一组可能值进行比较</strong>。</p>
+<hr>
+<h4 id="搜索表达式"><a href="#搜索表达式" class="headerlink" title="搜索表达式"></a>搜索表达式</h4><p>CASE 搜索表达式<strong>更灵活</strong>，它可以在WHEN子句中<strong>指定谓词或逻辑表达式</strong>，而不限于只进行相等性比较。CASE搜索表达式返回结果为TRUE的第一个WHEN逻辑表达式所关联的THEN子句中指定的值。如果没有任何WHEN表达式结果为TRUE，CASE表达式就返回ELSE子句中出现的值（<strong>如果没有指定ELSE子句，则返回NULL</strong>）。</p>
+<p>例如，以下查询根据商品的价格是否小于1000.00、在1000.00到3000.00之间、或者大于3000.00而生成相应的价格描述：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> orderId, custId, val,</span><br><span class="line">	<span class="keyword">CASE</span> </span><br><span class="line">		<span class="keyword">WHEN</span> val &lt; <span class="number">1000.00</span>	<span class="keyword">THEN</span> <span class="string">'Less then 1000'</span></span><br><span class="line">		<span class="keyword">WHEN</span> val <span class="keyword">BETWEEN</span> <span class="number">1000.00</span> <span class="keyword">AND</span> <span class="number">3000.00</span> <span class="keyword">THEN</span> <span class="string">'Between 1000 and 3000'</span></span><br><span class="line">		<span class="keyword">WHEN</span> val &gt; <span class="number">3000.00</span></span><br><span class="line">		<span class="keyword">ELSE</span> <span class="string">'Unknown'</span></span><br><span class="line">	<span class="keyword">END</span> <span class="keyword">AS</span> valueCategory</span><br><span class="line"><span class="keyword">FROM</span> Sales.OrderValues;</span><br></pre></td></tr></table></figure>
+<p><strong>每个CASE简单表达式都可以转换成CASE搜索表达式，但并非所有情况都有必要使用CASE搜索表达式</strong>。</p>
+<hr>
+<h3 id="NULL值"><a href="#NULL值" class="headerlink" title="NULL值"></a>NULL值</h3><p>如果逻辑表达式只涉及已经存在的值，那么最终的计算结果就是TRUE/FALSE。但是<strong>当逻辑表达式涉及缺少的值时，其计算结果就是UNKNOWN</strong>。例如考虑谓词salary &gt; 0：<strong>当salary是NULL时，表达式的计算结果为UNKNOWN</strong>。</p>
+<p>在不同的语言元素中，SQL对UNKNOWN的处理也有所不同。</p>
+<ul>
+<li>SQL<strong>对查询过滤条件处理</strong>的正确定义是：“接受TRUE”就意味着要<strong>过滤掉FALSE和UNKNOWN</strong>。</li>
+<li>SQL<strong>对CHECK约束处理</strong>的正确定义是：“拒绝FALSE”就意味着<strong>接受TRUE和UNKNOWN</strong>。</li>
+</ul>
+<p>UNKNOWN的一个微妙之处是，<strong>当对它取反时，结果仍然是UNKNOWN</strong>。对两个NULL值进行比较的表达式<code>NULL = NULL</code>，其<strong>计算结果也是UNKNOWN</strong>。因为<strong>NULL值代表一个缺少或不可知的值，所以无法判断</strong>，因此SQL提供了两个谓词：<code>IS NULL</code>和<code>IS NOT NULL</code>来取代<code>= NULL</code>和<code>!= NULL</code>。</p>
+<p>在用于比较和排序目的的不同语言元素中，SQL处理NULL的方式也有所不同。一些元素认为两个NULL值相等，另一些认为不等。</p>
+<p>例如，分组和排序时，认为两个NULL值相等。至于排序时，NULL值应该排在有效值之前还是之后，ANSI SQL把它留给了具体的产品实现。<strong>T-SQL把NULL值排在了有效值之前</strong>。</p>
+<p>ANSI SQL有两种<strong>UNIQUE约束</strong>：</p>
+<ol>
+<li>将多个NULL值视为相等的</li>
+<li>将多个NULL值视为不同的</li>
+</ol>
+<p><strong>SQL Server只实现了前者</strong>。</p>
+<hr>
+<h3 id="同时操作（All-At-Once-Operation）"><a href="#同时操作（All-At-Once-Operation）" class="headerlink" title="同时操作（All-At-Once Operation）"></a>同时操作（All-At-Once Operation）</h3><p>SQL支持一种所谓的<strong>同时操作</strong>的概念，认为<strong>在同一逻辑查询处理阶段中出现的所有表达式都是同时进行计算的</strong>。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> orderId, <span class="keyword">YEAR</span>(orderDate) <span class="keyword">AS</span> orderYear,</span><br><span class="line">	orderYear + <span class="number">1</span> <span class="keyword">AS</span> nextYear</span><br><span class="line"><span class="keyword">FROM</span> Sales.Orders;</span><br></pre></td></tr></table></figure></p>
+<p>以上SELECT列表中<strong>第三个表达式对第二列orderYear这一列别名的引用是无效的</strong>，因为<strong>从逻辑上来说</strong>，SELECT列表中各表达式的计算是没有顺序的，所有表达式都在同一时刻进行计算。<br>再如下方的查询语句：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> col1, col2</span><br><span class="line"><span class="keyword">FROM</span> dbo.T1</span><br><span class="line"><span class="keyword">WHERE</span> col1 != <span class="number">0</span> <span class="keyword">AND</span> col2 / col1 &gt; <span class="number">2</span>;</span><br></pre></td></tr></table></figure></p>
+<p>如果表达式<code>col1 != 0</code>的结果为FALSE，SQL Server将会按照<strong><a href="https://baike.baidu.com/item/%E7%9F%AD%E8%B7%AF%E6%B1%82%E5%80%BC/6428612?fr=aladdin" target="_blank" rel="noopener">短路求值原则（short-circuit）</a></strong>，停止计算这个表达式。<br>因为ANSI SQL中有<strong>同时操作</strong>这一概念，所以<strong>SQL Server可以按它喜欢的任意顺序来自由处理WHERE子句中的表达式</strong>。<strong>SQL Server通常是基于代价估计的标准来做决定，即通常先计算需要付出较小代价的表达式</strong>。为了尽可能避免查询执行失败，可以采用简单的数学办法避免除数为0的错误：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> col1, col2</span><br><span class="line"><span class="keyword">FROM</span> dbo.T1</span><br><span class="line"><span class="keyword">WHERE</span> col1 != <span class="number">0</span> <span class="keyword">and</span> col2 &gt; <span class="number">2</span> * col1;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="处理字符数据"><a href="#处理字符数据" class="headerlink" title="处理字符数据"></a>处理字符数据</h3><h4 id="排序规则（Collation）"><a href="#排序规则（Collation）" class="headerlink" title="排序规则（Collation）"></a>排序规则（Collation）</h4><p>排序规则封装了几个方面的特征，包括多语言支持（和Unicode类型有关）、排序规则、区分大小写、区分重音等。要得到系统中目前支持的所有排序规则及其描述，可以查询表函数<code>fn_helpcollations</code>，如下所示：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, description</span><br><span class="line"><span class="keyword">FROM</span> sys.fn_helpcollations();</span><br></pre></td></tr></table></figure></p>
+<p>例如排序规则Latin1_General_CI_AS：</p>
+<ul>
+<li>Latin1_Genral 表示支持的语言是英语</li>
+<li>排序规则名称中<strong>没有显式地出现BIN元素</strong>，则<strong>默认使用字典排序（不区分大小写）</strong></li>
+<li>CI 表示<strong>不区分大小写</strong>（Case Insensitive）</li>
+<li>AS 表示区分重音（Accent Sensitive）</li>
+</ul>
+<p>可以在4种不同的级别上定义排序规则：</p>
+<ol>
+<li>SQL Server实例</li>
+<li>数据库</li>
+<li>列</li>
+<li>表达式</li>
+</ol>
+<p><strong>最低级的排序规则是比较有效的一种定义方式</strong>。</p>
+<ul>
+<li>SQL Server实例的排序规则是在安装时设置的。它决定了所有系统数据库的排序规则，同时也是用户数据库默认使用的排序规则。</li>
+<li><strong>创建用户数据库</strong>时，可以使用<strong>COLLATE子句</strong>指定数据库的排序规则。数据库的排序规则决定了数据库中<strong>对象元数据的排序规则</strong>，同时也是<strong>用户表列</strong>默认使用的排序规则。<br>  如果数据库的<strong>排序规则区分大小写，则可以同时创建两个列为T1和t1的表</strong> 。</li>
+<li>在<strong>定义列</strong>时，可以使用<strong>COLLATE子句</strong>显式地指定它的排序规则。</li>
+<li>COLLATE子句也可以<strong>修改表达式的排序规则</strong>。<br>  例如，<strong>在不区分大小写的环境中，在查询中使用区分大小写的比较</strong>：  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> empId, firstName, lastName</span><br><span class="line"><span class="keyword">FROM</span> HR.Employees</span><br><span class="line"><span class="keyword">WHERE</span> lastName <span class="keyword">COLLATE</span> Latin1_General_CS_AS = N<span class="string">'davis'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><p>SQL Server支持<strong>两种字符数据类型</strong>：<strong>普通字符</strong>和<strong>Unicode字符</strong>。普通字符数据类型包括CHAR和VARCHAR，Unicode字符数据类型包括NCHAR和NVARCHAR。<strong>普通字符使用一个byte来保存每个字符，Unicode字符需要两个byte</strong>。一个列所支持的语言由<strong>列的有效排序规则（collation）属性决定</strong>。</p>
+<ul>
+<li>在<strong>排序规则为Latin1_General_CS_AS等规则</strong>时：<br>  普通字符类型由于一个列只用一个byte来保存每个字符，所以就<strong>限制在这个列中只能使用英语</strong>。<br>  当使用Unicode字符类型时，<strong>可以表示所有语言</strong>，表示字符常量时，<strong>需要在单引号前指定一个字符N</strong>：<code>N&#39;Unicode字符&#39;</code>。</li>
+<li>在<strong>排序规则为Chinese_PRC_CI_AS等规则</strong>时：<br>  <strong>中文也能直接保存在VARCHAR类型中，且无需通过在单引号前指定一个字符N</strong>。</li>
+</ul>
+<p>名称中不包含VAR元素的任何数据类型都是固定长度的（CHAR, NCAHR），SQL Server会<strong>按照为列定义的大小，在行中为该列留出固定的空间</strong>。因为当需要扩展字符串时，在行中无法进行扩展，所以<strong>固定长度的数据类型更适合以写入为主的系统</strong>。但因为这种类型的<strong>存储消耗不是最优的，所以在读取数据时可能要付出更多的代价</strong>。<br>名称中含有VAR元素的数据类型是可变长度的(VARCHAR, NVARCHAR)，SQL Server在行中会按字符串的实际长度来保存数据，<strong>外加两个额外的字节以保存数据的偏移值（o）</strong>。例如，如果将一个列定义为VARCHAR(25)，意味着它应该<strong>最多支持25个字符</strong>，在实际使用中，<strong>存储空间由实际的字符数量决定</strong>。与固定长度类型相比，<strong>可变长度类型小号的存储空间更少</strong>，所以<strong>读操作</strong>会更快。但是，<strong>更新数据时可能需要对行进行扩展，导致数据移动，超出当前页的范围，因此更新效率有所降低</strong>。<br>在定义可变长度的数据类型时，可以使用<strong>MAX说明符</strong>，而<strong>不必指定字符的最大数量</strong>。当使用MAX说明符（<code>VARCHAR(MAX)</code>）时，可以把一个值直接保存到行的内部，<strong>长度具有一定上限（默认8000字节）</strong>。<strong>大小超过该上限的值将作为大型对象（LOB, Large OBject），保存在行的外部</strong>。</p>
+<hr>
+<p><strong>引号分隔的标识符</strong><br>在标准SQL中，单引号<code>&#39;&#39;</code>用于分隔文字字符串，<strong>如果单引号是文字字符串的一部分，则需要两个单引号表示</strong>。如字符串abc’de，应该写成<code>abc&#39;&#39;de&#39;</code>;</p>
+<p><strong>双引号<code>&quot;&quot;</code></strong>用于分隔<strong>不规则的标识符</strong>（表名或列名包含<strong>空格</strong>或<strong>以数字开头</strong>（Java标识符只能以字母、下划线<code>_</code>、<code>$</code>开头，因此，尽量多语言保持统一））。在SQL Server中，有一个QUOTED_INDENTIFIER的设置选项，用于控制双引号的含义。可以在<strong>数据库级</strong>应用这个设置选项（ALTER DATABASE命令），也可以在会话级应用这个设置选项（SET命令）。当打开这个设置时，双引号的作用符合标准SQL的规定，仅用于分隔标识符。<strong>强烈建议遵循该标准SQL规定</strong>，大多数数据库接口（包括OLEDB和ODBC）都默认将该选项设置为ON。（<strong>SQL Server还支持用方括号<code>[]</code>作为分隔符</strong>）。</p>
+<hr>
+<h4 id="运算符和函数"><a href="#运算符和函数" class="headerlink" title="运算符和函数"></a>运算符和函数</h4><h5 id="字符串串联运算符（加号-）"><a href="#字符串串联运算符（加号-）" class="headerlink" title="字符串串联运算符（加号+）"></a>字符串串联运算符（加号+）</h5><p>T-SQL提供了加号<code>+</code>运算符，可以<strong>将两个或多个字符串合并或串联成一个字符串</strong>。<br>例如，以下对Employees表的查询将雇员的firstName列、一个空格，以及lastName列串联，生成完整的姓名fullName列：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> empId, firstName + N<span class="string">' '</span> + lastName <span class="keyword">AS</span> fullName</span><br><span class="line"><span class="keyword">FROM</span> HR.Employees;</span><br></pre></td></tr></table></figure></p>
+<p>ANSI SQL规定<strong>对NULL值执行字符串串联运算，也会产生NULL值的结果</strong>。<strong>要用空字符串来替换NULL，可以使用COALESCE函数</strong>。<strong>该函数接受一系列参数，返回其中第一个不为NULL的值</strong>。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> custId, country, region, city,</span><br><span class="line">	country + N<span class="string">', '</span> + <span class="keyword">COALESCE</span>(region, N<span class="string">''</span>) + N<span class="string">','</span> + city <span class="keyword">AS</span> location</span><br><span class="line"><span class="keyword">FROM</span> Sales.Customers;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h5 id="SUBSTRING函数"><a href="#SUBSTRING函数" class="headerlink" title="SUBSTRING函数"></a>SUBSTRING函数</h5><p>SUBSTRING函数用于从字符串中提取子串。<br><code>SUBSTRING(string, start, length)</code><br>该函数提取<strong>从指定位置开始，指定长度</strong>的子字符串。例如如下代码返回字符串<code>abc</code>：<br><code>SELECT SUBSTRING(&#39;abcde&#39;, 1, 3);</code></p>
+<p>如果第二个参数和第三个参数的和<strong>超过了输入字符串的长度</strong>，则返回<strong>从起始位置开始直到字符串结尾</strong>的子字符串，不会引发错误。</p>
+<hr>
+<h5 id="LEFT-和-RIGHT-函数"><a href="#LEFT-和-RIGHT-函数" class="headerlink" title="LEFT 和 RIGHT 函数"></a>LEFT 和 RIGHT 函数</h5><p>LEFT 和 RIGHT 函数是<strong>SUBSTRING 函数的简略形式</strong>，它们分别返回字符串中<strong>从左边或右边开始，指定长度</strong>的子字符串。<br><code>LEFT(string, length), RIGHT(string, length)</code><br>例如如下代码返回字符串’cde’：</p>
+<p><code>SELECT RIGHT(&#39;abcde&#39;, 3);</code></p>
+<hr>
+<h5 id="LEN-和-DATALENGTH-函数"><a href="#LEN-和-DATALENGTH-函数" class="headerlink" title="LEN 和 DATALENGTH 函数"></a>LEN 和 DATALENGTH 函数</h5><p>LEN函数返回字符串的长度，该函数返回的是<strong>字符数，而不一定是其字节数</strong>。如果<strong>要得到字节数</strong>，则应该使用DATALENGTH函数。<br>LEN和DATALENGTH函数的另一个区别是：前者<strong>不包含尾随空格（开头或中间的空格都会被计算）</strong>，而后者包含。</p>
+<ul>
+<li>在<strong>排序规则为Chinese_PRC_CI_AS等规则</strong>时，用DATALENGTH函数获取VARCHAR类型的字符数据时，<strong>会根据字符实际属于普通字符还是Unicode字符来返回字节数</strong>。</li>
+</ul>
+<hr>
+<h5 id="CHARINDEX-函数"><a href="#CHARINDEX-函数" class="headerlink" title="CHARINDEX 函数"></a>CHARINDEX 函数</h5><p>CHARINDEX 函数返回<strong>字符串中某个子串第一次出现的起始位置</strong>。<br><code>CHARINDEX(substring, string [, start_pos])</code><br>该函数<strong>在第二个参数中搜索第一个参数，并返回其起始位置</strong>。<strong>可以选择性地指定第三个参数，以便告诉这个函数从字符串的什么位置开始搜索，如果未指定，则从字符串的第一个字符开始搜索</strong>。<br><strong>如果在string中找不到substring，则CHARINDEX返回0</strong>。例如，以下代码在’Itzik Ben-Gan’中查找第一个空格的位置，结果将返回6：</p>
+<p><code>SELECT CHARINDEX(&#39; &#39;, &#39;Itzik Ben-Gan&#39;);</code></p>
+<hr>
+<h5 id="PATINDEX-函数"><a href="#PATINDEX-函数" class="headerlink" title="PATINDEX 函数"></a>PATINDEX 函数</h5><p>PATINDEX函数返回<strong>字符串中某个模式第一次出现的起始位置</strong>。<br><code>PATINDEX(pattern, string)</code><br><strong>参数pattern使用的模式与T-SQL中LIKE谓词使用的模式类似</strong>，目前还没有解释在T-SQL中如何表示模式，先用以下例子演示怎么在字符串中找到<strong>第一次出现数字的位置</strong>：<br><code>SELECT PATINDEX(&#39;%[0-9]%&#39;, &#39;abcd123efgh&#39;);</code></p>
+<p>这段代码返回的结果是5。</p>
+<hr>
+<h5 id="REPLACE-函数"><a href="#REPLACE-函数" class="headerlink" title="REPLACE 函数"></a>REPLACE 函数</h5><p>REPLACE函数将字符串中出现的<strong>所有某个子串替换为另一个字符串</strong>。<br><code>REPLACE(string, substring1, substring2)</code></p>
+<p>可以使用REPLACE函数来<strong>计算字符串中某个字符出现的次数</strong>。为此，先将字符串中所有的那个字符串<strong>替换为空字符串</strong>，再<strong>计算字符串的原始长度和新长度的差值</strong>。例如，以下查询返回每个雇员的lastName列中字符’e’出现的次数：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> empId, lastName,</span><br><span class="line">	<span class="keyword">LEN</span>(lastName) - <span class="keyword">LEN</span>(<span class="keyword">REPLACE</span>(lastName, <span class="string">'e'</span>, <span class="string">''</span>)) <span class="keyword">AS</span> numOccur</span><br><span class="line"><span class="keyword">FROM</span> HR.Employees;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h5 id="REPLICATE-函数"><a href="#REPLICATE-函数" class="headerlink" title="REPLICATE 函数"></a>REPLICATE 函数</h5><p>REPLICATE函数<strong>以指定的次数复制字符串值</strong>。<br><code>REPLICATE(string, n)</code><br>例如，以下代码将字符串’abc’复制3次，返回字符串’abcabcabc’：<br><code>SELECT REPLICATE(&#39;abc&#39;, 3);</code><br>下面这个例子显示了<strong>REPLICATE函数、RIGHT函数和字符串串联的用法</strong>：<br>对Production.Suppliers的查询为每个供应商的整数ID生成一个10位数的字符串表示（**不足10位时，前面补0）：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> supplierId,</span><br><span class="line">	<span class="keyword">RIGHT</span>(<span class="keyword">REPLICATE</span>(<span class="string">'0'</span>, <span class="number">9</span>) + <span class="keyword">CAST</span>(supplierId <span class="keyword">AS</span> <span class="built_in">VARCHAR</span>(<span class="number">10</span>)), <span class="number">10</span>) <span class="keyword">AS</span> strSupplierId</span><br><span class="line"><span class="keyword">FROM</span> Production.Suppliers;</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://blog.csdn.net/slove_cao/article/details/1915971" target="_blank" rel="noopener">CAST 和 CONVERT 函数的区别</a></p>
+<hr>
+<h5 id="STUFF-函数"><a href="#STUFF-函数" class="headerlink" title="STUFF 函数"></a>STUFF 函数</h5><p>STUFF函数可以先<strong>删除字符串中指定长度的子串</strong>，<strong>再插入一个新的字符串</strong>作为替换。<br><code>STUFF(string, pos, delete_length, insertString)</code><br>从参数pos指定的位置开始删除delete_length长度的字符，然后将insertString参数指定的字符串插入到pos指定的位置。例如，以下代码对字符串’xyz’进行处理，删除掉其中的第二个字符，再插入字符串’abc’：<br><code>SELECT STUFF(&#39;xyz&#39;, 2, 1, &#39;abc&#39;);</code></p>
+<p>这段代码的输出是’xabcz’。</p>
+<hr>
+<h5 id="UPPER-和-LOWER-函数"><a href="#UPPER-和-LOWER-函数" class="headerlink" title="UPPER 和 LOWER 函数"></a>UPPER 和 LOWER 函数</h5><h5 id="RTRIM-和-LTRIM-函数"><a href="#RTRIM-和-LTRIM-函数" class="headerlink" title="RTRIM 和 LTRIM 函数"></a>RTRIM 和 LTRIM 函数</h5><p>RTRIM 和 LTRIM 函数用于删除字符串中的<strong>尾随空格</strong>或<strong>前导空格</strong>。</p>
+<p><code>RTRIM(string), LTRIM(string)</code></p>
+<hr>
+<h4 id="LIKE谓词"><a href="#LIKE谓词" class="headerlink" title="LIKE谓词"></a>LIKE谓词</h4><p>T-SQL提供了LIKE谓词，用于<strong>检查字符串是否能够匹配指定的模式</strong>。</p>
+<h5 id="通配符-wildCard"><a href="#通配符-wildCard" class="headerlink" title="通配符 wildCard"></a>通配符 wildCard</h5><ul>
+<li><code>%</code>（百分号）通配符</li>
+<li><code>_</code>（下划线）通配符</li>
+<li><p><strong><code>[&lt;字符列&gt;]</code>通配符</strong><br>  方括号中包含<strong>一列字符</strong>（例如’[ABC]’），表示<strong>必须匹配列指定字符中的一个字符</strong>。<br>  例如，以下查询返回lastName<strong>以字符A、B、C开头的所有雇员</strong>：</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> empId, lastName</span><br><span class="line"><span class="keyword">FROM</span> HR.Employees</span><br><span class="line"><span class="keyword">WHERE</span> lastName <span class="keyword">LIKE</span> N<span class="string">'[ABC]%'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>[&lt;字符&gt;-&lt;字符&gt;]</code>通配符</strong><br>  方括号中包含<strong>一个字符范围</strong>（例如’[A-E]’），表示<strong>必须匹配指定范围内的一个字符</strong>。<br>  例如，以下查询返回lastName<strong>以字符A到E开头的所有雇员</strong>：</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> empId, lastName</span><br><span class="line"><span class="keyword">FROM</span> HR.Employees</span><br><span class="line"><span class="keyword">WHERE</span> lastName <span class="keyword">LIKE</span> N<span class="string">'[A-E]%'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>[^&lt;字符列或范围&gt;]</code>通配符</strong><br>  方括号中包含一个<strong>插入符<code>^</code>，跟着一个字符列或范围</strong>（例如’[^A-E]’），表示<strong>不属于</strong>指定字符列或范围内的任意单个字符。<br>  例如，以下查询返回lastName<strong>不是以字符A到E开头的所有雇员</strong>：</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> empId, lastName</span><br><span class="line"><span class="keyword">FROM</span> HR.Employees</span><br><span class="line"><span class="keyword">WHERE</span> lastName <span class="keyword">LIKE</span> N<span class="string">'[^A-E]%'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>ESCAPE（转义）字符</strong><br>如果想搜索<strong>包含特殊通配符的字符串</strong>（如<code>%</code>、<code>_</code>、<code>[</code>、<code>]</code>），则必须使用<strong>转义字符</strong>。<strong>指定一个确保不会在数据中出现的字符作为转义字符，把它放在待查找的字符串前面，并紧接着模式字符串，在ESCAPE关键字后面指定该转义字符</strong>。例如，要检查一个名为col1的列中<strong>是否包含下划线</strong>，可以使用<code>col1 LIKE &#39;%!_%&#39; ESCAPE &#39;!&#39;</code>。<br>另外，对于<strong>通配符<code>%</code>、<code>_</code>、<code>[</code></strong>，可以把它们<strong>放在方括号内而不必使用转义字符</strong>。例如：<code>col1 LIKE &#39;%[_]%&#39;</code>。</p>
+</li>
+</ul>
+<hr>
+<h3 id="处理日期和时间数据"><a href="#处理日期和时间数据" class="headerlink" title="处理日期和时间数据"></a>处理日期和时间数据</h3><h4 id="日期和时间数据类型"><a href="#日期和时间数据类型" class="headerlink" title="日期和时间数据类型"></a>日期和时间数据类型</h4><p>在SQL Server 2008之前，SQL Server支持两种表示时间的数据类型：<strong>DATETIME 和 SMALLDATETIME。这两种类型都包括了日期和时间组成部分，而且这两部分是不能分开的</strong>。SQL Server 2008引入了单独的DATE和TIME数据类型：</p>
+<ul>
+<li>DATETIME2——比DATETIME具有<strong>更大的日期范围和更好的精度</strong></li>
+<li>DATETIMEOFFSET：具有一个<strong>时区</strong>组成部分</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>存储大小（B）</th>
+<th>日期范围</th>
+<th>准确度</th>
+<th>推荐格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DATETIME</td>
+<td>8</td>
+<td>1753-01-01 到 9999-12-31</td>
+<td>3.33毫秒</td>
+<td>‘YYYYMMDD hh:mm:ss.nnn’</td>
+</tr>
+<tr>
+<td>SMALLDATETIME</td>
+<td>4</td>
+<td>1900-01-01 到 2079-06-06</td>
+<td>1分钟</td>
+<td>‘YYYYMMDD hh:mm’</td>
+</tr>
+<tr>
+<td>DATE</td>
+<td>3</td>
+<td>0001-01-01 到 9999-12-31</td>
+<td>1天</td>
+<td>‘YYYY-MM-DD’</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>3 到 5</td>
+<td>00:00:00.0000000 到 23:59.59.9999999</td>
+<td>100纳秒</td>
+<td>‘hh:mm:ss.nnnnnnn’</td>
+</tr>
+<tr>
+<td>DATETIME2</td>
+<td>6 到 8</td>
+<td>0001-01-01 00:00:00.0000000 到 9999-12-31 23:59:59.9999999</td>
+<td></td>
+<td>100纳秒</td>
+</tr>
+<tr>
+<td>DATETIMEOFFSET</td>
+<td>8 到 10</td>
+<td>0001-01-01 00:00:00.0000000 到 9999-12-31 23:59:59.9999999</td>
+<td>100纳秒</td>
+<td>‘YYYY-MM-DD hh:mm:ss.nnnnnnn [+</td>
+</tr>
+</tbody>
+</table>
+<p>TIME、DATETIME2以及DATETIMEOFFSET的存储空间大小依赖于所选择的精度。可以通过0-7之间的整数来指定精度，分别代表<strong>不同小数位数的秒值的精度</strong>。例如<code>TIME(0)</code>，<strong>SQL Server默认将精度设置为7</strong>。</p>
+<hr>
+<h4 id="字符串文字"><a href="#字符串文字" class="headerlink" title="字符串文字"></a>字符串文字</h4><p><strong>SQL Server并没有提供表达日期和时间字符串的具体方法</strong>，它<strong>允许你指定不同类型的字符串文字，再将其（显式或隐式地）转换为相应的日期和时间数据类型</strong>：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> orderId, custId, empId, orderDate</span><br><span class="line"><span class="keyword">FROM</span> Sales.Orders</span><br><span class="line"><span class="keyword">WHERE</span> orderDate = <span class="string">'20070212'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>隐式转换规则并不总是这么简单，其实<strong>在过滤器条件和其他表达式中应用的规则是不同的</strong>，当前处于讨论的目的，先让事情简单些。<br>强烈建议<strong>按照语言无关的方式</strong>来编写日期和时间字符串文字，这样SQL Server才能以相同的方式加以解释，而不受语言相关设置的影响。</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>语言中立的格式</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DATETIME</td>
+<td>‘YYYYMMDD hh:mm:ss.nnn’ ‘YYYY-MM-DDThh:mm:ss.nnn’ <br>‘YYYYMMDD’</td>
+<td>‘20090212 12:30:15.123’ <br>‘2009-02-12t12:30:15.123’ <br>‘20090212’</td>
+</tr>
+<tr>
+<td>SMALLDATETIME</td>
+<td>‘YYYYMMDD hh:mm’<br>‘YYYY-MM-DDThh:mm’<br>‘YYYYMMDD’</td>
+<td>‘20090212 12:30’ <br>‘2009-02-12T12:30’ <br>‘20090212’</td>
+</tr>
+<tr>
+<td>DATE</td>
+<td>‘YYYYMMDD’<br>‘YYYY-MM-DD’</td>
+<td>‘20090212’<br>‘2009-02-12’</td>
+</tr>
+<tr>
+<td>DATETIME2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -971,7 +1327,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#T-SQL查询和编程基础"><span class="nav-number">1.</span> <span class="nav-text">T-SQL查询和编程基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据生命周期"><span class="nav-number">1.1.</span> <span class="nav-text">数据生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#联机事务处理-OLTP，OnLine-Transactional-Processing"><span class="nav-number">1.1.1.</span> <span class="nav-text">联机事务处理 (OLTP，OnLine Transactional Processing)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据仓库-Data-Warehouse"><span class="nav-number">1.1.2.</span> <span class="nav-text">数据仓库 (Data Warehouse)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#联机分析处理技术-OLAP-OnLine-Analytical-Processing"><span class="nav-number">1.1.3.</span> <span class="nav-text">联机分析处理技术(OLAP, OnLine Analytical Processing)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据挖掘-DM-Data-Mining"><span class="nav-number">1.1.4.</span> <span class="nav-text">数据挖掘(DM, Data Mining)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-Server体系结构"><span class="nav-number">1.2.</span> <span class="nav-text">SQL Server体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-Server实例"><span class="nav-number">1.2.1.</span> <span class="nav-text">SQL Server实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库"><span class="nav-number">1.2.2.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#架构（Schema）和对象"><span class="nav-number">1.2.3.</span> <span class="nav-text">架构（Schema）和对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表和定义数据完整性"><span class="nav-number">1.3.</span> <span class="nav-text">创建表和定义数据完整性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建表"><span class="nav-number">1.3.1.</span> <span class="nav-text">创建表</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#T-SQL查询和编程基础"><span class="nav-number">1.</span> <span class="nav-text">T-SQL查询和编程基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据生命周期"><span class="nav-number">1.1.</span> <span class="nav-text">数据生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#联机事务处理-OLTP，OnLine-Transactional-Processing"><span class="nav-number">1.1.1.</span> <span class="nav-text">联机事务处理 (OLTP，OnLine Transactional Processing)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据仓库-Data-Warehouse"><span class="nav-number">1.1.2.</span> <span class="nav-text">数据仓库 (Data Warehouse)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#联机分析处理技术-OLAP-OnLine-Analytical-Processing"><span class="nav-number">1.1.3.</span> <span class="nav-text">联机分析处理技术(OLAP, OnLine Analytical Processing)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据挖掘-DM-Data-Mining"><span class="nav-number">1.1.4.</span> <span class="nav-text">数据挖掘(DM, Data Mining)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-Server体系结构"><span class="nav-number">1.2.</span> <span class="nav-text">SQL Server体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-Server实例"><span class="nav-number">1.2.1.</span> <span class="nav-text">SQL Server实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库"><span class="nav-number">1.2.2.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#架构（Schema）和对象"><span class="nav-number">1.2.3.</span> <span class="nav-text">架构（Schema）和对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表和定义数据完整性"><span class="nav-number">1.3.</span> <span class="nav-text">创建表和定义数据完整性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建表"><span class="nav-number">1.3.1.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义数据完整性"><span class="nav-number">1.3.2.</span> <span class="nav-text">定义数据完整性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#主键约束（Primary-Key-Constraints）"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">主键约束（Primary Key Constraints）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#唯一约束（Unique-Constraints）"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">唯一约束（Unique Constraints）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#外键约束"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">外键约束</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#检查约束（Check）"><span class="nav-number">1.3.2.4.</span> <span class="nav-text">检查约束（Check）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#默认约束（Default）"><span class="nav-number">1.3.2.5.</span> <span class="nav-text">默认约束（Default）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单表查询"><span class="nav-number">2.</span> <span class="nav-text">单表查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT-语句的元素"><span class="nav-number">2.1.</span> <span class="nav-text">SELECT 语句的元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#WHERE子句"><span class="nav-number">2.1.1.</span> <span class="nav-text">WHERE子句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GROUP-BY-子句"><span class="nav-number">2.1.2.</span> <span class="nav-text">GROUP BY 子句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SELECT子句"><span class="nav-number">2.1.3.</span> <span class="nav-text">SELECT子句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORDER-BY-子句"><span class="nav-number">2.1.4.</span> <span class="nav-text">ORDER BY 子句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TOP选项"><span class="nav-number">2.1.5.</span> <span class="nav-text">TOP选项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OVER子句"><span class="nav-number">2.1.6.</span> <span class="nav-text">OVER子句</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#谓词和运算符"><span class="nav-number">2.2.</span> <span class="nav-text">谓词和运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CASE-表达式"><span class="nav-number">2.3.</span> <span class="nav-text">CASE 表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单表达式"><span class="nav-number">2.3.1.</span> <span class="nav-text">简单表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#搜索表达式"><span class="nav-number">2.3.2.</span> <span class="nav-text">搜索表达式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NULL值"><span class="nav-number">2.4.</span> <span class="nav-text">NULL值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同时操作（All-At-Once-Operation）"><span class="nav-number">2.5.</span> <span class="nav-text">同时操作（All-At-Once Operation）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理字符数据"><span class="nav-number">2.6.</span> <span class="nav-text">处理字符数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#排序规则（Collation）"><span class="nav-number">2.6.1.</span> <span class="nav-text">排序规则（Collation）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据类型"><span class="nav-number">2.6.2.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运算符和函数"><span class="nav-number">2.6.3.</span> <span class="nav-text">运算符和函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#字符串串联运算符（加号-）"><span class="nav-number">2.6.3.1.</span> <span class="nav-text">字符串串联运算符（加号+）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SUBSTRING函数"><span class="nav-number">2.6.3.2.</span> <span class="nav-text">SUBSTRING函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LEFT-和-RIGHT-函数"><span class="nav-number">2.6.3.3.</span> <span class="nav-text">LEFT 和 RIGHT 函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LEN-和-DATALENGTH-函数"><span class="nav-number">2.6.3.4.</span> <span class="nav-text">LEN 和 DATALENGTH 函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CHARINDEX-函数"><span class="nav-number">2.6.3.5.</span> <span class="nav-text">CHARINDEX 函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PATINDEX-函数"><span class="nav-number">2.6.3.6.</span> <span class="nav-text">PATINDEX 函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#REPLACE-函数"><span class="nav-number">2.6.3.7.</span> <span class="nav-text">REPLACE 函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#REPLICATE-函数"><span class="nav-number">2.6.3.8.</span> <span class="nav-text">REPLICATE 函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#STUFF-函数"><span class="nav-number">2.6.3.9.</span> <span class="nav-text">STUFF 函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#UPPER-和-LOWER-函数"><span class="nav-number">2.6.3.10.</span> <span class="nav-text">UPPER 和 LOWER 函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RTRIM-和-LTRIM-函数"><span class="nav-number">2.6.3.11.</span> <span class="nav-text">RTRIM 和 LTRIM 函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LIKE谓词"><span class="nav-number">2.6.4.</span> <span class="nav-text">LIKE谓词</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#通配符-wildCard"><span class="nav-number">2.6.4.1.</span> <span class="nav-text">通配符 wildCard</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理日期和时间数据"><span class="nav-number">2.7.</span> <span class="nav-text">处理日期和时间数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#日期和时间数据类型"><span class="nav-number">2.7.1.</span> <span class="nav-text">日期和时间数据类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串文字"><span class="nav-number">2.7.2.</span> <span class="nav-text">字符串文字</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
